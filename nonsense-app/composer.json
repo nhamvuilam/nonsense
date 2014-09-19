@@ -1,0 +1,12 @@
+{
+    "name": "qunguyen/src",
+    "authors": [
+        {
+            "name": "Quyet. Nguyen Minh",
+            "email": "minhquyet@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-db": "2.3.3"
+    }
+}
