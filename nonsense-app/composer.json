@@ -6,6 +6,11 @@
             "email": "minhquyet@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Nvl\\": "src/"
+        }
+    },
     "require": {
         "zendframework/zend-db": "2.3.3"
     }
