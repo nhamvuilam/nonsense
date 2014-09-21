@@ -12,6 +12,5 @@
         }
     },
     "require": {
-        "zendframework/zend-db": "2.3.3"
     }
 }
