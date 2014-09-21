@@ -6,7 +6,7 @@ try {
     //Register an autoloader
     $loader = new \Phalcon\Loader();
     $loader->registerNamespaces(array(
-        'Nvl' => '../src/Nvl/',
+        // 'Nvl' => '../src/Nvl/',
 
     ))->register();
 
