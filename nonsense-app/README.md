@@ -11,8 +11,8 @@
 3. Run `composer install`
 4. Config database 
 ```
-db.mongo.dbhost=
-db.mongo.dbname=[mongodb name]
+db.mongo.dbhost=localhost
+db.mongo.dbname=nonsense_cms
 db.mongo.username=
 db.mongo.password=
 ```

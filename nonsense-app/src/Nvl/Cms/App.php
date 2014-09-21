@@ -28,7 +28,7 @@ class App {
             $di = new PhalconDi(\Phalcon\DI::getDefault());
 
             $di->set('db', function() {
-                $mongoClient = new \MongoClient();
+                $mongoClient = new \MongoClient('mongodb://127.0.0.1:27017/nonsense_cms');
                 return $mongoClient->selectDB('nonsense_cms');
             });
 
