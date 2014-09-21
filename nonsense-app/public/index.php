@@ -1,17 +1,23 @@
 <?php
-require '../vendor/autoload_namespaces.php';
+require '../vendor/autoload.php';
 
 try {
 
     //Register an autoloader
     $loader = new \Phalcon\Loader();
     $loader->registerNamespaces(array(
-        'Nvl\Content\Adapter\Http' => '../src/Nvl/Content/Adapter/Http/',
+        'Nvl' => '../src/Nvl/',
 
     ))->register();
 
     //Create a DI
     $di = new Phalcon\DI\FactoryDefault();
+
+    $di->set('dispatcher', function() {
+        $dispatcher = new Phalcon\Mvc\Dispatcher();
+        $dispatcher->setDefaultNamespace('\Nvl\Content\Adapter\Http\Controllers');
+        return $dispatcher;
+    });
 
     //Setup the view component
     $di->set('view', function(){
