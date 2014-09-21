@@ -4,12 +4,15 @@
 {
 	id: 1,
 	username: "username",
-	password: "hashed pass",               // OPTIONAL
+	password: "hashed pass",               // OPTIONAL if using social login
+	display_name: "User fullname",
 	email: "user@email.com",
 	mobile: "09xxxxxxxxx",
 	sn_id: "44529208921",                  // Social network unique id
 	sn_type: "facebook",                   // Social network type
-	status: 1,                             // 1: active, 0: locked
+	status: 1,                             // 1: active, 0: banned
+	post_count: 100, 
+	confirmed: true,                       // Email/phone confirmed or not
 	last_login: "2014-09-21 15:02:23",
 	created_date: "2014-09-21 15:02:23",
 	modified_date: "2014-09-21 15:02:23",
