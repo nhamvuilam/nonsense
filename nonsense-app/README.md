@@ -1,8 +1,21 @@
+## Requirement
+
+1. Web server which supports PHP
+2. `php-phalcon` PECL extension
+3. `mongodb` and `php-mongo` PECL extension
+
 ## Quickstart 
 
 1. Install composer [here](https://getcomposer.org)
 2. Go to application root directory (where `composer.json` is located)
 3. Run `composer install`
+4. Config database 
+```
+db.mongo.dbhost=
+db.mongo.dbname=[mongodb name]
+db.mongo.username=
+db.mongo.password=
+```
 
 ## Development guide
 
