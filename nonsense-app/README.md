@@ -1,6 +1,6 @@
 ## Requirement
 
-1. Web server which supports PHP
+1. Web server which supports PHP 5.3
 2. `php-phalcon` PECL extension
 3. `mongodb` and `php-mongo` PECL extension
 
