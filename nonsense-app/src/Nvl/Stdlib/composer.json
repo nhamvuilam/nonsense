@@ -1,0 +1,17 @@
+{
+    "name": "123pay/stdlib",
+    "description": "123pay standard library",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Quyet. Nguyen Minh",
+            "email": "quyetnm@vng.com.vn"
+        }
+    ],
+    "autoload" : {
+        "psr-0" : {
+            "Vng\\G8\\Stdlib" : ""
+        }
+    },
+    "target-dir": "Vng/G8/Stdlib"
+}

@@ -1,12 +1,20 @@
 <?php
-namespace Nvl\Content\Adapter\Http\Controllers;
+//
+// BaseController.php
+//
+// Created by Quyet. Nguyen Minh <minhquyet@gmail.com> on Sep 21, 2014.
+// Do not copy or use this source code without owner permission
+//
+// Copyright (c) Nvl 2014. All rights reserved.
+//
+//
+namespace Nvl\Cms\Adapter\Http\Controllers;
 
 use Phalcon\Mvc\Controller;
 
 /**
  * Base controller extends Phalcon Controller, provides basic methods for a controller
  * and helps isolating controller code from the MVC Framework in-use.
- * @author qunguyen
  */
 class BaseController extends Controller {
 
