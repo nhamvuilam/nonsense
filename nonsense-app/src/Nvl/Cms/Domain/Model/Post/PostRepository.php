@@ -8,7 +8,7 @@
 // Copyright (c) Nvl 2014. All rights reserved.
 //
 //
-namespace Nvl\Cms\Domain\Model;
+namespace Nvl\Cms\Domain\Model\Post;
 
 /**
  * Post repository
@@ -24,7 +24,7 @@ interface PostRepository {
     /**
      * Add new post
      *
-     * @param \Nvl\Cms\Domain\Model\Post $post The post object to save
+     * @param \Nvl\Cms\Domain\Model\Post\Post $post The post object to save
      */
     public function add($post);
 

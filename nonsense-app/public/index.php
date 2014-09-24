@@ -1,8 +1,11 @@
 <?php
+
 try {
 
+    define("APP_DIR", realpath(__DIR__ . '/../app'));
+
     // Composer autoload
-    require '../vendor/autoload.php';
+    $loader = require_once '../vendor/autoload.php';
 
     // Register an autoloader
     //     $loader = new \Phalcon\Loader();

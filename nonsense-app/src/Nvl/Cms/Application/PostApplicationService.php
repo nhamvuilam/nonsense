@@ -10,8 +10,8 @@
 //
 namespace Nvl\Cms\Application;
 
-use Nvl\Cms\Domain\Model\Post;
 
+use Nvl\Cms\Domain\Model\Post\Post;
 /**
  * Post Application Service
  */
@@ -34,12 +34,7 @@ class PostApplicationService {
     public function newPost($title, $type, $content, $author, $tags) {
 
         // Make new post
-        $post = new Post(array(
-            'title' => $title,
-            'original_content' => $content,
-            'author' => $author,
-            'tags' => $tags
-        ));
+        $post = new Post($title, $type, $content, $author, $tags);
 
         // Approve post by default
         $post->approve();
@@ -53,7 +48,7 @@ class PostApplicationService {
     }
 
     /**
-     * @return \Nvl\Cms\Domain\Model\PostRepository
+     * @return \Nvl\Cms\Domain\Model\Post\PostRepository
      */
     private function postRepository() {
         return $this->postRepository;

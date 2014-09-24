@@ -10,15 +10,19 @@
 //
 namespace Nvl\Cms\Adapter\Persistence\Mongo;
 
-use Nvl\Cms\Domain\Model\PostRepository;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Nvl\Cms\Domain\Model\Post\PostRepository;
 
 /**
  * Mongo Db Post Repository implementation
  */
-class MongoPostRepository extends MongoRepository implements PostRepository {
+class MongoPostRepository implements PostRepository {
 
-    public function __construct($options) {
-        parent::__construct($options);
+    private $dm;
+
+    public function __construct(DocumentManager $dm) {
+        //parent::__construct($options);
+        $this->dm = $dm;
     }
 
 	/* (non-PHPdoc)
@@ -31,7 +35,10 @@ class MongoPostRepository extends MongoRepository implements PostRepository {
      * @see \Nvl\Cms\Domain\Model\PostRepository::add()
      */
     public function add($post) {
-        $this->collection()->insert($post->toArray());
+        var_dump($post);
+        $this->dm()->persist($post);
+        $this->dm()->flush();
+        // $this->collection()->insert($post->toArray());
     }
 
 	/* (non-PHPdoc)
@@ -42,15 +49,25 @@ class MongoPostRepository extends MongoRepository implements PostRepository {
     }
 
     public function latestOfTag($tag, $limit = 10) {
+        /*
     	$cursor = $this->collection()->find(array(
     		'tags' => $tag,
     	));
     	$cursor->sort(array('created_date' => -1))->limit($limit);
 
     	return $cursor;
+    	*/
+
     }
 
     public function latestOfCategory($category, $limit = 10) {}
+
+    /**
+     * @return DocumentManager
+     */
+    public function dm() {
+        return $this->dm;
+    }
 
 	/* (non-PHPdoc)
      * @see \Nvl\Cms\Adapter\Persistence\Mongo\MongoRepository::collectionName()
