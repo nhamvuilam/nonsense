@@ -49,6 +49,10 @@ class MongoPostRepository implements PostRepository {
     }
 
     public function latestOfTag($tag, $limit = 10) {
+        return $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\Post\Post')
+                         ->select()
+                         ->sort(array('createdDate' => -1))
+                         ->limit($limit)->getQuery()->execute();
         /*
     	$cursor = $this->collection()->find(array(
     		'tags' => $tag,
