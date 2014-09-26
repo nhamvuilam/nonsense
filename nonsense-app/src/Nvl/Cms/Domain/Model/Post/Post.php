@@ -38,8 +38,7 @@ class Post {
     private $id;
     private $title;
     private $type;
-    private $displayContent;
-    private $originalContent;
+    private $postContent; // class
     private $author;
     private $createdDate;
     private $modifiedDate;

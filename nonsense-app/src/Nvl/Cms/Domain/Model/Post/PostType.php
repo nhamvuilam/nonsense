@@ -14,17 +14,18 @@ namespace Nvl\Cms\Domain\Model\Post;
  * A post type
  */
 class PostType {
-    const IMAGE_LINK = "image_link";
-    const VIDEO_LINK = "video_link";
+
+    const IMAGE = "image"; // image url, upload, draw
+    const VIDEO = "video"; // Youtube Url
 
     private $name;
 
-    public static function IMAGE_LINK() {
-        return new PostType(PostType::IMAGE_LINK);
+    public static function IMAGE() {
+        return new PostType(PostType::IMAGE);
     }
 
-    public static function VIDEO_LINK() {
-        return new PostType(PostType::VIDEO_LINK);
+    public static function VIDEO() {
+        return new PostType(PostType::VIDEO);
     }
 
     public function __construct($name) {
