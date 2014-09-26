@@ -122,6 +122,23 @@ class NvlCmsDomainModelPostPostHydrator implements HydratorInterface
             $this->class->reflFields['sticky']->setValue($document, $return);
             $hydratedData['sticky'] = $return;
         }
+
+        /** @EmbedOne */
+        if (isset($data['type'])) {
+            $embeddedDocument = $data['type'];
+            $className = $this->unitOfWork->getClassNameForAssociation($this->class->fieldMappings['type'], $embeddedDocument);
+            $embeddedMetadata = $this->dm->getClassMetadata($className);
+            $return = $embeddedMetadata->newInstance();
+
+            $embeddedData = $this->dm->getHydratorFactory()->hydrate($return, $embeddedDocument, $hints);
+            $embeddedId = $embeddedMetadata->identifier && isset($embeddedData[$embeddedMetadata->identifier]) ? $embeddedData[$embeddedMetadata->identifier] : null;
+
+            $this->unitOfWork->registerManaged($return, $embeddedId, $embeddedData);
+            $this->unitOfWork->setParentAssociation($return, $this->class->fieldMappings['type'], $document, 'type');
+
+            $this->class->reflFields['type']->setValue($document, $return);
+            $hydratedData['type'] = $return;
+        }
         return $hydratedData;
     }
 }

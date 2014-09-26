@@ -1,0 +1,5 @@
+Nvl\Cms\Domain\Model\Post\PostType:
+  type: embeddedDocument
+  fields:
+    name: 
+      type: string
