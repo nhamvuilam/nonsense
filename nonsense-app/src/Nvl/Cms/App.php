@@ -80,7 +80,7 @@ class App {
     }
 
     /**
-     * @return Documentma
+     * @return DocumentManager
      */
     public static function documentManager() {
         return static::di()->get('document_manager');
