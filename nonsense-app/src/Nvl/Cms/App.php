@@ -10,12 +10,13 @@
 //
 namespace Nvl\Cms;
 
-use Nvl\Cms\Application\PostApplicationService;
 use Nvl\Cms\Adapter\Persistence\Mongo\MongoPostRepository;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Mapping\Driver\YamlDriver;
 use Doctrine\MongoDB\Connection;
 use Doctrine\ODM\MongoDB\Configuration;
+use Nvl\Cms\Application\PostApplicationServiceImpl;
+use Nvl\Config\SymfonyIniFileLoader;
 
 /**
  * Application registry which return services needed by application
@@ -37,7 +38,7 @@ class App {
             });
 
             $di->set('post_application_service', function() use ($di) {
-                return new PostApplicationService($di->get('post_repository'));
+                return new PostApplicationServiceImpl($di->get('post_repository'));
             });
 
             $di->set('document_manager', function() {
@@ -59,6 +60,20 @@ class App {
                 return DocumentManager::create($connection, $config);
 
             });
+
+            // Config file loader
+            $di->set('config_loader', function() {
+                $paths = array(
+                    APP_DIR . '/configs',
+                    APP_DIR . '/configs/local',
+                );
+                return new SymfonyIniFileLoader($paths);
+            });
+
+            // Cms Config
+            $di->set('cms_config', function() {
+                return App::configLoader()->loadConfigFilename('cms.ini');
+            });
         }
 
         return $di;
@@ -69,6 +84,20 @@ class App {
      */
     public static function documentManager() {
         return static::di()->get('document_manager');
+    }
+
+    /**
+     * @return array
+     */
+    public static function config() {
+        return static::di()->get('cms_config');
+    }
+
+    /**
+     * @return \Nvl\Config\ConfigLoader
+     */
+    public static function configLoader() {
+        return static::di()->get('config_loader');
     }
 
     /**
