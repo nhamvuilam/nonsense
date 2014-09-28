@@ -1,0 +1,10 @@
+Nvl\Cms\Domain\Model\Post\PostContent:
+  type: embeddedDocument
+  inheritanceType: SINGLE_COLLECTION
+  discriminatorField: type
+  discriminatorMap:
+    video: VideoPost 
+    image: ImagePost
+  fields:
+    caption: 
+      type: string

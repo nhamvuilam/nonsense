@@ -1,0 +1,6 @@
+Nvl\Cms\Domain\Model\Post\ImagePost:
+  type: embeddedDocument
+  fields:
+    images:
+      type: collection 
+    

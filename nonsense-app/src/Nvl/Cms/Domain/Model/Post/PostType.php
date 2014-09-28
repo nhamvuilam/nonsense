@@ -2,7 +2,7 @@
 //
 // PostType.php
 //
-// Created by Quyet. Nguyen Minh <minhquyet@gmail.com> on Sep 24, 2014.
+// Created by Quyet. Nguyen Minh <minhquyet@gmail.com> on Sep 28, 2014.
 // Do not copy or use this source code without owner permission
 //
 // Copyright (c) Nvl 2014. All rights reserved.
@@ -11,24 +11,35 @@
 namespace Nvl\Cms\Domain\Model\Post;
 
 /**
- * A post type
+ * @author Quyet. Nguyen Minh <minhquyet@gmail.com>
  */
 class PostType {
 
-    const IMAGE = "image"; // image url, upload, draw
-    const VIDEO = "video"; // Youtube Url
+    const IMAGE = 1;
+    const VIDEO = 2;
 
-    private $name;
+    public static $CODES = array(
+        self::IMAGE => 'image', // image url, upload, draw
+        self::VIDEO => 'video', // Youtube Url
+    );
 
-    public static function IMAGE() {
-        return new PostType(PostType::IMAGE);
+    /**
+     * @param string $type         Post type
+     * @param array  $contentArray Post content array
+     * @return \Nvl\Cms\Domain\Model\Post\PostContent
+     */
+    public static function postContentOf($type, $contentArray) {
+
+        switch ($type) {
+        	case 'image':
+        	    $postContent = new ImagePost($contentArray['caption'], $contentArray['link']);
+        	    break;
+        	case 'video':
+        	    $postContent = new VideoPost($contentArray['caption'], $contentArray['embedded']);
+        	    break;
+        }
+
+        return $postContent;
     }
 
-    public static function VIDEO() {
-        return new PostType(PostType::VIDEO);
-    }
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
 }

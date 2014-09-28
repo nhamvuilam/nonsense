@@ -8,7 +8,7 @@
 // Copyright (c) Nvl 2014. All rights reserved.
 //
 //
-namespace Nvl\Cms;
+namespace Nvl\Di;
 
 use Nvl\Di\Di;
 

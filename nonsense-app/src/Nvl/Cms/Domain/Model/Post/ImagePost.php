@@ -11,12 +11,40 @@
 namespace Nvl\Cms\Domain\Model\Post;
 
 /**
- * Link post
+ * Image post
+ *
+ * @author Quyet. Nguyen Minh <minhquyet@gmail.com>
  */
-class ImagePost {
+class ImagePost extends PostContent {
 
-    private $caption;
-    private $url;
-    private $description;
+    private $images = array();
+
+    public function __construct($caption, $images) {
+        parent::__construct($caption);
+        $this->images = $images;
+    }
+
+	/**
+     * @see \Nvl\Cms\Domain\Model\Post\PostContent::excerptHtml()
+     */
+    public function excerptHtml() {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Domain\Model\Post\PostContent::html()
+     */
+    public function html() {
+        // TODO
+    }
+
+    /**
+     * @see \Nvl\Cms\Domain\Model\Post\PostContent::toArray()
+     */
+    public function toArray() {
+        // TODO
+    }
+
 
 }
