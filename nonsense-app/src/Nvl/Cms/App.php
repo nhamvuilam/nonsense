@@ -10,12 +10,18 @@
 //
 namespace Nvl\Cms;
 
-use Nvl\Cms\Application\PostApplicationService;
 use Nvl\Cms\Adapter\Persistence\Mongo\MongoPostRepository;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Mapping\Driver\YamlDriver;
 use Doctrine\MongoDB\Connection;
 use Doctrine\ODM\MongoDB\Configuration;
+use Nvl\Cms\Application\PostApplicationServiceImpl;
+use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Config\Loader\FileLoader;
+use Symfony\Component\Config\Loader\LoaderResolver;
+use Nvl\Cms\ConfigLoader\YamlFileLoader;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\FileLocator;
 
 /**
  * Application registry which return services needed by application
@@ -37,7 +43,7 @@ class App {
             });
 
             $di->set('post_application_service', function() use ($di) {
-                return new PostApplicationService($di->get('post_repository'));
+                return new PostApplicationServiceImpl($di->get('post_repository'));
             });
 
             $di->set('document_manager', function() {
@@ -59,6 +65,17 @@ class App {
                 return DocumentManager::create($connection, $config);
 
             });
+
+            $di->set('cms_config', function() {
+                $fileLocator = new FileLocator(array(
+                    APP_DIR . '/configs',
+                    APP_DIR . '/configs/local',
+                ));
+                $loaderResolver = new LoaderResolver(array(new YamlFileLoader($fileLocator)));
+                $delegatingLoader = new DelegatingLoader($loaderResolver);
+
+                return $delegatingLoader->load('cms.yml');
+            });
         }
 
         return $di;
@@ -69,6 +86,10 @@ class App {
      */
     public static function documentManager() {
         return static::di()->get('document_manager');
+    }
+
+    public static function config() {
+        return static::di()->get('cms_config');
     }
 
     /**

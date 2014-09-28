@@ -1,18 +1,17 @@
 {
-    "name": "qunguyen/src",
-    "authors": [
-        {
-            "name": "Quyet. Nguyen Minh",
-            "email": "minhquyet@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-0": { 
-            "": "src/" 
-        }
-    },
-    "require": {
-        "doctrine/mongodb-odm": "1.0.0-BETA11",
-        "symfony/yaml":         "2.5.4"
+  "name" : "qunguyen/src",
+  "require" : {
+    "doctrine/mongodb-odm" : "1.0.0-BETA11",
+    "symfony/yaml" : "2.5.4",
+    "symfony/config" : "2.5.4"
+  },
+  "authors" : [ {
+    "name" : "Quyet. Nguyen Minh",
+    "email" : "minhquyet@gmail.com"
+  } ],
+  "autoload" : {
+    "psr-0" : {
+      "" : "src/"
     }
+  }
 }
