@@ -16,12 +16,7 @@ use Doctrine\ODM\MongoDB\Mapping\Driver\YamlDriver;
 use Doctrine\MongoDB\Connection;
 use Doctrine\ODM\MongoDB\Configuration;
 use Nvl\Cms\Application\PostApplicationServiceImpl;
-use Symfony\Component\Yaml\Yaml;
-use Symfony\Component\Config\Loader\FileLoader;
-use Symfony\Component\Config\Loader\LoaderResolver;
-use Nvl\Cms\ConfigLoader\YamlFileLoader;
-use Symfony\Component\Config\Loader\DelegatingLoader;
-use Symfony\Component\Config\FileLocator;
+use Nvl\Config\SymfonyIniFileLoader;
 
 /**
  * Application registry which return services needed by application
@@ -66,15 +61,18 @@ class App {
 
             });
 
-            $di->set('cms_config', function() {
-                $fileLocator = new FileLocator(array(
+            // Config file loader
+            $di->set('config_loader', function() {
+                $paths = array(
                     APP_DIR . '/configs',
                     APP_DIR . '/configs/local',
-                ));
-                $loaderResolver = new LoaderResolver(array(new YamlFileLoader($fileLocator)));
-                $delegatingLoader = new DelegatingLoader($loaderResolver);
+                );
+                return new SymfonyIniFileLoader($paths);
+            });
 
-                return $delegatingLoader->load('cms.yml');
+            // Cms Config
+            $di->set('cms_config', function() {
+                return App::configLoader()->loadConfigFilename('cms.ini');
             });
         }
 
@@ -88,8 +86,18 @@ class App {
         return static::di()->get('document_manager');
     }
 
+    /**
+     * @return array
+     */
     public static function config() {
         return static::di()->get('cms_config');
+    }
+
+    /**
+     * @return \Nvl\Config\ConfigLoader
+     */
+    public static function configLoader() {
+        return static::di()->get('config_loader');
     }
 
     /**
