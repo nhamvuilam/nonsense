@@ -35,10 +35,8 @@ class MongoPostRepository implements PostRepository {
      * @see \Nvl\Cms\Domain\Model\Post\PostRepository::add()
      */
     public function add(Post $post) {
-        var_dump($post);
         $this->dm()->persist($post);
         $this->dm()->flush();
-        // $this->collection()->insert($post->toArray());
     }
 
     /**

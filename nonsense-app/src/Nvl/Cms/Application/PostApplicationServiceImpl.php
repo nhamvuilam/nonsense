@@ -32,21 +32,21 @@ class PostApplicationServiceImpl implements PostApplicationService {
     // POST APPLICATION SERVICE IMPLEMENTATION
     // =============================================================================================
 
-	/* (non-PHPdoc)
+	/**
      * @see \Nvl\Cms\Application\PostApplicationService::queryPosts()
      */
     public function queryPosts($authors = array(), $type = '', $tags = array(), $limit, $offset = 1) {
         // TODO Auto-generated method stub
     }
 
-	/* (non-PHPdoc)
+	/**
      * @see \Nvl\Cms\Application\PostApplicationService::editPost()
      */
     public function editPost($id, $editFields) {
         // TODO Auto-generated method stub
     }
 
-	/* (non-PHPdoc)
+	/**
      * @see \Nvl\Cms\Application\PostApplicationService::newPost()
      */
     public function newPost($type, $tags, $date, $postContent) {
@@ -55,6 +55,7 @@ class PostApplicationServiceImpl implements PostApplicationService {
 
         $this->postRepository()->add($post);
 
+        return $post;
     }
 
     // =============================================================================================
@@ -69,7 +70,6 @@ class PostApplicationServiceImpl implements PostApplicationService {
     }
 
     /**
-     * @return PostFactory
      * @return PostFactory
      */
     private function postFactory() {

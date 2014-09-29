@@ -20,6 +20,9 @@ use Nvl\Config\SymfonyIniFileLoader;
 use Nvl\Cms\Domain\Model\Post\PostFactory;
 use Nvl\Cms\Domain\Model\Post\PostRepository;
 use Nvl\Di\PhalconDi;
+use Nvl\Cms\Adapter\Image\SimpleImageStorage;
+use Nvl\Cms\Adapter\Image\ImagickGenerator;
+use Nvl\Cms\Adapter\Image\ImagickProcessor;
 use Nvl\Cms\Adapter\Image\LocalCdnService;
 
 /**
@@ -37,20 +40,32 @@ class App {
         if (!isset($di)) {
             $di = new PhalconDi(\Phalcon\DI::getDefault());
 
+            // ===================================================================================
             // POST services
+            // ===================================================================================
             $di->set('post_repository', function() use ($di) {
             	return new MongoPostRepository(App::documentManager());
             });
             $di->set('cdn_service', function() {
-        	    return new LocalCdnService();
+                return new LocalCdnService();
+            });
+            $di->set('image_processor', function() {
+                $config = App::config();
+            	return new ImagickProcessor(@$config['image']['tmpPath']);
             });
             $di->set('post_factory', function() {
-            	return new PostFactory(App::cdnService());
+                $config = App::config();
+            	return new PostFactory(App::imageProcessor(),
+            	                       App::cdnService(),
+            	                       $config['image']['sizes']);
             });
             $di->set('post_application_service', function() {
                 return new PostApplicationServiceImpl(App::postRepository(), App::postFactory());
             });
 
+            // ===================================================================================
+            // Mongo DB
+            // ===================================================================================
             $di->set('document_manager', function() {
                 $config = App::config();
                 $mongoClient = new \MongoClient(
@@ -75,7 +90,9 @@ class App {
 
             });
 
-            // Config file loader
+            // ===================================================================================
+            // Configuration
+            // ===================================================================================
             $di->set('config_loader', function() {
                 $paths = array(
                     APP_DIR . '/configs',
@@ -83,7 +100,6 @@ class App {
                 );
                 return new SymfonyIniFileLoader($paths);
             });
-
             // Cms Config
             $di->set('cms_config', function() {
                 return App::configLoader()->loadConfigFilename('cms.ini');
@@ -112,6 +128,10 @@ class App {
      */
     public static function configLoader() {
         return static::di()->get('config_loader');
+    }
+
+    public static function imageProcessor() {
+        return static::di()->get('image_processor');
     }
 
     public static function cdnService() {

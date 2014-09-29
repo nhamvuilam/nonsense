@@ -27,10 +27,15 @@ class PostFactory {
         self::VIDEO => 'video', // Youtube Url
     );
 
+    private $_imageProcessor;
     private $_cdnService;
+    private $_imageSizes;
 
-    public function __construct(CdnService $cdnService) {
+    public function __construct(ImageProcessor $imageProcessor,
+                                CdnService $cdnService, $imageSizes) {
+        $this->_imageProcessor = $imageProcessor;
         $this->_cdnService = $cdnService;
+        $this->_imageSizes = $imageSizes;
     }
 
     /**
@@ -46,15 +51,18 @@ class PostFactory {
      */
     public function newPost($type, $contentArray, $author, $date, $tags) {
 
+        // Validate input
         if (!$this->isValidType($type)) {
             throw new ValidateException('Invalid post type ['.$type.']');
         }
 
+        // Create post meta
         $meta = new PostMeta();
         if (!empty($tags)) {
             $meta->addTag($tags);
         }
 
+        // Create new post instance
         $post = new Post($this->postContentOf($type, $contentArray), $meta, $author, $date);
 
         return $post;
@@ -85,19 +93,58 @@ class PostFactory {
     private function postContentOf($type, $contentArray) {
 
         switch ($type) {
+
+            // Create image post
         	case 'image':
-        	    $postContent = new ImagePost($contentArray['caption'],
-        	                                 $this->cdn()->thumb($contentArray['link']));
-        	    break;
+                return $this->imagePost($contentArray);
+
+        	// Create video post
         	case 'video':
-        	    $postContent = new VideoPost($contentArray['caption'], $contentArray['embedded']);
-        	    break;
+        	    return $this->videoPost($contentArray);
+
+        	default:
+        	    throw new \Exception('Invalid post type detected');
         }
 
-        return $postContent;
     }
 
-    private function cdn() {
+    private function imagePost($contentArray) {
+        $image = !empty($contentArray['link']) ? $contentArray['link'] : $contentArray['data'];
+
+        // Resize image
+        $resizedImages = $this->imageProcessor()->resize($image, $this->_imageSizes);
+        $storedImages = null;
+
+        // Upload resized images to a CDN
+        // XXX: At this phase, only allow upload one image
+        foreach ($resizedImages[0] as $resizedImage) {
+            $url = $this->cdnService()->put($resizedImage['path']);
+            unlink($resizedImage['path']);
+            $storedImages[] = array(
+            	'url' => $url,
+                'width' => $resizedImage['width'],
+                'height' => $resizedImage['height'],
+            );
+        }
+
+        var_dump($storedImages);
+        // Create image post with the cdn location
+        return new ImagePost($contentArray['caption'], $storedImages);
+    }
+
+    private function videoPost($contentArray) {
+        return new VideoPost($contentArray['caption'], $contentArray['embedded']);
+    }
+
+    private function imageProcessor() {
+        return $this->_imageProcessor;
+    }
+
+    private function cdnService() {
         return $this->_cdnService;
+    }
+
+    private function imageSizes() {
+        return $this->_imageSizes;
     }
 }

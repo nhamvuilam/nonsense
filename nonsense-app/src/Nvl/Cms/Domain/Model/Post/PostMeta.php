@@ -42,7 +42,7 @@ class PostMeta {
     }
 
     public function addTag($tags) {
-        array_push($this->tags, (array) $tags);
+        $this->tags = array_unique(array_merge($this->tags, (array) $tags));
     }
 
 }

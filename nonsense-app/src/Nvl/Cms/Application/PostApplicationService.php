@@ -10,6 +10,13 @@
 //
 namespace Nvl\Cms\Application;
 
+use Nvl\Cms\Domain\Model\Post\Post;
+
+/**
+ * Post application service provides interface for manipulate post objects
+ *
+ * @author Quyet. Nguyen Minh <minhquyet@gmail.com>
+ */
 interface PostApplicationService {
 
     /**
@@ -36,6 +43,7 @@ interface PostApplicationService {
      *   'embeded' => 'videos's <embeded/> tag'
      * )
      * </pre>
+     * @return Post Newly created post
      *
      */
     public function newPost($type, $tags, $date, $postContent);
@@ -64,7 +72,7 @@ interface PostApplicationService {
      *      'image' => array(
      *        'caption' => 'Image caption',
      *        'sizes' => array(
-     *          array('url' => 'Image url', 'width' => width, 'height' => height),
+     *          array('url' => 'Image URL', 'width' => width, 'height' => height),
      *          ...
      *        ),
      *      ),
