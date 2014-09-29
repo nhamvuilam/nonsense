@@ -10,12 +10,17 @@
 //
 namespace Nvl\Cms;
 
-use Nvl\Cms\Application\PostApplicationService;
 use Nvl\Cms\Adapter\Persistence\Mongo\MongoPostRepository;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Mapping\Driver\YamlDriver;
 use Doctrine\MongoDB\Connection;
 use Doctrine\ODM\MongoDB\Configuration;
+use Nvl\Cms\Application\PostApplicationServiceImpl;
+use Nvl\Config\SymfonyIniFileLoader;
+use Nvl\Cms\Domain\Model\Post\PostFactory;
+use Nvl\Cms\Domain\Model\Post\PostRepository;
+use Nvl\Di\PhalconDi;
+use Nvl\Cms\Adapter\Image\LocalCdnService;
 
 /**
  * Application registry which return services needed by application
@@ -32,17 +37,27 @@ class App {
         if (!isset($di)) {
             $di = new PhalconDi(\Phalcon\DI::getDefault());
 
+            // POST services
             $di->set('post_repository', function() use ($di) {
             	return new MongoPostRepository(App::documentManager());
             });
-
-            $di->set('post_application_service', function() use ($di) {
-                return new PostApplicationService($di->get('post_repository'));
+            $di->set('cdn_service', function() {
+        	    return new LocalCdnService();
+            });
+            $di->set('post_factory', function() {
+            	return new PostFactory(App::cdnService());
+            });
+            $di->set('post_application_service', function() {
+                return new PostApplicationServiceImpl(App::postRepository(), App::postFactory());
             });
 
             $di->set('document_manager', function() {
-                $mongoClient = new \MongoClient('mongodb://127.0.0.1:27017/nonsense_cms');
-                $mongoClient->selectDB('nonsense_cms');
+                $config = App::config();
+                $mongoClient = new \MongoClient(
+                        'mongodb://'.$config['db']['mongo.host']
+                        .':'.$config['db']['mongo.port']
+                        .'/'.$config['db']['mongo.dbname']);
+                $mongoClient->selectDB($config['db']['mongo.dbname']);
 
             	$connection = new Connection($mongoClient);
 
@@ -59,16 +74,62 @@ class App {
                 return DocumentManager::create($connection, $config);
 
             });
+
+            // Config file loader
+            $di->set('config_loader', function() {
+                $paths = array(
+                    APP_DIR . '/configs',
+                    APP_DIR . '/configs/local',
+                );
+                return new SymfonyIniFileLoader($paths);
+            });
+
+            // Cms Config
+            $di->set('cms_config', function() {
+                return App::configLoader()->loadConfigFilename('cms.ini');
+            });
         }
 
         return $di;
     }
 
     /**
-     * @return Documentma
+     * @return DocumentManager
      */
     public static function documentManager() {
         return static::di()->get('document_manager');
+    }
+
+    /**
+     * @return array
+     */
+    public static function config() {
+        return static::di()->get('cms_config');
+    }
+
+    /**
+     * @return \Nvl\Config\ConfigLoader
+     */
+    public static function configLoader() {
+        return static::di()->get('config_loader');
+    }
+
+    public static function cdnService() {
+        return static::di()->get('cdn_service');
+    }
+
+    /**
+     * @return PostFactory
+     */
+    public static function postFactory() {
+        return static::di()->get('post_factory');
+    }
+
+    /**
+     * @return PostRepository
+     */
+    public static function postRepository() {
+        return static::di()->get('post_repository');
     }
 
     /**

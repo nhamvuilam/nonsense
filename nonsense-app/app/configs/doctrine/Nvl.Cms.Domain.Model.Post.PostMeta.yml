@@ -1,0 +1,11 @@
+Nvl\Cms\Domain\Model\Post\PostMeta:
+  type: embeddedDocument
+  fields:
+    tags: 
+      type: hash 
+    commentCount:
+      type: int
+    likeCount:
+      type: int
+    sticky:
+      type: boolean

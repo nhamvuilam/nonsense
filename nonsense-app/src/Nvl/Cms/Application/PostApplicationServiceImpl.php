@@ -10,47 +10,70 @@
 //
 namespace Nvl\Cms\Application;
 
+use Nvl\Cms\Domain\Model\Post\PostFactory;
+use Nvl\Cms\Domain\Model\Post\PostRepository;
 
-use Nvl\Cms\Domain\Model\Post\Post;
 /**
- * Post Application Service
+ * Post Application Service Implementation
+ *
+ * @author Nguyen Minh Quyet <minhquyet@gmail.com>
  */
-class PostApplicationServiceImpl {
+class PostApplicationServiceImpl implements PostApplicationService {
 
-    private $postRepository;
+    private $_postRepository;
+    private $_postFactory;
 
-    public function __construct($postRepository) {
-        $this->postRepository = $postRepository;
+    public function __construct(PostRepository $postRepository, PostFactory $postFactory) {
+        $this->_postRepository = $postRepository;
+        $this->_postFactory = $postFactory;
     }
 
-    /**
-     * Create new post
-     *
-     * @param string $title    Title
-     * @param string $type     Post type
-     * @param string $content  Post content
-     * @param int    $author   User id
+    // =============================================================================================
+    // POST APPLICATION SERVICE IMPLEMENTATION
+    // =============================================================================================
+
+	/* (non-PHPdoc)
+     * @see \Nvl\Cms\Application\PostApplicationService::queryPosts()
      */
-    public function newPost($title, $type, $content, $author, $tags) {
+    public function queryPosts($authors = array(), $type = '', $tags = array(), $limit, $offset = 1) {
+        // TODO Auto-generated method stub
+    }
 
-        // Make new post
-        $post = new Post($title, $type, $content, $author, $tags);
+	/* (non-PHPdoc)
+     * @see \Nvl\Cms\Application\PostApplicationService::editPost()
+     */
+    public function editPost($id, $editFields) {
+        // TODO Auto-generated method stub
+    }
 
-        // Approve post by default
-        $post->approve();
+	/* (non-PHPdoc)
+     * @see \Nvl\Cms\Application\PostApplicationService::newPost()
+     */
+    public function newPost($type, $tags, $date, $postContent) {
+        $author = 'nmquyet';
+        $post = $this->postFactory()->newPost($type, $postContent, $author, $date, $tags);
 
-        // Add new post to repository
         $this->postRepository()->add($post);
+
     }
 
-    public function latestOfTag($tag, $limit, $page) {
-        return $this->postRepository()->latestOfTag($tag);
-    }
+    // =============================================================================================
+    // HELPER METHODS
+    // =============================================================================================
 
     /**
-     * @return \Nvl\Cms\Domain\Model\Post\PostRepository
+     * @return PostRepository
      */
     private function postRepository() {
-        return $this->postRepository;
+        return $this->_postRepository;
     }
+
+    /**
+     * @return PostFactory
+     * @return PostFactory
+     */
+    private function postFactory() {
+        return $this->_postFactory;
+    }
+
 }

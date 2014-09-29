@@ -10,24 +10,12 @@
 //
 namespace Nvl\Cms\Domain\Model\Post;
 
+use Nvl\Cms\Domain\Model\ValidateException;
+
 /**
  * A cms post object
  *
- * Properties
- * <pre>
- * $_id;
- * $title;
- * $displayContent;
- * $originalContent;
- * $author;
- * $createdDate;
- * $modifiedDate;
- * $tags = array();
- * $status = 0;
- * $commentCount = 0;
- * likeCount = 0;
- * $sticky = false;
- * </pre>
+ * @author Nguyen Minh Quyet <minhquyet@gmail.com>
  */
 class Post {
 
@@ -36,27 +24,53 @@ class Post {
     const STATUS_DELETED = "deleted";
 
     private $id;
-    private $title;
-    private $type;
-    private $postContent; // class
+
+    /**
+     * @var unknown
+     */
     private $author;
+
+    /**
+     * @var PostMeta
+     */
+    private $meta;
+
+    /**
+     * @var PostContent
+     */
+    private $content; // class
+
+    private $status = 0;
+
     private $createdDate;
     private $modifiedDate;
-    private $tags = array();
-    private $status = 0;
-    private $commentCount = 0;
-    private $likeCount = 0;
-    private $sticky = false;
 
-    public function __construct($title, $type, $content, $author, $tags) {
-        $this->title = $title;
-        $this->type = $type;
-        $this->originalContent = $content;
+    /**
+     *
+     * @param PostContent $content
+     * @param PostMeta    $meta
+     * @param string      $author
+     * @param long        $date    Post time
+     * @throws ValidateException
+     */
+    public function __construct(PostContent $content,
+                                PostMeta $meta,
+                                $author,
+                                $date) {
+
+        if (empty($content)) {
+            throw new ValidateException("PostContent cannot be empty");
+        }
+        if (empty($author)) {
+            throw new ValidateException("Author cannot be empty");
+        }
+
+        $this->content = $content;
+        $this->meta = $meta;
         $this->author = $author;
-        $this->tags = $tags;
 
         // default value for new post
-        $this->createdDate = time();
+        $this->createdDate = empty($date) ? time() : $date;
         $this->modifiedDate = $this->createdDate;
     }
 
@@ -65,18 +79,18 @@ class Post {
      */
     public function approve() {
         $this->status = static::STATUS_PUBLISHED;
-        $this->updateModifyDate();
+        $this->refreshModifiedDate();
     }
 
     /**
      * Promote this post
      */
     public function promote() {
-        $this->sticky = true;
-        $this->updateModifyDate();
+        // TODO
+        $this->refreshModifiedDate();
     }
 
-    private function updateModifyDate() {
+    private function refreshModifiedDate() {
         $this->modifiedDate = time();
     }
 }

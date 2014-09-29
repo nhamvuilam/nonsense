@@ -26,14 +26,14 @@ interface PostRepository {
      *
      * @param \Nvl\Cms\Domain\Model\Post\Post $post The post object to save
      */
-    public function add($post);
+    public function add(Post $post);
 
     /**
      * Save a post
      *
      * @param \Nvl\Cms\Domain\Model\Post $post The post object to save
      */
-    public function save($post);
+    public function save(Post $post);
 
     /**
      * @param string $tag   Tag to query

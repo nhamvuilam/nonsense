@@ -15,7 +15,7 @@ try {
 
     $di->set('dispatcher', function() {
         $dispatcher = new Phalcon\Mvc\Dispatcher();
-        $dispatcher->setDefaultNamespace('\Nvl\Cms\Adapter\Http\Controllers');
+        $dispatcher->setDefaultNamespace('Nvl\Cms\Adapter\Http\Controllers\\');
         return $dispatcher;
     });
 

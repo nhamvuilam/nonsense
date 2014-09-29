@@ -11,10 +11,40 @@
 namespace Nvl\Cms\Domain\Model\Post;
 
 /**
- * Link post
+ * Video post
+ *
+ * @author Nguyen Minh Quyet <minhquyet@gmail.com>
  */
-class VideoPost {
-    private $title;
-    private $url;
-    private $description;
+class VideoPost extends PostContent {
+
+    private $embedded;
+
+    public function __construct($caption, $embedded) {
+        parent::__construct($caption);
+        $this->embedded = $embedded;
+    }
+
+	/**
+     * @see \Nvl\Cms\Domain\Model\Post\PostContent::excerptHtml()
+     */
+    public function excerptHtml() {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Domain\Model\Post\PostContent::html()
+     */
+    public function html() {
+        // TODO Auto-generated method stub
+        return "";
+    }
+
+    /**
+     * @see \Nvl\Cms\Domain\Model\Post\PostContent::toArray()
+     */
+    public function toArray() {
+    }
+
+
 }

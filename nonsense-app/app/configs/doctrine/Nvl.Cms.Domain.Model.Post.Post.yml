@@ -3,31 +3,19 @@ Nvl\Cms\Domain\Model\Post\Post:
   collection: posts
   customId: true
   embedOne:
-    type:
-      targetDocument: Nvl\Cms\Domain\Model\Post\PostType
+    content:
+      targetDocument: Nvl\Cms\Domain\Model\Post\PostContent
+    meta:
+      targetDocument: Nvl\Cms\Domain\Model\Post\PostMeta
   fields:
     id: 
       id: true
       strategy: INCREMENT
-    title: 
-      type: string
-    displayContent:
-      type: string
-    originalContent:
-      type: string
     author:
       type: string
     createdDate:
       type: timestamp
     modifiedDate:
       type: timestamp
-    tags:
-      type: hash
     status:
       type: string
-    commentCount:
-      type: int
-    likeCount:
-      type: int
-    sticky:
-      type: boolean
