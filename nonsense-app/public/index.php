@@ -2,15 +2,13 @@
 
 try {
 
+	error_reporting(E_ERROR);
+	
     define("APP_DIR", realpath(__DIR__ . '/../app'));
+    define("STATIC_PATH", '/nhamvl');        
 
     // Composer autoload
-    $loader = require_once '../vendor/autoload.php';
-
-    // Register an autoloader
-    //     $loader = new \Phalcon\Loader();
-    //     $loader->registerNamespaces(array(
-    //     ))->register();
+    $loader = require_once '../vendor/autoload.php';    
 
     // Create a DI
     $di = new Phalcon\DI\FactoryDefault();
@@ -25,6 +23,11 @@ try {
     $di->set('view', function(){
         $view = new \Phalcon\Mvc\View();
         $view->setViewsDir('../app/views/');
+        
+        $view->registerEngines(array(
+            ".php" => 'Phalcon\Mvc\View\Engine\Php'
+        ));
+        
         return $view;
     });
 
