@@ -43,10 +43,10 @@ class Post {
     private $status = 0;
 
     private $createdDate;
+
     private $modifiedDate;
 
     /**
-     *
      * @param PostContent $content
      * @param PostMeta    $meta
      * @param string      $author
@@ -90,7 +90,25 @@ class Post {
         $this->refreshModifiedDate();
     }
 
+    public function html($attribs = array()) {
+        return $this->content->html($attribs);
+    }
+
     private function refreshModifiedDate() {
         $this->modifiedDate = time();
     }
+
+    public function toArray() {
+        $postArray = array(
+            'id'        => $this->id,
+            'type'      => $this->content->type(),
+            'post_url'  => '/'.$this->content->type().'/'.$this->id,
+            'timestamp' => $this->createdDate,
+            'tags' => $this->meta->tagArray(),
+            $this->content->type() => $this->content->toArray(),
+        );
+
+        return $postArray;
+    }
+
 }

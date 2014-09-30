@@ -96,11 +96,11 @@ class PostFactory {
 
             // Create image post
         	case 'image':
-                return $this->imagePost($contentArray);
+                return $this->newImagePost($contentArray);
 
         	// Create video post
         	case 'video':
-        	    return $this->videoPost($contentArray);
+        	    return $this->newVideoPost($contentArray);
 
         	default:
         	    throw new \Exception('Invalid post type detected');
@@ -108,8 +108,15 @@ class PostFactory {
 
     }
 
-    private function imagePost($contentArray) {
-        $image = !empty($contentArray['link']) ? $contentArray['link'] : $contentArray['data'];
+    /**
+     * Create new image post
+     *
+     * @param array $contentArray
+     * @return \Nvl\Cms\Domain\Model\Post\ImagePost
+     */
+    private function newImagePost($contentArray) {
+        $image = !empty($contentArray['link']) ? $contentArray['link']
+                                               : $contentArray['data'][0]['uploaded_path'];
 
         // Resize image
         $resizedImages = $this->imageProcessor()->resize($image, $this->_imageSizes);
@@ -127,12 +134,11 @@ class PostFactory {
             );
         }
 
-        var_dump($storedImages);
         // Create image post with the cdn location
         return new ImagePost($contentArray['caption'], $storedImages);
     }
 
-    private function videoPost($contentArray) {
+    private function newVideoPost($contentArray) {
         return new VideoPost($contentArray['caption'], $contentArray['embedded']);
     }
 

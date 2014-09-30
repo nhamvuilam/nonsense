@@ -50,11 +50,14 @@ class PostApplicationServiceImpl implements PostApplicationService {
      * @see \Nvl\Cms\Application\PostApplicationService::newPost()
      */
     public function newPost($type, $tags, $date, $postContent) {
+        // Dummy author
         $author = 'nmquyet';
+
+        // Create new post
         $post = $this->postFactory()->newPost($type, $postContent, $author, $date, $tags);
 
+        // Save created post
         $this->postRepository()->add($post);
-
         return $post;
     }
 

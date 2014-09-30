@@ -49,22 +49,45 @@ class ImagickProcessor implements ImageProcessor {
         foreach ($imagick as $image) {
 
             // Generate various image sizes for current image
-            foreach ($sizes as $name => $width) {
-                $name = $this->tmpPath.'/'.$name.'_'.$width.'_'.md5(uniqid(gethostname())).'.jpg';
-                $image->resizeImage($width, 0, \Imagick::FILTER_LANCZOS, 0.9);
-                // $image->thumbnailimage($width, 0);
-                $image->writeimage($name);
+            foreach ($sizes as $name => $maxWidth) {
+                $originalWidth = $image->getimagewidth();
+
+                // Only resize if original width larger than max width
+                if ($maxWidth <= $originalWidth) {
+
+                    // Resize image
+                    $image->resizeImage($maxWidth, 0, \Imagick::FILTER_LANCZOS, 0.9);
+                    // $image->thumbnailimage($width, 0);
+
+                    // Save image to a temporary directory
+                    $outputPath = $this->filenameFor($name, $image);
+                    $image->writeimage($outputPath);
+                    $imageSet[] = array(
+                        'path'   => $outputPath,
+                        'width'  => $image->getimagewidth(),
+                        'height' => $image->getimageheight(),
+                    );
+                }
+            }
+
+            if (empty($imageSet)) {
+                $image->writeimage($this->filenameFor('regular', $image));
                 $imageSet[] = array(
-                    'path' => $name,
-                    'width' => $image->getimagewidth(),
+                    'path'   => $image->getimagefilename(),
+                    'width'  => $image->getimagewidth(),
                     'height' => $image->getimageheight(),
                 );
             }
+
             $result[] = $imageSet;
         }
 
         $imagick->destroy();
         return $result;
+    }
+
+    private function filenameFor($sizeName, $image) {
+        return $this->tmpPath.'/'.$sizeName.'_'.$image->getimagewidth().'_'.md5(uniqid(gethostname())).'.jpg';
     }
 
 }

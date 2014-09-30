@@ -31,7 +31,14 @@ interface PostApplicationService {
      * <pre>
      * array(
      *   'link',
-     *   'data',
+     *   'data' => array(
+     *     array(
+     *       'uploaded_path' => /tmp
+     *       'name'          => upload_test.jpg
+     *       'type'          => image/jpeg
+     *     ),
+     *     [...]
+     *   ),
      *   'caption'
      * )
      * </pre>

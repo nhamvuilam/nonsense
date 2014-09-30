@@ -23,6 +23,14 @@ abstract class PostContent {
         $this->caption = $caption;
     }
 
+    protected function buildHtmlAttribs($attribs) {
+        $string = '';
+        foreach ($attribs as $name => $value) {
+            $string .= ' '.$name.'="'.$value.'"';
+        }
+        return $string;
+    }
+
     /**
      * @return string The post title text
      */
@@ -38,10 +46,12 @@ abstract class PostContent {
     /**
      * @return string The sanitized full post html string
      */
-    public abstract function html();
+    public abstract function html($attr);
 
     /**
      * @return array Post content as an array
      */
     public abstract function toArray();
+
+    public abstract function type();
 }

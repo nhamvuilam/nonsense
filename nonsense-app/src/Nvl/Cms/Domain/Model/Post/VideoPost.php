@@ -29,13 +29,12 @@ class VideoPost extends PostContent {
      */
     public function excerptHtml() {
         // TODO Auto-generated method stub
-
     }
 
 	/**
      * @see \Nvl\Cms\Domain\Model\Post\PostContent::html()
      */
-    public function html() {
+    public function html($attribs) {
         // TODO Auto-generated method stub
         return "";
     }
@@ -46,5 +45,7 @@ class VideoPost extends PostContent {
     public function toArray() {
     }
 
-
+    public function type() {
+        return 'video';
+    }
 }

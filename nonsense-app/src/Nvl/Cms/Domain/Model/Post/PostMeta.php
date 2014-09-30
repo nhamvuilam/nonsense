@@ -45,4 +45,8 @@ class PostMeta {
         $this->tags = array_unique(array_merge($this->tags, (array) $tags));
     }
 
+    public function tagArray() {
+        return $this->tags;
+    }
+
 }

@@ -12,10 +12,7 @@ use Nvl\Cms\Domain\Model\Post\CdnService;
 class LocalCdnService implements CdnService {
 
     /**
-     * (non-PHPdoc)
-     *
      * @see \Nvl\Cms\Domain\Model\Post\CdnService::put()
-     *
      */
     public function put($file) {
         $dest = '/home/php/project/nonsense/nonsense-app/public/photos';

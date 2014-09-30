@@ -28,23 +28,28 @@ class ImagePost extends PostContent {
      * @see \Nvl\Cms\Domain\Model\Post\PostContent::excerptHtml()
      */
     public function excerptHtml() {
-        // TODO Auto-generated method stub
-
     }
 
 	/**
      * @see \Nvl\Cms\Domain\Model\Post\PostContent::html()
      */
-    public function html() {
-        // TODO
+    public function html($attribs = array()) {
+        return '<img src="'.$this->images[0]['url'].$this->buildHtmlAttribs($attribs).'" />';
     }
 
     /**
      * @see \Nvl\Cms\Domain\Model\Post\PostContent::toArray()
      */
     public function toArray() {
-        // TODO
+        return array(
+           'type' => 'image',
+    	   'caption' => $this->captionText(),
+           'images'  => $this->images,
+        );
     }
 
+    public function type() {
+        return 'image';
+    }
 
 }
