@@ -4,8 +4,7 @@
 		<div class="badge-entry-collection">
 			<?php if(isset($posts['posts'])) { 
 				foreach($posts['posts'] as $post) {?>
-					<article data-entry-id="aAVP4Go" data-entry-url="<?php echo $post['post_url']?>" data-entry-votes="8733"
-						data-entry-comments="48" id="jsid-entry-entity-aAVP4Go" class="badge-entry-container badge-entry-entity">
+					<article data-entry-id="aAVP4Go" data-entry-url="<?php echo $post['post_url']?>" id="jsid-entry-entity-aAVP4Go" class="badge-entry-container badge-entry-entity">
 						<header>
 							<h2 class="badge-item-title"><a class="badge-evt badge-track"
 							data-evt="ref-post-from-list,hot,position-1"
@@ -14,21 +13,21 @@
 							target="_blank"> <?php echo $post['image']['caption']?> </a></h2>
 						</header>
 						<div class="badge-post-container post-container">
-							<a href="/gag/aAVP4Go"
-							class="badge-animated-cover badge-track badge-track-no-follow"
-							data-track="post,p,,,d,aAVP4Go,l"
-							style="width: 436.14457831325px; height: 500px; max-height:500px;padding-left:31.927710843373px;"> <div class="badge-animated-container-animated" data-image="http://img-9gag-lol.9cache.com/photo/aAVP4Go_460sa_v1.gif"></div>
-							<div class="badge-animated-container-static gif-post presenting">
-								<img class="badge-item-img" src="<?php echo $post['image']['sizes'][0]['url']?>" alt="<?php echo $post['image']['caption']?>"
-								style="width: 436.14457831325px; height: 500px; max-height:500px;" />
-							</div> </a>
+							<a href="/gag/aAVP4Go" class="badge-animated-cover badge-track badge-track-no-follow"							
+								style="width: 436.14457831325px; height: 500px; max-height:500px;padding-left:31.927710843373px;"> <div class="badge-animated-container-animated" data-image="http://img-9gag-lol.9cache.com/photo/aAVP4Go_460sa_v1.gif"></div>
+								<div class="badge-animated-container-static gif-post presenting">
+									<img class="badge-item-img" src="<?php echo $post['image']['sizes'][0]['url']?>" alt="<?php echo $post['image']['caption']?>"
+									style="width: 436.14457831325px; height: 500px; max-height:500px;" />
+								</div> 
+							</a>
 						</div>
 						<p class="post-meta">
-							<a class="badge-evt point" id="love-count-aAVP4Go"
-							href="/gag/aAVP4Go"
-							target="_blank"
-							data-evt="EntryAction,VotePointLinkUnderTitle,ListPage"> <span class="badge-item-love-count">8,733</span> points</a> &middot; <a class="comment badge-evt" href="/gag/aAVP4Go#comment" target="_blank"
-							data-evt="EntryAction,CommentLinkUnderTitle,ListPage" >48 comments</a>
+							<a class="badge-evt point" id="love-count-aAVP4Go" href="<?php echo $post['post_url']?>" target="_blank"
+							data-evt="EntryAction,VotePointLinkUnderTitle,ListPage"> <span class="badge-item-love-count">0</span> points</a> &middot; 
+							<a class="comment badge-evt" href="/" target="_blank"
+								data-evt="EntryAction,CommentLinkUnderTitle,ListPage" >
+								<fb:comments-count href="<?php echo $post['post_url']?>"/></fb:comments-count> comments
+							</a>
 						</p>
 						<div class="badge-item-vote-container post-afterbar-a in-list-view  ">
 							<div class="vote">

@@ -19,29 +19,27 @@ class PostController extends BaseController {
             if ($this->request->hasFiles() == true) {
             	
                 //get file upload into upload folder
-                foreach ($this->request->getUploadedFiles() as $file){
-                	echo $file->getName();                    		
-            		//$file->moveTo(APP_DIR.'/caches/upload/' . $file->getName());                            
+                foreach ($this->request->getUploadedFiles() as $file) {
+                	$arrContent['data'][] = array(
+                		'uploaded_path' => $file->getPath(), 'name' => $file->getName(),
+                		'type' => $file->getRealType()
+					);             		                         
                 }
-								
-				$arrContent['link'] = $file->getName();
-				$arrContent['data'] = $file->getName();
+															
 				$arrContent['caption'] = $params['title'];
+				$arrContent['type'] = 'image';
 															
             } else { // type is link
-            	
-            	$arrContent['embeded'] = $params['url'];				
-				$arrContent['caption'] = $params['title'];
-            }						
+            
+            	$arrContent['type'] = 'video';
+            	$arrContent['embedded'] = $params['url'];				
+				$arrContent['caption'] = $params['title'];				
+            }															
 						
 			$result = App::postApplicationService()->newPost(
-				$params['type'], '', time(), $arrContent);
-						            
-			if ($result == 1) {	// insert success	        			
-				$this->redirect("/");
-			}  
-			
-			$this->redirect("/post");			
+				$arrContent['type'], '', time(), $arrContent);
+						            			        		
+			$this->redirect("/");					
             
         }
 		                
