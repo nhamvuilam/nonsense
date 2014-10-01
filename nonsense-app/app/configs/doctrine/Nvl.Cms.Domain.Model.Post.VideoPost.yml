@@ -1,5 +1,5 @@
 Nvl\Cms\Domain\Model\Post\VideoPost:
   type: embeddedDocument
   fields:
-    embedded:
+    link:
       type: string

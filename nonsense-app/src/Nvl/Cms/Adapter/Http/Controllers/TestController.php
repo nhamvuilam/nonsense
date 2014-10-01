@@ -26,6 +26,24 @@ class TestController extends BaseController {
                 )
         );
         echo '<h1>Document inserted</h1>';
+        echo $post->html();
+        var_dump($post->toArray());
+        exit;
+    }
+
+    function newVideoPostAction() {
+
+        $post = App::postApplicationService()->newPost(
+            'video',
+            array('meme', 'hot'),
+            null,
+            array(
+                'caption'  => 'Legend of Korra',
+                'link'     => 'http://www.youtube.com/watch?v=NCEFMY4TWGw',
+            )
+        );
+
+        echo '<h1>Document inserted</h1>';
         echo $post->html(array());
         var_dump($post->toArray());
         exit;

@@ -139,7 +139,7 @@ class PostFactory {
     }
 
     private function newVideoPost($contentArray) {
-        return new VideoPost($contentArray['caption'], $contentArray['embedded']);
+        return new VideoPost($contentArray['caption'], $contentArray['link']);
     }
 
     private function imageProcessor() {

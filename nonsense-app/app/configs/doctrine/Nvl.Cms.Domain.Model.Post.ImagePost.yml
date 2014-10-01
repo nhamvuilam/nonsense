@@ -3,4 +3,3 @@ Nvl\Cms\Domain\Model\Post\ImagePost:
   fields:
     images:
       type: collection 
-    

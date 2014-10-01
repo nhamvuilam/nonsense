@@ -46,8 +46,8 @@ interface PostApplicationService {
      * <p>Type <code>video</code>
      * <pre>
      * array(
-     *   'caption' => 'caption string',
-     *   'embeded' => 'videos's <embeded/> tag'
+     *   'caption' => Title,
+     *   'link'    => Video URL of supported sites
      * )
      * </pre>
      * @return Post Newly created post
