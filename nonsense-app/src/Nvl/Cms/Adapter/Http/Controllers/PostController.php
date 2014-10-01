@@ -21,7 +21,7 @@ class PostController extends BaseController {
                 //get file upload into upload folder
                 foreach ($this->request->getUploadedFiles() as $file) {
                 	$arrContent['data'][] = array(
-                		'uploaded_path' => $file->getPath(), 'name' => $file->getName(),
+                		'uploaded_path' => $file->getTempName(), 'name' => $file->getName(),
                 		'type' => $file->getRealType()
 					);             		                         
                 }
@@ -29,10 +29,10 @@ class PostController extends BaseController {
 				$arrContent['caption'] = $params['title'];
 				$arrContent['type'] = 'image';
 															
-            } else { // type is link
+            } else { // type is Video
             
             	$arrContent['type'] = 'video';
-            	$arrContent['embedded'] = $params['url'];				
+            	$arrContent['link'] = $params['url'];				
 				$arrContent['caption'] = $params['title'];				
             }															
 						

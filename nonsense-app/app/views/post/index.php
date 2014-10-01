@@ -1,6 +1,6 @@
 <div class="badge-page page ">
 	<section id="upload-file">
-		<form onsubmit="return GAG.UploadController.validateForm();" method="POST" enctype="multipart/form-data" action="/submit" class="modal" id="form-modal-post-image">
+		<form onsubmit="return GAG.UploadController.validateForm();" method="POST" enctype="multipart/form-data" action="/post" class="modal" id="form-modal-post-image">
 			<input type="hidden" value="Photo" name="type">
 			<input type="hidden" value="12d87d1c6e88194d2bf1fc7169d8a83b" name="csrftoken" id="csrftoken">
 			<input type="hidden" value="Photo" name="post_type" id="post_type">
@@ -11,7 +11,10 @@
 					Upload funny pictures, paste pictures URL, accepting GIF/JPG/PNG (Max size: 3MB)
 				</p>
 				<div class="field photo">
-					<label style="display:none;"> <a href="javascript:void(0);" class="" id="jsid-upload-url-btn">Paste URL</a> / <a href="javascript:void(0);" class="upload-selected" id="jsid-upload-file-btn">Upload File</a> </label>
+					<label style="display:none;"> 
+						<a href="javascript:void(0);" class="" id="jsid-upload-url-btn">Paste URL</a> / 
+						<a href="javascript:void(0);" class="upload-selected" id="jsid-upload-file-btn">Upload File</a> 
+					</label>
 					<input type="url" value="" placeholder="http://" name="url" class="hide" id="jsid-upload-url-input">
 					<div class="file-field " id="jsid-upload-file-input">
 						<input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" name="image" class="file text">
