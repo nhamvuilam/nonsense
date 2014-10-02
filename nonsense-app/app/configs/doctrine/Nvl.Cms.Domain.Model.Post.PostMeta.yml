@@ -2,7 +2,7 @@ Nvl\Cms\Domain\Model\Post\PostMeta:
   type: embeddedDocument
   fields:
     tags: 
-      type: hash 
+      type: collection
     commentCount:
       type: int
     likeCount:

@@ -35,7 +35,7 @@ class TestController extends BaseController {
 
         $post = App::postApplicationService()->newPost(
             'video',
-            array('meme', 'hot'),
+            array('anim', 'video'),
             null,
             array(
                 'caption'  => 'Legend of Korra',
@@ -46,6 +46,13 @@ class TestController extends BaseController {
         echo '<h1>Document inserted</h1>';
         echo $post->html(array());
         var_dump($post->toArray());
+        exit;
+    }
+
+    function queryPostAction() {
+        echo '<h1>By tags</h1>';
+        $posts = App::postApplicationService()->queryPosts(array(), '', array(), 10, 0);
+        var_dump($posts);
         exit;
     }
 }

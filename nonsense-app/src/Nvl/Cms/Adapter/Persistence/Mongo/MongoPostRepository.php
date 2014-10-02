@@ -13,6 +13,7 @@ namespace Nvl\Cms\Adapter\Persistence\Mongo;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Nvl\Cms\Domain\Model\Post\PostRepository;
 use Nvl\Cms\Domain\Model\Post\Post;
+use Nvl\Cms\Domain\Model\PaginatedResult;
 
 /**
  * Mongo Db Post Repository implementation
@@ -43,7 +44,39 @@ class MongoPostRepository implements PostRepository {
      * @see \Nvl\Cms\Domain\Model\Post\PostRepository::save()
      */
     public function save(Post $post) {
+        $this->dm()->persist($post);
+        $this->dm()->flush();
+    }
 
+	/**
+     * @see \Nvl\Cms\Domain\Model\Post\PostRepository::findBy()
+     */
+    public function findBy($query) {
+        $queryBuilder = $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\Post\Post');
+
+        if (!empty($query['tags'])) {
+            $queryBuilder->field('meta.tags')->in($query['tags']);
+        }
+        if (!empty($query['authors'])) {
+            $queryBuilder->field('author')->in((array) $query['authors']);
+        }
+        if (!empty($query['type'])) {
+            $queryBuilder->field('content.type')->equals($query['type']);
+        }
+        if (!empty($query['limit'])) {
+            $queryBuilder->limit($query['limit']);
+        }
+        if (!empty($query['offset'])) {
+            $queryBuilder->skip($query['offset']);
+        }
+
+        $queryBuilder->sort(array('createdDate' => 'desc'));
+
+        return new PaginatedResult(
+                $query['limit'],
+                $query['offset'],
+                $queryBuilder->getQuery()->count(),
+                $queryBuilder->getQuery()->execute());
     }
 
     /**
@@ -51,21 +84,12 @@ class MongoPostRepository implements PostRepository {
      */
     public function latestOfTag($tag, $limit = 10) {
         return $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\Post\Post')
-                         ->select()
-                         ->sort(array('createdDate' => -1))
-                         ->limit($limit)->getQuery()->execute();
-        /*
-    	$cursor = $this->collection()->find(array(
-    		'tags' => $tag,
-    	));
-    	$cursor->sort(array('created_date' => -1))->limit($limit);
-
-    	return $cursor;
-    	*/
-
+                          ->select()
+                          ->sort(array('createdDate' => -1))
+                          ->limit($limit)
+                          ->getQuery()
+                          ->execute();
     }
-
-    public function latestOfCategory($category, $limit = 10) {}
 
     /**
      * @return DocumentManager
@@ -80,4 +104,6 @@ class MongoPostRepository implements PostRepository {
     public function collectionName() {
         return 'posts';
     }
+
+
 }
