@@ -59,25 +59,28 @@ class ImagickProcessor implements ImageProcessor {
                     $image->resizeImage($maxWidth, 0, \Imagick::FILTER_LANCZOS, 0.9);
                     // $image->thumbnailimage($width, 0);
 
-                    // Save image to a temporary directory
-                    $outputPath = $this->filenameFor($name, $image);
-                    $image->writeimage($outputPath);
-                    $imageSet[] = array(
-                        'path'   => $outputPath,
-                        'width'  => $image->getimagewidth(),
-                        'height' => $image->getimageheight(),
-                    );
                 }
+
+                // Save image to a temporary directory
+                $outputPath = $this->filenameFor($name, $image);
+                $image->writeimage($outputPath);
+                $imageSet[$name] = array(
+                    'path'   => $outputPath,
+                    'width'  => $image->getimagewidth(),
+                    'height' => $image->getimageheight(),
+                );
             }
 
+            /*
             if (empty($imageSet)) {
                 $image->writeimage($this->filenameFor('regular', $image));
-                $imageSet[] = array(
+                $imageSet['regular'] = array(
                     'path'   => $image->getimagefilename(),
                     'width'  => $image->getimagewidth(),
                     'height' => $image->getimageheight(),
                 );
             }
+            */
 
             $result[] = $imageSet;
         }

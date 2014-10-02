@@ -124,10 +124,10 @@ class PostFactory {
 
         // Upload resized images to a CDN
         // XXX: At this phase, only allow upload one image
-        foreach ($resizedImages[0] as $resizedImage) {
+        foreach ($resizedImages[0] as $sizeName => $resizedImage) {
             $url = $this->cdnService()->put($resizedImage['path']);
             unlink($resizedImage['path']);
-            $storedImages[] = array(
+            $storedImages[$sizeName] = array(
             	'url' => $url,
                 'width' => $resizedImage['width'],
                 'height' => $resizedImage['height'],

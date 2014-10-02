@@ -14,7 +14,7 @@
 						</header>
 						<div class="badge-post-container post-container">
 							<a href="<?php echo $post['post_url']; ?>">
-                                <img class="badge-item-img" src="<?php echo ($post['type'] == 'image' ? $post['content']['images'][0]['url'] : $post['content']['image_url']) ?>" alt="<?php echo $post['image']['caption']?>" />
+                                <img class="badge-item-img" src="<?php echo ($post['type'] == 'image' ? $post['content']['images']['medium']['url'] : $post['content']['image_url']) ?>" alt="<?php echo $post['image']['caption']?>" />
 							</a>
 						</div>
 						<p class="post-meta">

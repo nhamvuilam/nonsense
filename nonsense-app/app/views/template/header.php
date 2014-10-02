@@ -12,7 +12,6 @@
     <link href="<?php echo STATIC_PATH ?>/css/styleAll.css" media="screen,projection" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<?php echo STATIC_PATH ?>/js/lib.js"></script>
 </head>
-<!--
 <script type="text/javascript">
 
     (function(i, s, o, g, r, a, m) {
@@ -52,7 +51,6 @@
         googletag.enableServices();
     });
 </script>
- -->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

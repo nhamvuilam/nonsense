@@ -28,6 +28,7 @@
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
 <![endif]-->
 
+<!--
 <script type="text/javascript">
 
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -37,7 +38,7 @@
 
             ga('create', 'UA-4838180-1', '9gag.com');
     ga('send', 'pageview');
-    
+
 </script>
 <script type='text/javascript'>
 var googletag = googletag || {};
@@ -59,6 +60,7 @@ googletag.pubads().enableSingleRequest();
 googletag.enableServices();
 });
 </script>
+  -->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -67,7 +69,7 @@ googletag.enableServices();
   js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=450155908453928&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<script src="https://apis.google.com/js/platform.js" async defer></script> 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <body class="background-white">
 <section class="announcement-banner badge-volatile-banner yellow hide" id="jsid-banner-confirm-email">
   <p>Hey <span id="jsid-banner-confirm-email-username"></span>, please verify your email address. If you didn't receive an email, we can <a href="/member/resend-confirmation">resend it</a> or you can <a href="https://9gag.com/settings">change your email adress</a>.</p>
@@ -101,7 +103,7 @@ googletag.enableServices();
       </div>
       <div id="jsid-user-function" class="user-function">
         <div id="jsid-header-notification-menu" class="notification badge-evt" data-evt="Notification-Badge,Clicked-Badge,https://9gag.com/notifications"> <a class="bell" href="javascript:void(0);"> <span id="jsid-notification-unread-count" class="badge hide" href="http://9gag.com/notifications">0</span> </a> </div>
-        <div id="jsid-header-user-menu" class="avatar"> <a class="avatar-container" href="javascript:void(0);"> 
+        <div id="jsid-header-user-menu" class="avatar"> <a class="avatar-container" href="javascript:void(0);">
         <img id="jsid-avatar" src="//avatars-cdn.9gag.com/avatar/nguyensivn_6991713_100.jpg" alt="Avatar">
           <div class="drop-arrow"></div>
           </a> </div>
@@ -169,7 +171,7 @@ googletag.enableServices();
     <div class="slogan">
       <p>9GAG is your best source of fun.</p>
     </div>
-    <div class="social-love" style="float:right">     
+    <div class="social-love" style="float:right">
       <div class="fb-like" style="top:0px;" data-href="https://www.facebook.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
     </div>
    <!-- <a class="customize badge-personalise-btn" href="#">Personalise <span class="drop-arrow"></span></a>-->
