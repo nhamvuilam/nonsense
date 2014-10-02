@@ -35,8 +35,28 @@ class PostApplicationServiceImpl implements PostApplicationService {
 	/**
      * @see \Nvl\Cms\Application\PostApplicationService::queryPosts()
      */
-    public function queryPosts($authors = array(), $type = '', $tags = array(), $limit, $offset = 1) {
-        // TODO Auto-generated method stub
+    public function queryPosts($authors = array(), $type = '', $tags = array(), $limit = 10, $offset = 0) {
+        $paginatedResult = $this->postRepository()->findBy(array(
+        	'tags'    => $tags,
+            'authors' => $authors,
+            'type'    => $type,
+            'limit'   => $limit,
+            'offset'  => $offset,
+        ));
+
+        $posts = array();
+        foreach ($paginatedResult->data() as $post) {
+            /* @var $post \Nvl\Cms\Domain\Model\Post\Post */
+            $posts[] = $post->toArray();
+        }
+
+        return array(
+    	    'total' => $paginatedResult->total(),
+            'current' => (int) $offset,
+            'next' => $paginatedResult->next(),
+            'previous' => $paginatedResult->previous(),
+            'posts' => $posts,
+        );
     }
 
 	/**

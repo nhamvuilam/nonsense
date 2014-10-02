@@ -10,6 +10,7 @@
 //
 namespace Nvl\Cms\Domain\Model\Post;
 
+use Nvl\Cms\Domain\Model\PaginatedResult;
 /**
  * Post repository
  */
@@ -36,13 +37,19 @@ interface PostRepository {
     public function save(Post $post);
 
     /**
+     * Find posts filtered by given query
+     *
+     * @param array $query
+     * @return PaginatedResult
+     */
+    public function findBy($query);
+
+    /**
      * @param string $tag   Tag to query
      * @param number $limit Number of post to return
      * @return array Array of latest post
      */
     public function latestOfTag($tag, $limit = 10);
-
-    public function latestOfCategory($category, $limit = 10);
 
     /**
      * @return int - The next post id
