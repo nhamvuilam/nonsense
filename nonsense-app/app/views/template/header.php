@@ -12,6 +12,7 @@
     <link href="<?php echo STATIC_PATH ?>/css/styleAll.css" media="screen,projection" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<?php echo STATIC_PATH ?>/js/lib.js"></script>
 </head>
+<!--
 <script type="text/javascript">
 
     (function(i, s, o, g, r, a, m) {
@@ -51,6 +52,7 @@
         googletag.enableServices();
     });
 </script>
+ -->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -59,9 +61,9 @@
   js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=225088811013195&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<script src="https://apis.google.com/js/platform.js" async defer></script> 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<body class="background-white">    
+<body class="background-white">
     <div class="badge-sticky-subnav-static">
         <header id="top-nav" class="badge-sticky-nav">
             <div class="nav-wrap">
@@ -91,11 +93,11 @@
                 </div>
                 <div id="jsid-user-function" class="user-function">
                     <div id="jsid-header-notification-menu" class="notification badge-evt" data-evt="Notification-Badge,Clicked-Badge,https://9gag.com/notifications"> <a class="bell" href="javascript:void(0);"> <span id="jsid-notification-unread-count" class="badge hide" href="http://9gag.com/notifications">0</span> </a> </div>
-                    <div id="jsid-header-user-menu" class="avatar"> 
-                    	<a class="avatar-container" href="javascript:void(0);"> 
+                    <div id="jsid-header-user-menu" class="avatar">
+                    	<a class="avatar-container" href="javascript:void(0);">
                             <img id="jsid-avatar" src="//avatars-cdn.9gag.com/avatar/nguyensivn_6991713_100.jpg" alt="Avatar">
                             <div class="drop-arrow"></div>
-                        </a> 
+                        </a>
                     </div>
                     <div class="upload"> <a id="jsid-upload-menu" class="upload" href="javascript:void(0);" onClick="GAG.GA.track('Headbar-Upload', 'Clicked', 'UploadButton');">Upload</a> </div>
                     <div id="jsid-header-notification-items" class="notification-menu hide">
@@ -161,7 +163,7 @@
             <div class="slogan">
                 <p>NhamVL Vui lam.</p>
             </div>
-            <div class="social-love" style="float:right">     
+            <div class="social-love" style="float:right">
                 <div class="fb-like" style="top:0px;" data-href="https://www.facebook.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
             </div>
            <!-- <a class="customize badge-personalise-btn" href="#">Personalise <span class="drop-arrow"></span></a>-->
@@ -170,4 +172,4 @@
     </div>
     <div class="toast badge-toast-container" style="display:none">
         <p class="close"> <span class="badge-toast-message"></span> <a class="btn-close badge-toast-close" href="#">&#10006;</a> </p>
-    </div> 
+    </div>

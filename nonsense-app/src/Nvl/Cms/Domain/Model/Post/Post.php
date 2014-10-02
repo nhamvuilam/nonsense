@@ -105,7 +105,7 @@ class Post {
             'post_url'  => '/'.$this->content->type().'/'.$this->id,
             'timestamp' => $this->createdDate,
             'tags' => $this->meta->tagArray(),
-            $this->content->type() => $this->content->toArray(),
+            'content' => $this->content->toArray(),
         );
 
         return $postArray;

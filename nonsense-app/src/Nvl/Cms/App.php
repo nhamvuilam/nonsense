@@ -20,8 +20,6 @@ use Nvl\Config\SymfonyIniFileLoader;
 use Nvl\Cms\Domain\Model\Post\PostFactory;
 use Nvl\Cms\Domain\Model\Post\PostRepository;
 use Nvl\Di\PhalconDi;
-use Nvl\Cms\Adapter\Image\SimpleImageStorage;
-use Nvl\Cms\Adapter\Image\ImagickGenerator;
 use Nvl\Cms\Adapter\Image\ImagickProcessor;
 use Nvl\Cms\Adapter\Image\LocalCdnService;
 

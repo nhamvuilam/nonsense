@@ -19,11 +19,13 @@ use Nvl\Cms\Domain\Model\ValidateException;
 class VideoPost extends PostContent {
 
     private $link;
+    private $embeddedCode;
+    private $imageUrl;
 
     public function __construct($caption, $link) {
         parent::__construct($caption);
         $this->link = $link;
-        var_dump($link);
+        $this->parseVideo();
     }
 
 	/**
@@ -37,7 +39,7 @@ class VideoPost extends PostContent {
      * @see \Nvl\Cms\Domain\Model\Post\PostContent::html()
      */
     public function html($attribs) {
-        return $this->embeddedCode($attribs);
+        return $this->embeddedCode;
     }
 
     /**
@@ -46,7 +48,8 @@ class VideoPost extends PostContent {
     public function toArray() {
         return array(
         	'link'          => $this->link,
-            'embedded_code' => $this->embeddedCode(),
+            'image_url'     => $this->imageUrl,
+            'embedded_code' => $this->embeddedCode,
             'caption'       => $this->captionText(),
         );
     }
@@ -58,24 +61,31 @@ class VideoPost extends PostContent {
         return 'video';
     }
 
-    private function embeddedCode($attribs) {
-        return '<iframe width="640" height="360"
-                        src="'.$this->embeddedUrl().'?rel=0&amp;showinfo=0"
-                        frameborder="0"
-                        allowfullscreen></iframe>';
+    private function parseVideo($attribs) {
+        $video = $this->parseVideoInfo();
+
+        $this->imageUrl = $video['image_url'];
+        $this->embeddedCode = '<iframe width="640" height="360"
+                                       src="'.$video['embedded_url'].'?rel=0&amp;showinfo=0"
+                                       frameborder="0" allowfullscreen></iframe>';
     }
 
-    private function embeddedUrl() {
-        $url = '//www.youtube.com/embed/';
+    private function parseVideoInfo() {
+        $embeddedUrl = '//www.youtube.com/embed/';
+        $imageUrl = null;
 
         $isMatch = preg_match('/(?<=v\=)[^&]+/', $this->link, $matches);
 
         if ($isMatch > 0) {
-            $url .= $matches[0];
+            $embeddedUrl .= $matches[0];
+            $imageUrl = 'http://i.ytimg.com/vi/'.$matches[0].'/sddefault.jpg';
         } else {
             throw new ValidateException('Đường dẫn video không được hỗ trợ');
         }
 
-        return $url;
+        return array(
+        	'embedded_url' => $embeddedUrl,
+            'image_url'    => $imageUrl,
+        );
     }
 }

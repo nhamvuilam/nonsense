@@ -3,3 +3,7 @@ Nvl\Cms\Domain\Model\Post\VideoPost:
   fields:
     link:
       type: string
+    embeddedCode:
+      type: string
+    imageUrl:
+      type: string
