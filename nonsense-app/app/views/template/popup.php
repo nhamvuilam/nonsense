@@ -1,11 +1,9 @@
 <div id="overlay-container" class="overlay-scroll-container hide">
 	<section id="modal-upload" class="modal upload hide">
-		<a class="badge-overlay-close btn-close" href="#">✖</a>
+		<a class="badge-overlay-close btn-close" href="javascript:void(0)">✖</a>
 		<section id="upload-file">
 			<form id="form-modal-post-image" class="modal" action="/post" enctype="multipart/form-data" method="POST" onsubmit="return GAG.UploadController.validateForm();">
-				<input type="hidden" name="type" value="image" />
-				<input type="hidden" id="csrftoken" name="csrftoken" value="" />
-				<input id="post_type" type="hidden" name="post_type" value="image"/>
+				<input type="hidden" name="type" value="image" />				
 				<div id="jsid-disable-mask">
 					<h2>Post a fun</h2>
 					<p class="lead">
@@ -20,7 +18,7 @@
 					</div>
 					<div class="field title">
 						<label>Title</label>
-						<p id="jsid-char-count" class="count ">
+						<p id="jsid-char-count" class="count">
 							120
 						</p>
 						<textarea id="jsid-upload-title" name="title" data-maxlength="120"></textarea>
@@ -44,7 +42,7 @@
 			</form>
 		</section>
 	</section>
-	<section id="modal-report" class="badge-overlay-report modal report hide">
+	<!--<section id="modal-report" class="badge-overlay-report modal report hide">
 		<header>
 			<h3>Report Post</h3>
 			<p>
@@ -79,7 +77,7 @@
 			</div>
 		</form>
 	</section>
-	<section class="modal signup badge-overlay-signin hide">
+ 	<section class="modal signup badge-overlay-signin hide">
 		<a class="btn-close badge-overlay-close" href="#">&#10006;</a>
 		<section id="signup">
 			<h2>Login</h2>
@@ -117,7 +115,7 @@
 			<div id="signup-fb" class="">
 				<h2>Hey there!</h2>
 				<p class="lead">
-					9GAG is your best source of fun. Share anything you find interesting, get real responses from people all over the world, and discover what makes you laugh.
+					NhamVL is your best source of fun. Share anything you find interesting, get real responses from people all over the world, and discover what makes you laugh.
 				</p>
 				<div class="social-signup">
 					<a class="btn-connect-option facebook badge-facebook-connect" href="#" onclick="GAG.GA.track('login-signup', 'facebook-connect', 'signup-form');">Facebook</a><span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="javascript:void(0);" onclick="GAG.GPlus.btnClicked = true; GAG.GA.track('login-signup', 'gplus-connect', 'signup-form');">Google</a></span>
@@ -149,7 +147,7 @@
 						<div id='captchawrapper' style="display:none;">
 							<h3 id='capchatitle'>Please enter the words below</h3>
 							<div id='captchadiv' data-apiKey="6Lf0iMkSAAAAALGZpEfzpO13sqJNiEgr6znqfm9r">
-								<div id="recaptcha_widget" style="" class="">
+								<div id="recaptcha_widget">
 									<div id="recaptcha_image" style="width: 300px; height: 57px;"></div>
 									<div class="recaptcha_function">
 										<div class="recaptcha_reload">
@@ -192,7 +190,7 @@
 	<div id="jsid-modal-post-zoom" class="hide" style="height: 100%;">
 		<div class="badge-post-zoom-img zoom-container"></div>
 		<a class="badge-overlay-close close-button" href="javascript: void(0);">Close</a>
-	</div>
+	</div> -->
 </div>
 <script type="text/javascript">
 	jQuery(document).ready(function(){
@@ -209,5 +207,18 @@
 			}
 			jQuery("#jsid-upload-url-input").removeClass("hide");								
 		});
+		
+	 	jQuery("textarea[name=title]").keyup(function(){                  
+		  	var limit = parseInt(jQuery(this).attr('data-maxlength'));         
+		  	var text = jQuery(this).val();
+		  	var chars = text.length;
+		  	var result = (limit - chars) > 0 ? (limit - chars) : 0;     
+		  	jQuery('#jsid-char-count').html(result);                          
+		  	if(chars > limit || (limit - chars) <=0 ){
+			   alert('Bạn đã nhập quá số ký tự cho phép');                            
+			   var new_text = text.substr(0, limit);                    
+			   jQuery(this).val(new_text);
+		  	}  
+	 	});
 	})
 </script>

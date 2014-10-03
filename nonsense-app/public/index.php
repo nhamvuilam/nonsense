@@ -37,6 +37,14 @@ try {
         $url->setBaseUri('/');
         return $url;
     });
+	
+	//Specify routes for modules
+	$di->set('router', function () {
+		$router = new \Phalcon\Mvc\Router();		        		
+		// This route only will be matched if the HTTP method is GET
+		$router->addGet("/nham/{id}", "Detail::index");				
+	    return $router;
+	});
 
     // Handle the request
     $application = new \Phalcon\Mvc\Application($di);
