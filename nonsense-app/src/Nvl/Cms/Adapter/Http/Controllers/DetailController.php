@@ -4,13 +4,18 @@ use Nvl\Cms\App;
 class DetailController extends BaseController {
 
 	public function initialize() {
-		$this->view->setLayout('main');		
+		$this->view->setLayout('main');
 	}
 
-	public function indexAction() {				
-		
+	public function indexAction() {
+
 		$id = $this->dispatcher->getParam("id");
-		
+
+		$post = App::postApplicationService()->postInfo($id);
+		$arrayData = array(
+			'post' => $post,
+		);
+		/*
 		$arrayData = array(
     	    'total' => 1,
             'current' => 0,
@@ -38,7 +43,8 @@ class DetailController extends BaseController {
 					)
 				)
 			),
-        );				
+        );
+        */
 		$this->view->setVars(array('data' => $arrayData, 'display_slidebar' => 1));
 	}
 
