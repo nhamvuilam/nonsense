@@ -59,6 +59,16 @@ class PostApplicationServiceImpl implements PostApplicationService {
         );
     }
 
+    public function postInfo($id) {
+        $post = $this->postRepository()->find($id);
+
+        if (empty($post)) {
+            return null;
+        }
+
+        return $post->toArray();
+    }
+
 	/**
      * @see \Nvl\Cms\Application\PostApplicationService::editPost()
      */

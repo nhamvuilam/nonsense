@@ -2,6 +2,7 @@
 namespace Nvl\Cms\Adapter\Http\Controllers;
 
 use Nvl\Cms\App;
+use Nvl\Cms\Domain\Model\User\AuthenticationException;
 
 class TestController extends BaseController {
 
@@ -53,6 +54,34 @@ class TestController extends BaseController {
         echo '<h1>By tags</h1>';
         $posts = App::postApplicationService()->queryPosts(array(), '', array(), 10, 0);
         var_dump($posts);
+        exit;
+    }
+
+    function newUserAction() {
+        $id = uniqid('minhquyet');
+        echo '<h1>New Password Login</h1>';
+        $user = App::userApplicationService()->register($id.'@gmail.com', '123456', 'Quyet', 'minhquyet@gmail.com', null);
+        echo '<br>Persisted!!!';
+        var_dump($user);
+
+        echo '<h1>Fail Login</h1>';
+        try {
+            $failUser= App::userApplicationService()->authenticate($id.'@gmail.com', '1123456');
+        } catch (AuthenticationException $e) {
+            echo '<p>'.$e->getMessage();
+        }
+        echo '<br>Returned user:';
+        var_dump($failUser);
+
+        echo '<h1>Login</h1>';
+        try {
+            $succeedUser = App::userApplicationService()->authenticate($id.'@gmail.com', '123456');
+        } catch (AuthenticationException $e) {
+            echo '<p>'.$e->getMessage();
+        }
+        echo '<br>Returned user:';
+        var_dump($succeedUser);
+
         exit;
     }
 }

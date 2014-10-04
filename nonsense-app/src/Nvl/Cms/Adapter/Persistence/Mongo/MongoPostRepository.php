@@ -30,6 +30,7 @@ class MongoPostRepository implements PostRepository {
      * @see \Nvl\Cms\Domain\Model\PostRepository::find()
      */
     public function find($id) {
+        return $this->dm()->find('\Nvl\Cms\Domain\Model\Post\Post', $id);
     }
 
     /**

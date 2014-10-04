@@ -12,6 +12,7 @@ namespace Nvl\Cms\Adapter\Image;
 
 use Nvl\Cms\Domain\Model\Post\ImageProcessor;
 use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Cms\App;
 
 /**
  * ImageMagick processor
@@ -37,7 +38,7 @@ class ImagickProcessor implements ImageProcessor {
             $images = (array) $image;
             $imagick = new \Imagick((array) $images);
         } catch (\ImagickException $e) {
-            throw new ValidateException('Hình ảnh không tồn tại');
+            throw new ValidateException(App::message('upload.resize.original_image_not_found'));
         }
 
         $imagick->setCompression(\Imagick::COMPRESSION_JPEG);

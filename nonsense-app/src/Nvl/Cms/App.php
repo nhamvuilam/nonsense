@@ -24,6 +24,9 @@ use Nvl\Cms\Adapter\Image\SimpleImageStorage;
 use Nvl\Cms\Adapter\Image\ImagickGenerator;
 use Nvl\Cms\Adapter\Image\ImagickProcessor;
 use Nvl\Cms\Adapter\Image\LocalCdnService;
+use Nvl\Cms\Adapter\Persistence\Mongo\MongoUserRepository;
+use Nvl\Cms\Application\UserApplicationService;
+use Nvl\Cms\Domain\Model\User\UserRepository;
 
 /**
  * Application registry which return services needed by application
@@ -61,6 +64,16 @@ class App {
             });
             $di->set('post_application_service', function() {
                 return new PostApplicationServiceImpl(App::postRepository(), App::postFactory());
+            });
+
+            // ===================================================================================
+            // POST services
+            // ===================================================================================
+            $di->set('user_repository', function() use ($di) {
+            	return new MongoUserRepository(App::documentManager());
+            });
+            $di->set('user_application_service', function() {
+            	return new UserApplicationService(App::userRepository());
             });
 
             // ===================================================================================
@@ -103,6 +116,10 @@ class App {
             // Cms Config
             $di->set('cms_config', function() {
                 return App::configLoader()->loadConfigFilename('cms.ini');
+            });
+            // Message
+            $di->set('message', function() {
+            	return App::configLoader()->loadConfigFilename('message.ini');
             });
         }
 
@@ -153,9 +170,34 @@ class App {
     }
 
     /**
+     * @return UserRepository
+     */
+    public static function userRepository() {
+        return static::di()->get('user_repository');
+    }
+
+    /**
      * @return \Nvl\Cms\Application\PostApplicationService
      */
     public static function postApplicationService() {
         return static::di()->get('post_application_service');
     }
+
+    /**
+     * @return UserApplicationService
+     */
+    public static function userApplicationService() {
+        return static::di()->get('user_application_service');
+    }
+
+    public static function message($key) {
+        $message = static::di()->get('message');
+
+        if (array_key_exists($key, $message)) {
+            return $message[$key];
+        }
+
+        return $key;
+    }
+
 }

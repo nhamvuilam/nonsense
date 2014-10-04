@@ -101,6 +101,12 @@ interface PostApplicationService {
     public function queryPosts($authors = array(), $type = '', $tags = array(), $limit, $offset = 1);
 
     /**
+     * @param string $id The post id to find
+     * @return Array of post's info or NULL if post id is not found
+     */
+    public function postInfo($id);
+
+    /**
      * Edit a post
      *
      * @param number $id         Post id to edit
