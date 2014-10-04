@@ -65,7 +65,7 @@ class VideoPost extends PostContent {
         $video = $this->parseVideoInfo();
 
         $this->imageUrl = $video['image_url'];
-        $this->embeddedCode = '<iframe width="640" height="360"
+        $this->embeddedCode = '<iframe width="100%" height="400"
                                        src="'.$video['embedded_url'].'?rel=0&amp;showinfo=0"
                                        frameborder="0" allowfullscreen></iframe>';
     }

@@ -1,6 +1,6 @@
 <div class="main-wrap">
     <div id="gag-ads-init-mode"></div>
-	<section id="list-view-2" class="badge-list-view-element variant-right">
+	<section id="individual-post" class="badge-list-view-element variant-right">
 		<div class="badge-entry-collection">
 			<?php if(isset($data['post'])) { ?>
 				<article class="badge-entry-container badge-entry-entity">
@@ -11,7 +11,7 @@
 						  </a>
 						</h2>
 					</header>
-					<div class="badge-post-container post-container">
+					<div class="badge-post-container badge-entry-content post-container">
 						<a href="javascript:void(0);">
 						    <?php if ($data['post']['type'] === 'image' ) { ?>
                             <img class="badge-item-img" src="<?php echo $data['post']['content']['images']['medium']['url']; ?>" alt="<?php echo $data['post']['image']['caption']; ?>" />
@@ -26,7 +26,7 @@
 							<fb:comments-count href="<?php echo $data['post']['post_url']?>"/></fb:comments-count> comments
 						</a>
 					</p>
-					<div class="badge-item-vote-container post-afterbar-a in-list-view  ">
+					<div class="post-afterbar-a in-post-bot">
 						<div class="vote">
 							<ul class="btn-vote left">
 								<li>

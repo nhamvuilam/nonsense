@@ -15,6 +15,7 @@ class DetailController extends BaseController {
 		$arrayData = array(
 			'post' => $post,
 		);
+
 		/*
 		$arrayData = array(
     	    'total' => 1,
