@@ -40,7 +40,7 @@
 							<div class="share right">
 								<ul>
 									<li>
-										<a href="javascript:void(0);" class="badge-facebook-share badge-evt badge-track btn-share facebook" data-share="http://9gag.com/gag/aAVP4Go?ref=fb.s">Facebook</a>
+										<a href="javascript:void(0);" class="badge-facebook-share badge-evt badge-track btn-share facebook" data-share="<?php echo $post['post_url']?>">Facebook</a>
 									</li>
 									<!-- <li>
 										<a href="javascript:void(0);" class="badge-twitter-share badge-evt badge-track btn-share twitter"
@@ -56,10 +56,6 @@
 					</article>
 				<?php } ?>
 			<?php } ?>
-		</div>
-		<div class="loading">
-			<a class="btn badge-load-more-post" href="/?id=aMbwODP%2CanX1w9q%2CamLzeoV&c=10" data-loading-text="Loading more posts..." data-load-count-max="30">Load more posts</a>
-		</div>
-		<span id="jsid-gat-interval" data-post-interval="-1" class="hide">1410500109</span><span id="jsid-latest-entries" class="hide">aAVP4Go,awbVLDW,a49Z766,aRgeDYj,aDwG7wx,a6dQ35N,aVQDRq2,amLzeoV,anX1w9q,aMbwODP</span>
+		</div>		
 	</section>
 </div>
