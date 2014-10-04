@@ -1,33 +1,31 @@
-Nvl\Cms\Domain\Model\Post\Post:
+Nvl\Cms\Domain\Model\User\User:
   type: document
-  collection: posts
+  collection: users
   customId: true
   embedOne:
-    type:
-      targetDocument: Nvl\Cms\Domain\Model\Post\PostType
+    loginInfo:
+      targetDocument: Nvl\Cms\Domain\Model\User\Login
+    contact:
+      targetDocument: Nvl\Cms\Domain\Model\User\ContactInfo
+    stats:
+      targetDocument: Nvl\Cms\Domain\Model\User\UserStats
   fields:
     id: 
       id: true
       strategy: INCREMENT
-    title: 
+    confirmed: 
+      type: boolean
+    status:
       type: string
-    displayContent:
-      type: string
-    originalContent:
-      type: string
-    author:
-      type: string
+    publishedPostCount:
+      type: int
+    postCount:
+      type: int
+    likeCount:
+      type: int
+    lastLogin:
+      type: timestamp
     createdDate:
       type: timestamp
     modifiedDate:
       type: timestamp
-    tags:
-      type: hash
-    status:
-      type: string
-    commentCount:
-      type: int
-    likeCount:
-      type: int
-    sticky:
-      type: boolean

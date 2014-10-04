@@ -20,14 +20,12 @@ class User {
     const STATUS_BANNED   = "banned";
 
     private $id;
-    private $passwordLogin;
-    private $socialLogin;
+    private $loginInfo;
     private $contact;
-    private $status;
+    private $confirmed = false;
 
-    private $postCount = 0;
-    private $likeCount = 0;
-    private $isConfirmed;
+    private $stats;
+
     private $lastLogin;
     private $createdDate;
     private $modifiedDate;
@@ -35,20 +33,26 @@ class User {
     /**
      * Initiate new user
      *
-     * @param PasswordLogin $passwordLogin
-     * @param SocialLogin   $socialLogin
-     * @param ContactInfo   $contact
+     * @param Login       $loginInfo
+     * @param ContactInfo $contact
      */
-    public function __construct(PasswordLogin $passwordLogin,
-                                SocialLogin $socialLogin,
-                                ContactInfo $contact) {
+    public function __construct(Login $loginInfo, ContactInfo $contact) {
 
-        $this->passwordLogin = $passwordLogin;
-        $this->socialLogin = $socialLogin;
+        $this->loginInfo = $loginInfo;
         $this->contact = $contact;
+        $this->stats = new UserStats();
 
-        $this->status = USER::STATUS_ACTIVE;
+        $this->status = static::STATUS_INACTIVE;
         $this->createdDate = time();
         $this->modifiedDate = time();
+    }
+
+    public function activate() {
+        $this->status = static::STATUS_ACTIVE;
+    }
+
+    public function authenticate() {
+        $args = func_get_args();
+        return call_user_func_array(array($this->loginInfo, 'authenticate'), $args);
     }
 }

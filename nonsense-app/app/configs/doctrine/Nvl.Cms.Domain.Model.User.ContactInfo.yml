@@ -1,33 +1,10 @@
-Nvl\Cms\Domain\Model\Post\Post:
-  type: document
-  collection: posts
+Nvl\Cms\Domain\Model\User\ContactInfo:
+  type: embeddedDocument
   customId: true
-  embedOne:
-    type:
-      targetDocument: Nvl\Cms\Domain\Model\Post\PostType
   fields:
-    id: 
-      id: true
-      strategy: INCREMENT
-    title: 
+    name: 
       type: string
-    displayContent:
+    email:
       type: string
-    originalContent:
+    mobile: 
       type: string
-    author:
-      type: string
-    createdDate:
-      type: timestamp
-    modifiedDate:
-      type: timestamp
-    tags:
-      type: hash
-    status:
-      type: string
-    commentCount:
-      type: int
-    likeCount:
-      type: int
-    sticky:
-      type: boolean

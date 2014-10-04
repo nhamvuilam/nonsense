@@ -1,0 +1,9 @@
+Nvl\Cms\Domain\Model\User\UserStats:
+  type: embeddedDocument
+  fields:
+    publishedPostCount:
+      type: int
+    postCount: 
+      type: int
+    likeCount:
+      type: int

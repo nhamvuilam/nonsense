@@ -13,21 +13,26 @@ namespace Nvl\Cms\Domain\Model\User;
 /**
  * Social network login info
  */
-class SocialLogin {
+class SocialLogin extends Login {
 
-    private $id;
-    private $type;
+    private $socialId;
+    private $socialNetwork;
 
-    public function __construct($type, $id) {
-        $this->type = $type;
-        $this->id = $id;
+    public function __construct($email, $socialNetwork, $socialId) {
+        parent::__construct($email);
+        $this->socialNetwork = $socialNetwork;
+        $this->socialId = $socialId;
     }
 
-    public function getId() {
-        return $this->id;
+    public function socialId() {
+        return $this->socialId;
     }
 
-    public function getType() {
-        return $this->type;
+    public function socialNetwork() {
+        return $this->socialNetwork;
+    }
+
+    public function authenticate() {
+        return true;
     }
 }

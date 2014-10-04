@@ -1,0 +1,11 @@
+Nvl\Cms\Domain\Model\User\Login:
+  type: embeddedDocument
+  inheritanceType: SINGLE_COLLECTION
+  discriminatorField: type
+  discriminatorMap:
+    password: PasswordLogin
+    social: SocialLogin
+  fields:
+    username:
+      unique: true
+      type: string
