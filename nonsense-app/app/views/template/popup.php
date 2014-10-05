@@ -2,7 +2,7 @@
 	<section id="modal-upload" class="modal upload hide">
 		<a class="badge-overlay-close btn-close" href="javascript:void(0)">✖</a>
 		<section id="upload-file">
-			<form id="form-modal-post-image" class="modal" action="/post" enctype="multipart/form-data" method="POST" onsubmit="return GAG.UploadController.validateForm();">
+			<form id="form-modal-post-image" class="modal" action="/post" enctype="multipart/form-data" method="POST" onsubmit="return valivateFormUpload();">
 				<input type="hidden" name="type" value="image" />				
 				<div id="jsid-disable-mask">
 					<h2>Post a fun</h2>
@@ -42,13 +42,13 @@
 			</form>
 		</section>
 	</section>
-	<!--<section id="modal-report" class="badge-overlay-report modal report hide">
+	<section id="modal-report" class="badge-overlay-report modal report hide">
 		<header>
 			<h3>Report Post</h3>
 			<p>
 				What do you report this post for?
 			</p>
-			<a class="btn-close badge-overlay-close" href="#">✖</a>
+			<a class="btn-close badge-overlay-close" href="javascript:void(0)">✖</a>
 		</header>
 		<form id="form-modal-report" class="popup-report" action="" onsubmit="return false;">
 			<div class="field checkbox">
@@ -70,7 +70,7 @@
 				<label>
 					<input name="radio-report" type="radio" value="4">
 					Repost of another post on 9GAG</label>
-				<input id="jsid-repost-link" type="text" class="text" placeholder="http://9gag.com/gag/post_ID">
+				<input id="jsid-repost-link" type="text" class="text" placeholder="http://nhamvl.com/gag/post_ID">
 			</div>
 			<div class="btn-container">
 				<input type="submit" value="Submit" class="badge-report-submit-btn" data-text-loading="Please wait ...">
@@ -78,16 +78,17 @@
 		</form>
 	</section>
  	<section class="modal signup badge-overlay-signin hide">
-		<a class="btn-close badge-overlay-close" href="#">&#10006;</a>
+		<a class="btn-close badge-overlay-close" href="javascript:void(0);">&#10006;</a>
 		<section id="signup">
 			<h2>Login</h2>
 			<p class="lead">
 				Connect with a social network
 			</p>
 			<div class="social-signup">
-				<a class="btn-connect-option facebook badge-facebook-connect" href="#" onclick="GAG.GA.track('login-signup', 'facebook-connect', 'login-form');">Facebook</a><span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="javascript:void(0);" onclick="GAG.GPlus.btnClicked = true;">Google</a></span>
+				<a class="btn-connect-option facebook badge-facebook-connect" href="javascript:void(0);">Facebook</a>
+				<span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="javascript:void(0);">Google</a></span>
 			</div>
-			<form id="login-email" class="badge-login-form" action="https://9gag.com/login" method="POST">
+			<form id="login-email" class="badge-login-form" action="https://nhamvl.com/login" method="POST">
 				<input type="hidden" id="jsid-login-form-csrftoken" name="csrftoken" value=""/>
 				<input type="hidden" id="jsid-login-form-next-url" name="next" value=""/>
 				<input type="hidden" name="location" value="1"/>
@@ -103,14 +104,14 @@
 					<input id="login-email-password" type="password" name="password" value="" />
 				</div>
 				<div class="btn-container">
-					<input type="submit" value="Log in" onclick="GAG.GA.track('login-signup', 'login', 'login-form');"/>
-					<a class="forgot-password" href="https://9gag.com/recover" onclick="GAG.GA.track('login-signup', 'clicked', 'forgot-password');">Forgot Password</a>
+					<input type="submit" value="Log in"/>
+					<a class="forgot-password" href="https://nhamvl.com/recover" onclick="GAG.GA.track('login-signup', 'clicked', 'forgot-password');">Forgot Password</a>
 				</div>
 			</form>
 		</section>
 	</section>
 	<section class="modal signup hide badge-overlay-signup-fb">
-		<a class="badge-overlay-close btn-close" href="#">&#10006;</a>
+		<a class="badge-overlay-close btn-close" href="javascript:void(0);">&#10006;</a>
 		<section id="signup">
 			<div id="signup-fb" class="">
 				<h2>Hey there!</h2>
@@ -118,18 +119,19 @@
 					NhamVL is your best source of fun. Share anything you find interesting, get real responses from people all over the world, and discover what makes you laugh.
 				</p>
 				<div class="social-signup">
-					<a class="btn-connect-option facebook badge-facebook-connect" href="#" onclick="GAG.GA.track('login-signup', 'facebook-connect', 'signup-form');">Facebook</a><span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="javascript:void(0);" onclick="GAG.GPlus.btnClicked = true; GAG.GA.track('login-signup', 'gplus-connect', 'signup-form');">Google</a></span>
+					<a class="btn-connect-option facebook badge-facebook-connect" href="javascript:void(0);">Facebook</a>
+					<span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="javascript:void(0);">Google</a></span>
 				</div>
 				<p class="alternative">
-					Sign up with your <a href="#" class="badge-signup-email-link">Email Address</a>
+					Sign up with your <a href="javascript:void(0);" class="badge-signup-email-link">Email Address</a>
 				</p>
 				<p class="alternative">
-					Have an account? <a href="https://9gag.com/login?ref=" class="badge-signup-login-link">Login</a>
+					Have an account? <a href="https://nhamvl.com/login?ref=" class="badge-signup-login-link">Login</a>
 				</p>
 			</div>
 			<div id="signup-email" class=" hide">
 				<h2>Become a member</h2>
-				<form id="signup-email" action="https://9gag.com/member/email-signup" autocomplete="off" method="post">
+				<form id="signup-email" action="https://nhamvl.com/member/email-signup" autocomplete="off" method="post">
 					<input type="hidden" id="jsid-login-form-next-url" name="next" value=""/>
 					<div class="field">
 						<label for="signup-email-name">Full Name</label>
@@ -190,35 +192,5 @@
 	<div id="jsid-modal-post-zoom" class="hide" style="height: 100%;">
 		<div class="badge-post-zoom-img zoom-container"></div>
 		<a class="badge-overlay-close close-button" href="javascript: void(0);">Close</a>
-	</div> -->
+	</div>
 </div>
-<script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery(".badge-upload-image").click(function() {			
-			if ( !jQuery("#jsid-upload-url-input").hasClass("hide")) {
-				jQuery("#jsid-upload-url-input").addClass("hide");
-			}
-			jQuery("#jsid-upload-file-input").removeClass("hide");
-										
-		});
-		jQuery(".badge-upload-url").click(function() {			
-			if ( !jQuery("#jsid-upload-file-input").hasClass("hide")) {
-				jQuery("#jsid-upload-file-input").addClass("hide");
-			}
-			jQuery("#jsid-upload-url-input").removeClass("hide");								
-		});
-		
-	 	jQuery("textarea[name=title]").keyup(function(){                  
-		  	var limit = parseInt(jQuery(this).attr('data-maxlength'));         
-		  	var text = jQuery(this).val();
-		  	var chars = text.length;
-		  	var result = (limit - chars) > 0 ? (limit - chars) : 0;     
-		  	jQuery('#jsid-char-count').html(result);                          
-		  	if(chars > limit || (limit - chars) <=0 ){
-			   alert('Bạn đã nhập quá số ký tự cho phép');                            
-			   var new_text = text.substr(0, limit);                    
-			   jQuery(this).val(new_text);
-		  	}  
-	 	});
-	})
-</script>

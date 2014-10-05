@@ -87,8 +87,8 @@
                     </ul>
                 </div>
                 <div id="jsid-visitor-function" class="visitor-function hide"> 
-                	<a class="badge-login-button link" href="https://nhamvl.com/login" onClick="GAG.GA.track('Headbar-Login', 'Clicked', 'Nav');">Log in</a> 
-                	<a class="badge-signup-button link" href="https://nhamvl.com/signup" onClick="GAG.GA.track('Headbar-Signup', 'Clicked', 'Nav');">Sign up</a>
+                	<a class="badge-login-button link" href="javascript:void(0);">Log in</a> 
+                	<a class="badge-signup-button link" href="javascript:void(0);">Sign up</a>
                     <div class="upload"> <a class="badge-signup-button upload" href="https://nhamvl.com/signup">Upload</a> </div>
                 </div>
                 <div id="jsid-user-function" class="user-function">
@@ -99,7 +99,7 @@
                             <div class="drop-arrow"></div>
                         </a>
                     </div>
-                    <div class="upload"> <a id="jsid-upload-menu" class="upload" href="javascript:void(0);" onClick="GAG.GA.track('Headbar-Upload', 'Clicked', 'UploadButton');">Upload</a> </div>
+                    <div class="upload"> <a id="jsid-upload-menu" class="upload" href="javascript:void(0);">Upload</a> </div>
                     <div id="jsid-header-notification-items" class="notification-menu hide">
                         <div class="title">
                             <h3>Notifications</h3>
@@ -133,9 +133,9 @@
                 </div>
                 <div class="popup-menu upload hide badge-upload-items"> <span class="arrow-wrap"> <span class="arrow"></span> </span>
                     <ul>
-                        <li><a class="badge-upload-selector badge-upload-url" href="#" onClick="UploadUrl();">Add from URL</a></li>
-                        <li><a class="badge-upload-selector badge-upload-image" href="#" onClick="UploadImage();">Upload image</a></li>
-                        <li><a href="http://memeful.com/generator?ref=9gag" target="_blank" onClick="Memeful();">Make a meme</a></li>
+                        <li><a class="badge-upload-selector badge-upload-url" href="javascript:void(0)">Add from URL</a></li>
+                        <li><a class="badge-upload-selector badge-upload-image" href="javascript:void(0)">Upload image</a></li>
+                        <li><a href="http://memeful.com/generator?ref=9gag" target="_blank">Make a meme</a></li>
                     </ul>
                 </div>
                 <form id="headbar-search" class="badge-header-search" action="http://nhamvl.com/search" onClick="GAG.GA.track('Headbar-Search', 'Clicked', 'Nav');">
