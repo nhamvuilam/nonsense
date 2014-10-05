@@ -56,7 +56,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=225088811013195&version=v2.0";
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=645425958908296&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -155,7 +155,7 @@
                 <p>NhamVL Vui lam.</p>
             </div>
             <div class="social-love" style="float:right">
-                <div class="fb-like" style="top:0px;" data-href="https://www.facebook.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                <div class="fb-like" style="top:0px;" data-href="http://nhamvl.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
             </div>
            <!-- <a class="customize badge-personalise-btn" href="#">Personalise <span class="drop-arrow"></span></a>-->
             <div class="clearfix"></div>
