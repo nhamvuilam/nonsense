@@ -36,6 +36,8 @@ class App {
      * @return \Nvl\Di\Di The dependency injection implementation
      */
     public static function di() {
+        session_start();
+
         static $di;
 
         if (!isset($di)) {

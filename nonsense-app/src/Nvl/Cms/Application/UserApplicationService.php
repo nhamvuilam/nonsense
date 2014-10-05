@@ -45,8 +45,38 @@ class UserApplicationService {
             throw new AuthenticationException(App::message('auth.invalid_password'));
         }
 
+        $this->login($user);
+
         return $user;
 
+    }
+
+    /**
+     * Connect with an OAuth account
+     *
+     * @param string $type     OAuth type string
+     * @param array  $userInfo User info returned by OAuth Provider
+     * @return \Nvl\Cms\Domain\Model\User\User
+     */
+    public function connectSocialAccount($type, $userInfo) {
+
+        // Create OAuth account if not exists, otherwise verify return it
+        $user = $this->userRepository()->findBySocialNetwork($type, $userInfo['id']);
+        if (empty($user)) {
+            $user = $this->registerSocial($userInfo['id'],
+                                          $type,
+                                          $userInfo['name'],
+                                          $userInfo['email'],
+                                          $userInfo['mobile']);
+
+        }
+
+        // Save user info to current session
+        if (!empty($user)) {
+            $this->login($user);
+        }
+
+        return $user;
     }
 
     /**
@@ -76,6 +106,16 @@ class UserApplicationService {
         return $user;
     }
 
+    /**
+     * Register social network account
+     *
+     * @param string $socialId
+     * @param string $socialNetwork
+     * @param string $name
+     * @param string $email
+     * @param string $mobile
+     * @return \Nvl\Cms\Domain\Model\User\User
+     */
     public function registerSocial($socialId, $socialNetwork, $name, $email, $mobile) {
 
         $loginInfo = new SocialLogin($email, $socialNetwork, $socialId);
@@ -87,6 +127,31 @@ class UserApplicationService {
         $this->userRepository()->add($user);
 
         return $user;
+    }
+
+    /**
+     * Log current user out
+     */
+    public function logout() {
+        unset($_SESSION['user']);
+    }
+
+    /**
+     * @return boolean Flag indicates user is logged in or not
+     */
+    public function isLoggedIn() {
+        return !empty($_SESSION['user']);
+    }
+
+    public function login(User $user) {
+        $_SESSION['user'] = $user->toArray();
+    }
+
+    /**
+     * @return User Current logged in user, return NULL if user is not logged in
+     */
+    public function user() {
+        return $_SESSION['user'];
     }
 
     private function userRepository() {

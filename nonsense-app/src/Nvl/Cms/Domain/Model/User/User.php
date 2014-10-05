@@ -23,6 +23,7 @@ class User {
     private $loginInfo;
     private $contact;
     private $confirmed = false;
+    private $status;
 
     private $stats;
 
@@ -54,5 +55,17 @@ class User {
     public function authenticate() {
         $args = func_get_args();
         return call_user_func_array(array($this->loginInfo, 'authenticate'), $args);
+    }
+
+    public function toArray() {
+        return array(
+        	'id'            => $this->id,
+            'contact'       => $this->contact->toArray(),
+            'status'        => $this->status,
+            'stats'         => $this->stats->toArray(),
+            'last_login'    => $this->lastLogin,
+            'created_date'  => $this->createdDate,
+            'modified_date' => $this->modifiedDate,
+        );
     }
 }

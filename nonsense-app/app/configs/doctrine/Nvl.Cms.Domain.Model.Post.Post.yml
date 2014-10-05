@@ -10,7 +10,7 @@ Nvl\Cms\Domain\Model\Post\Post:
   fields:
     id: 
       id: true
-      strategy: INCREMENT
+      strategy: AUTO
     author:
       type: string
     createdDate:

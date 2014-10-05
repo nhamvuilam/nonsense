@@ -38,23 +38,23 @@ class MongoUserRepository implements UserRepository {
      * @see \Nvl\Cms\Domain\Model\User\UserRepository::findByUsername()
      */
     public function findByUsername($username) {
-        /*
-        $queryBuilder = $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\User\User');
-
-        $queryBuilder->field('loginInfo.username')->equals($username);
-
-        $cursor = $queryBuilder->getQuery()->execute();
-        if ($cursor->count() > 1) {
-            throw new \Exception('Duplicate username detected');
-        }
-
-        var_dump($cursor);
-
-        return $cursor->first();
-        */
 
         $user = $this->dm()->getRepository('\Nvl\Cms\Domain\Model\User\User')
                            ->findOneBy(array('loginInfo.username' => $username));
+
+        return $user;
+    }
+
+    /**
+     * @see \Nvl\Cms\Domain\Model\User\UserRepository::findBySocialNetwork()
+     */
+    public function findBySocialNetwork($type, $id) {
+
+        $user = $this->dm()->getRepository('\Nvl\Cms\Domain\Model\User\User')
+                           ->findOneBy(array(
+                               'loginInfo.socialNetwork' => $type,
+                               'loginInfo.socialId' => $id
+                           ));
 
         return $user;
     }

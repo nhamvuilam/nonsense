@@ -19,4 +19,11 @@ class UserStats {
     private $postCount = 0;
     private $likeCount = 0;
 
+    public function toArray() {
+        return array(
+        	'published_post_count' => $this->publishedPostCount,
+            'post_count'           => $this->postCount,
+            'like_count'           => $this->likeCount,
+        );
+    }
 }

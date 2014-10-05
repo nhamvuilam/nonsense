@@ -44,7 +44,6 @@ class SymfonyIniFileLoader extends FileLoader implements ConfigLoader {
         foreach ($filePaths as $path) {
             $count++;
             $config = parse_ini_file($path, true);
-            var_dump($config);
 
             if ($count == 1) {
                 $ini = $config;

@@ -3,8 +3,54 @@ namespace Nvl\Cms\Adapter\Http\Controllers;
 
 use Nvl\Cms\App;
 use Nvl\Cms\Domain\Model\User\AuthenticationException;
+use Nvl\OAuth\OAuthFactory;
 
 class TestController extends BaseController {
+
+    function configAction() {
+        var_dump(App::config());
+        exit;
+    }
+
+    function oauthAction($s) {
+        session_start();
+
+        echo '<a href="javascript:void(0);" onclick="">Facebook</a>';
+        if ($type = $this->getGetParam('s', null)) {
+
+            $config = App::config();
+            $authFactory = new OAuthFactory($config['oauth']);
+            $auth = $authFactory->getOAuth($type);
+
+            if ($auth == null) {
+                throw new \Exception('Sorry we have not supported this feature yet');
+            }
+
+            // authenticate user or redirect to social network login page
+            $auth->process();
+
+            $returnedUser = $auth->getUserInfo();
+            if (!isset($returnedUser)) { throw new \Exception('Cannot get user info'); }
+
+            // Dont allow user login if he/she do not have email account
+            if (empty($returnedUser['email'])) {
+                throw new \Exception('User do not have any email account');
+            }
+
+            var_dump(App::userApplicationService()->connectSocialAccount($type, $returnedUser));
+
+        }
+        exit;
+    }
+
+    function userStateAction() {
+        if ($this->getGetParam('clear')) {
+            App::userApplicationService()->logout();
+        }
+        var_dump(App::userApplicationService()->isLoggedIn());
+        var_dump(App::userApplicationService()->user());
+        exit;
+    }
 
     function newPostAction() {
         $post = App::postApplicationService()->newPost(

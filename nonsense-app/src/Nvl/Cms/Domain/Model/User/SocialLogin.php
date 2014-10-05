@@ -19,7 +19,7 @@ class SocialLogin extends Login {
     private $socialNetwork;
 
     public function __construct($email, $socialNetwork, $socialId) {
-        parent::__construct($email);
+        parent::__construct($socialNetwork.$socialId);
         $this->socialNetwork = $socialNetwork;
         $this->socialId = $socialId;
     }

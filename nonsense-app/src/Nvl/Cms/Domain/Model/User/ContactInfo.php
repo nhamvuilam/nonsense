@@ -24,4 +24,12 @@ class ContactInfo {
         $this->email = $email;
         $this->mobile = $mobile;
     }
+
+    public function toArray() {
+        return array(
+        	'name' => $this->name,
+            'email' => $this->email,
+            'mobile' => $this->mobile,
+        );
+    }
 }

@@ -27,6 +27,8 @@ interface UserRepository {
      */
     public function findByUsername($username);
 
+    public function findBySocialNetwork($type, $id);
+
     /**
      * Add user
      *
