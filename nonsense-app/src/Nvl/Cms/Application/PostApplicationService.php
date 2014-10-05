@@ -58,6 +58,7 @@ interface PostApplicationService {
     /**
      * @param array  $authors Limit to these authors
      * @param string $type    Limit to this post type
+     * @param string $status  Limit to this status
      * @param array  $tags    Limit to these tags
      * @param array  $limit   Limit number of result
      * @param number $offset  Result offset
@@ -98,7 +99,7 @@ interface PostApplicationService {
      * )
      * </pre>
      */
-    public function queryPosts($authors = array(), $type = '', $tags = array(), $limit, $offset = 1);
+    public function queryPosts($authors = array(), $type = '', $status = '', $tags = array(), $limit, $offset = 1);
 
     /**
      * @param string $id The post id to find

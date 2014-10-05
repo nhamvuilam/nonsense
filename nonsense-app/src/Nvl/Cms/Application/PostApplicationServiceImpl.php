@@ -12,6 +12,7 @@ namespace Nvl\Cms\Application;
 
 use Nvl\Cms\Domain\Model\Post\PostFactory;
 use Nvl\Cms\Domain\Model\Post\PostRepository;
+use Nvl\Cms\Domain\Model\Post\Post;
 
 /**
  * Post Application Service Implementation
@@ -35,11 +36,13 @@ class PostApplicationServiceImpl implements PostApplicationService {
 	/**
      * @see \Nvl\Cms\Application\PostApplicationService::queryPosts()
      */
-    public function queryPosts($authors = array(), $type = '', $tags = array(), $limit = 10, $offset = 0) {
+    public function queryPosts($authors = array(), $type = '', $status = '',
+                               $tags = array(), $limit = 10, $offset = 0) {
         $paginatedResult = $this->postRepository()->findBy(array(
         	'tags'    => $tags,
             'authors' => $authors,
             'type'    => $type,
+            'status'  => $status,
             'limit'   => $limit,
             'offset'  => $offset,
         ));

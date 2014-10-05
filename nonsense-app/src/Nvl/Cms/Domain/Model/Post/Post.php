@@ -40,7 +40,7 @@ class Post {
      */
     private $content; // class
 
-    private $status = 0;
+    private $status = self::STATUS_PENDING_REVIEW;
 
     private $createdDate;
 

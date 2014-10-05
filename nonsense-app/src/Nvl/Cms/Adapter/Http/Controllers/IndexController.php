@@ -10,7 +10,7 @@ class IndexController extends BaseController {
 
     public function indexAction() {
 
-		$arrayData = App::postApplicationService()->queryPosts();
+		$arrayData = App::postApplicationService()->queryPosts(array(), '', '', array());
 		$this->view->setVars(array(
             'posts' => $arrayData,
             'display_slidebar' => 1

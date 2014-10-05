@@ -64,6 +64,9 @@ class MongoPostRepository implements PostRepository {
         if (!empty($query['type'])) {
             $queryBuilder->field('content.type')->equals($query['type']);
         }
+        if (!empty($query['status'])) {
+            $queryBuilder->field('status')->equals($query['status']);
+        }
         if (!empty($query['limit'])) {
             $queryBuilder->limit($query['limit']);
         }
