@@ -48,7 +48,8 @@ class App {
             	return new MongoPostRepository(App::documentManager());
             });
             $di->set('cdn_service', function() {
-                return new LocalCdnService();
+                $config = App::config();
+                return new LocalCdnService($config['cdn']['photosDir'], $config['cdn']['url']);
             });
             $di->set('image_processor', function() {
                 $config = App::config();

@@ -11,18 +11,25 @@ use Nvl\Cms\Domain\Model\Post\CdnService;
  */
 class LocalCdnService implements CdnService {
 
+    private $photosDir;
+    private $cdnUrl;
+
+    public function __construct($photosDir, $cdnUrl) {
+        $this->photosDir = $photosDir;
+        $this->cdnUrl = $cdnUrl;
+    }
+
     /**
      * @see \Nvl\Cms\Domain\Model\Post\CdnService::put()
      */
     public function put($file) {
-        $dest = '/home/php/project/nonsense/nonsense-app/public/photos';
 
-        if (!file_exists($dest)) {
-            mkdir($dest, 0755);
+        if (!file_exists($this->photosDir)) {
+            mkdir($this->photosDir, 0755);
         }
 
         $filename = basename($file);
-        copy($file, $dest.'/'.$filename);
-        return 'http://local.nhamvl.com/photos/'.$filename;
+        copy($file, $this->photosDir.'/'.$filename);
+        return $this->cdnUrl.'/'.$filename;
     }
 }
