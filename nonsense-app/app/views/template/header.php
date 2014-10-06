@@ -126,9 +126,9 @@
                 </div>                
                 <div id="jsid-header-user-menu-items" class="popup-menu user hide"> <span class="arrow-wrap"> <span class="arrow"></span> </span>
                     <ul>
-                        <li><a id="jsid-my-profile" href="/u/nguyensivn" onClick="GAG.GA.track('Headbar-Profile', 'Clicked', 'Nav');">My Profile</a></li>
-                        <li><a href="https://nhamvl.com/settings" onClick="GAG.GA.track('Headbar-Setting', 'Clicked', 'Nav');">Settings</a></li>
-                        <li><a class="badge-logout-btn" href="https://nhamvl.com/logout" onClick="GAG.GA.track('Headbar-Logout', 'Clicked', 'Nav');">Logout</a></li>
+                        <li><a id="jsid-my-profile" href="/u/nguyensivn">My Profile</a></li>
+                        <li><a href="https://nhamvl.com/settings">Settings</a></li>
+                        <li><a class="badge-logout-btn" href="https://nhamvl.com/logout">Logout</a></li>
                     </ul>
                 </div>
                 <div class="popup-menu upload hide badge-upload-items"> <span class="arrow-wrap"> <span class="arrow"></span> </span>
@@ -138,7 +138,7 @@
                         <li><a href="http://memeful.com/generator?ref=9gag" target="_blank">Make a meme</a></li>
                     </ul>
                 </div>
-                <form id="headbar-search" class="badge-header-search" action="http://nhamvl.com/search" onClick="GAG.GA.track('Headbar-Search', 'Clicked', 'Nav');">
+                <form id="headbar-search" class="badge-header-search" action="http://nhamvl.com/search">
                     <input type="text" name="query" id="jsid-search-input" class="ui-autocomplete-input search search_input" data-placeholder="Search…" tabindex="1" autocomplete="off">
                     <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
                     <div class="ui-widget"></div>
