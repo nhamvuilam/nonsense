@@ -36,7 +36,19 @@ class ImagickProcessor implements ImageProcessor {
 
         try {
             $images = (array) $image;
-            $imagick = new \Imagick((array) $images);
+            $tmpFiles = array();
+
+            foreach ($images as $index => $path) {
+                if (strpos($path, 'http') === 0) {
+                    $tmpFile = file_get_contents($path);
+                    $tmpFilename = $this->tmpPath.'/dl_'.sha1(uniqid(microtime(true)));
+                    file_put_contents($tmpFilename, $tmpFile);
+                    $images[$index] = $tmpFilename;
+                    $tmpFiles[] = $tmpFilename;
+                }
+            }
+
+            $imagick = new \Imagick($images);
         } catch (\ImagickException $e) {
             throw new ValidateException(App::message('upload.resize.original_image_not_found'));
         }
@@ -53,6 +65,10 @@ class ImagickProcessor implements ImageProcessor {
             foreach ($sizes as $name => $maxWidth) {
                 $originalWidth = $image->getimagewidth();
 
+                if (!$originalWidth) {
+                    throw new \Exception('Not supported image');
+                }
+
                 // Only resize if original width larger than max width
                 if ($maxWidth <= $originalWidth) {
 
@@ -65,6 +81,7 @@ class ImagickProcessor implements ImageProcessor {
                 // Save image to a temporary directory
                 $outputPath = $this->filenameFor($name, $image);
                 $image->writeimage($outputPath);
+
                 $imageSet[$name] = array(
                     'path'   => $outputPath,
                     'width'  => $image->getimagewidth(),
@@ -84,6 +101,11 @@ class ImagickProcessor implements ImageProcessor {
             */
 
             $result[] = $imageSet;
+        }
+
+        // Delete temporary file
+        foreach ($tmpFiles as $tmp) {
+            unlink($tmp);
         }
 
         $imagick->destroy();
