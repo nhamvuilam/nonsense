@@ -8,9 +8,9 @@ use Nvl\Cms\App;
     <meta name="description" content="Nham VL, vui lam, nham vui lam" />
     <meta name="robots" content="noodp" />
  	<meta name="google-site-verification" content="_reH-wYeRCPPrwQkNAV4Xc9YIBL1Z64xkSsN_vumMNo" />
-    <meta property="og:title" content="Just For Fun" />
-    <meta property="og:site_name" content="NhamVL" />
-    <meta property="og:url" content="http://nhamvl.vn" />
+    <meta property="og:title" content="Nhảm vui lắm" />
+    <meta property="og:site_name" content="nhamvl.com" />
+    <meta property="og:url" content="http://nhamvl.com" />
     <meta property="og:description" content="Nham VL, vui lam, nham vui lam" />
     <meta property="og:type" content="blog" />
     <link href="<?php echo STATIC_PATH ?>/css/styleAll.css" media="screen,projection" rel="stylesheet" type="text/css" />
