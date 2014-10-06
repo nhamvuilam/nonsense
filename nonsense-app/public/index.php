@@ -2,6 +2,7 @@
 
 try {
 
+    session_start();
 	error_reporting(E_ERROR);
 
     define("APP_DIR", realpath(__DIR__ . '/../app'));
