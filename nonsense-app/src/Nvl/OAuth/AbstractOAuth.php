@@ -54,7 +54,7 @@ abstract class AbstractOAuth {
      * Constructor
      */
 	public function __construct($url, $provider, $prxy = null, $prxy_port = null) {
-		$this->return_url = $url . '?s=' . $provider;
+		$this->return_url = $url.'/'.$provider;
 		$this->proxy = $prxy;
 		$this->proxyPort = $prxy_port;
 	}

@@ -3,13 +3,13 @@
 		<a class="badge-overlay-close btn-close" href="javascript:void(0)">✖</a>
 		<section id="upload-file">
 			<form id="form-modal-post-image" class="modal" action="/post" enctype="multipart/form-data" method="POST" onsubmit="return valivateFormUpload();">
-				<input type="hidden" name="type" value="image" />				
+				<input type="hidden" name="type" value="image" />
 				<div id="jsid-disable-mask">
 					<h2>Post a fun</h2>
 					<p class="lead">
 						Upload funny pictures, paste pictures URL, accepting GIF/JPG/PNG (Max size: 3MB)
 					</p>
-					<div class="field photo">						
+					<div class="field photo">
 						<input id="jsid-upload-url-input" class="hide" type="url" name="url" placeholder="http://" value="" />
 						<div id="jsid-upload-file-input" class="file-field ">
 							<input class="file text" type="file" name="image" accept="image/gif,image/jpeg,image/jpg,image/png" />
@@ -85,8 +85,8 @@
 				Connect with a social network
 			</p>
 			<div class="social-signup">
-				<a class="btn-connect-option facebook badge-facebook-connect" href="javascript:void(0);">Facebook</a>
-				<span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="javascript:void(0);">Google</a></span>
+				<a class="btn-connect-option facebook badge-facebook-connect" href="/connect/facebook">Facebook</a>
+				<span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="/connect/google">Google</a></span>
 			</div>
 			<form id="login-email" class="badge-login-form" action="https://nhamvl.com/login" method="POST">
 				<input type="hidden" id="jsid-login-form-csrftoken" name="csrftoken" value=""/>

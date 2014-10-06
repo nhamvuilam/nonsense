@@ -1,3 +1,6 @@
+<?php
+use Nvl\Cms\App;
+?>
 <head>
     <title>Nham VL</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,7 +16,7 @@
     <link href="<?php echo STATIC_PATH ?>/css/styleAll.css" media="screen,projection" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<?php echo STATIC_PATH ?>/js/lib.js"></script>
 </head>
-<script type="text/javascript">	
+<script type="text/javascript">
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function() {
@@ -86,44 +89,50 @@
                         <li><a class="" href="http://nhamvl.com/comic">Ảnh Hài Hước</a></li>
                     </ul>
                 </div>
-                <div id="jsid-visitor-function" class="visitor-function hide"> 
-                	<a class="badge-login-button link" href="javascript:void(0);">Log in</a> 
+                <?php if (!App::userApplicationService()->isLoggedIn())  { ?>
+                <div id="jsid-visitor-function" class="visitor-function">
+                	<a class="badge-login-button link" href="javascript:void(0);">Log in</a>
                 	<a class="badge-signup-button link" href="javascript:void(0);">Sign up</a>
                     <div class="upload"> <a class="badge-signup-button upload" href="https://nhamvl.com/signup">Upload</a> </div>
                 </div>
+                <?php } else { ?>
                 <div id="jsid-user-function" class="user-function">
-                    <div id="jsid-header-notification-menu" class="notification badge-evt" data-evt="Notification-Badge,Clicked-Badge,https://nhamvl.com/notifications"> <a class="bell" href="javascript:void(0);"> <span id="jsid-notification-unread-count" class="badge hide" href="http://nhamvl.com/notifications">0</span> </a> </div>
+                    <div id="jsid-header-notification-menu" class="notification badge-evt" data-evt="Notification-Badge,Clicked-Badge,https://9gag.com/notifications">
+                        <a class="bell" href="javascript:void(0);">
+                            <span id="jsid-notification-unread-count" class="badge hide" href="http://9gag.com/notifications">0</span>
+                        </a>
+                    </div>
+
                     <div id="jsid-header-user-menu" class="avatar">
-                    	<a class="avatar-container" href="javascript:void(0);">
-                            <img id="jsid-avatar" src="//avatars-cdn.9gag.com/avatar/nguyensivn_6991713_100.jpg" alt="Avatar">
+                        <a class="avatar-container" href="javascript:void(0);">
+                            <img id="jsid-avatar" src="//accounts-cdn.9gag.com/media/avatar/20791934_100_1.jpg" alt="Avatar">
+                            <span class="name">Me</span>
                             <div class="drop-arrow"></div>
                         </a>
                     </div>
-                    <div class="upload"> <a id="jsid-upload-menu" class="upload" href="javascript:void(0);">Upload</a> </div>
+
+                            <div class="upload">
+                        <a id="jsid-upload-menu" class="upload" href="javascript:void(0);">Upload</a>
+                    </div>
+
+
                     <div id="jsid-header-notification-items" class="notification-menu hide">
                         <div class="title">
                             <h3>Notifications</h3>
                         </div>
-                        <div class="scrollbar" style="height: 0px;">
-                            <div class="track" style="height: 0px;">
-                                <div class="thumb"></div>
-                            </div>
-                        </div>
+                        <div class="scrollbar" style="height: 0px;"><div class="track" style="height: 0px;"><div class="thumb"></div></div></div>
                         <div class="notification-list viewport">
-                            <ul id="jsid-header-notification-items-container" class="overview" style="top: 0px;">
-                                <li class="empty">
-                                    <div class="empty-message">
-                                        <p>You don't have any notification yet.</p>
-                                    </div>
-                                </li>
-                            </ul>
+                            <ul id="jsid-header-notification-items-container" class="overview" style="top: 0px;"><li class="empty"><div class="empty-message"><p>You don't have any notification yet.</p></div></li></ul>
                         </div>
-                        <div class="bumper"> <a id="jsid-header-notification-see-all" class="see-all badge-evt" href="http://nhamvl.com/notifications" data-evt="Notification-Menu,Clicked-All,http://nhamvl.com/notifications">See all</a> </div>
+                        <div class="bumper">
+                            <a id="jsid-header-notification-see-all" class="see-all badge-evt" href="http://9gag.com/notifications" data-evt="Notification-Menu,Clicked-All,http://9gag.com/notifications">See all</a>
+                        </div>
                     </div>
                 </div>
+                <?php } ?>
                 <div class="badge-user-function-placeholder hide">
                     <div class="upload"> <a class="badge-signup-button upload" href="javascript:void(0)">Upload</a> </div>
-                </div>                
+                </div>
                 <div id="jsid-header-user-menu-items" class="popup-menu user hide"> <span class="arrow-wrap"> <span class="arrow"></span> </span>
                     <ul>
                         <li><a id="jsid-my-profile" href="/u/nguyensivn">My Profile</a></li>
@@ -164,4 +173,4 @@
     <div class="toast badge-toast-container" style="display:none">
         <p class="close"> <span class="badge-toast-message"></span> <a class="btn-close badge-toast-close" href="#">&#10006;</a> </p>
     </div>
-</body>    
+</body>
