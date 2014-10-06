@@ -37,7 +37,13 @@ class PostController extends BaseController {
             }
 
 			$result = App::postApplicationService()->newPost(
-				$arrContent['type'], '', time(), $arrContent);
+                    $arrContent['type'],
+			        '',
+			        time(),
+			        $arrContent,
+			        array(
+			            'source_url' => @$params['source_url']
+                    ));
 
 			$this->redirect("/");
 
