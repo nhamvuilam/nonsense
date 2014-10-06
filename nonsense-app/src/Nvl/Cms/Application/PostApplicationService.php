@@ -50,10 +50,11 @@ interface PostApplicationService {
      *   'link'    => Video URL of supported sites
      * )
      * </pre>
+     * @param array $meta [OPTIONAL] Additional meta data
      * @return Post Newly created post
      *
      */
-    public function newPost($type, $tags, $date, $postContent);
+    public function newPost($type, $tags, $date, $postContent, $metas = array());
 
     /**
      * @param array  $authors Limit to these authors

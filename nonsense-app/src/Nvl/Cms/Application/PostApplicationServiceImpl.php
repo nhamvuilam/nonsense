@@ -87,7 +87,7 @@ class PostApplicationServiceImpl implements PostApplicationService {
 	/**
      * @see \Nvl\Cms\Application\PostApplicationService::newPost()
      */
-    public function newPost($type, $tags, $date, $postContent) {
+    public function newPost($type, $tags, $date, $postContent, $metas = array()) {
         // Dummy author
         $author = 'nmquyet';
         $user = App::userApplicationService()->user();
@@ -97,7 +97,7 @@ class PostApplicationServiceImpl implements PostApplicationService {
         }
 
         // Create new post
-        $post = $this->postFactory()->newPost($type, $postContent, $author, $date, $tags);
+        $post = $this->postFactory()->newPost($type, $postContent, $author, $date, $tags, $metas);
 
         // Save created post
         $this->postRepository()->add($post);

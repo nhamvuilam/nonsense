@@ -104,7 +104,7 @@ class Post {
             'type'      => $this->content->type(),
             'post_url'  => '/nham/'.$this->id,
             'timestamp' => $this->createdDate,
-            'tags' => $this->meta->tagArray(),
+            'metas'     => $this->meta->toArray(),
             'content' => $this->content->toArray(),
             'author' => $this->author->toArray(),
         );

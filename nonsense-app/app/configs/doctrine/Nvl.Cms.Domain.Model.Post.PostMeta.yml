@@ -3,6 +3,8 @@ Nvl\Cms\Domain\Model\Post\PostMeta:
   fields:
     tags: 
       type: collection
+    data:
+      type: hash
     commentCount:
       type: int
     likeCount:

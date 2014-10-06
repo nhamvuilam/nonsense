@@ -18,6 +18,7 @@ namespace Nvl\Cms\Domain\Model\Post;
 class PostMeta {
 
     private $commentCount = 0;
+    private $data;
     private $likeCount = 0;
     private $tags = array();
     private $sticky = false;
@@ -45,8 +46,26 @@ class PostMeta {
         $this->tags = array_unique(array_merge($this->tags, (array) $tags));
     }
 
+    public function setData($data = array()) {
+        $this->data = $data;
+    }
+
+    public function metadata() {
+        return $this->data;
+    }
+
     public function tagArray() {
         return $this->tags;
+    }
+
+    public function toArray() {
+        return array(
+        	'tags' => $this->tags,
+            'comment_count' => $this->commentCount,
+            'like_count' => $this->likeCount,
+            'sticky' => $this->sticky,
+            'additional_data' => $this->data,
+        );
     }
 
 }

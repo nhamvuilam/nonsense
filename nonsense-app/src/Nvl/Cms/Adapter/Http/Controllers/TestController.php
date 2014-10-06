@@ -70,6 +70,9 @@ class TestController extends BaseController {
                    'data' => null,
 
             	   'caption' => 'Có thánh nào bị như em không',
+                ),
+                array(
+        	       'source_url' => 'http://haivl.com',
                 )
         );
         echo '<h1>Document inserted</h1>';

@@ -46,10 +46,11 @@ class PostFactory {
      * @param string $author
      * @param long   $date
      * @param array  $tags
+     * @param array  $metas         [OPTIONAL] Meta data
      * @throws ValidateException
      * @return \Nvl\Cms\Domain\Model\Post\Post The new post object
      */
-    public function newPost($type, $contentArray, $author, $date, $tags) {
+    public function newPost($type, $contentArray, $author, $date, $tags, $metas = array()) {
 
         // Validate input
         if (!$this->isValidType($type)) {
@@ -58,6 +59,7 @@ class PostFactory {
 
         // Create post meta
         $meta = new PostMeta();
+        $meta->setData($metas);
         if (!empty($tags)) {
             $meta->addTag($tags);
         }
