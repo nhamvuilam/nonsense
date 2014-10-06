@@ -164,3 +164,4 @@
     <div class="toast badge-toast-container" style="display:none">
         <p class="close"> <span class="badge-toast-message"></span> <a class="btn-close badge-toast-close" href="#">&#10006;</a> </p>
     </div>
+</body>    
