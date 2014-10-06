@@ -106,6 +106,7 @@ class Post {
             'timestamp' => $this->createdDate,
             'tags' => $this->meta->tagArray(),
             'content' => $this->content->toArray(),
+            'author' => $this->author->toArray(),
         );
 
         return $postArray;

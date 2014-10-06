@@ -32,23 +32,9 @@
 		</form>
 		<div id="sidebar-content">
 			<section class="badge-block-ad block-ad">
-				<div class="badge-gag-ads-container img-container" data-gag-ads="list-sidebar1-300x250-atf"></div>
-			</section>
-			<section class="block-subscribe badge-email-subscription" >
-				<h2 class="sidebar-title">Nhận niềm vui mỗi ngày</h2>
-				<form>
-					<div class="field badge-toggle-hide-when-done">
-						<input class="badge-email-subscription-input badge-evt" data-evt="Email-Subscription,Input-Clicked,top"
-						type="email" placeholder="Email address">
-						<a class="btn badge-email-subscription-btn badge-evt" href="javascript:void(0);"
-						data-evt="Email-Subscription,Input-Clicked,top">Subscribe</a>
-					</div>
-					<div class="message hide badge-toggle-hide-when-done">
-						<p>
-							Thanks for signing up!
-						</p>
-					</div>
-				</form>
+				<div class="badge-gag-ads-container img-container" data-gag-ads="list-sidebar1-300x250-atf">
+                    <img src="http://local.nhamvl.com/nhamvl/img/ads-300x250.gif"/>
+				</div>
 			</section>
 			<section class="block-feature-cover">
 				<h2 class="sidebar-title">Featured</h2>
@@ -62,7 +48,9 @@
 			</section>
 			<div id="jsid-featured-sidebar-tail">
 				<section id="jsid-featured-sidebar-ad" class="badge-block-ad block-ad">
-					<div class="badge-gag-ads-container img-container" data-gag-ads="list-sidebar2-300x250-sticky"></div>
+					<div class="badge-gag-ads-container img-container" data-gag-ads="list-sidebar2-300x250-sticky">
+					    <img src="http://local.nhamvl.com/nhamvl/img/ads-300x250.gif"/>
+					</div>
 				</section>
 				<section class="block-subscribe badge-email-subscription" style="padding-bottom: 20px;">
 					<h2 class="sidebar-title">Subscribe to 9GAG</h2>

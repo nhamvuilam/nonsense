@@ -55,6 +55,13 @@ jQuery(document).ready(function() {
 			jQuery(".badge-upload-items").addClass("hide");
 		}
  	});
+ 	jQuery("#jsid-header-user-menu").click(function() {
+ 		if ( jQuery("#jsid-header-user-menu-items").hasClass("hide")) {
+			jQuery("#jsid-header-user-menu-items").removeClass("hide");
+		} else {
+			jQuery("#jsid-header-user-menu-items").addClass("hide");
+		}
+ 	});
  	
  	//register and login
  	jQuery(".badge-login-button").click(function() {

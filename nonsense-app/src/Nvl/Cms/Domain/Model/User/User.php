@@ -60,6 +60,7 @@ class User {
     public function toArray() {
         return array(
         	'id'            => $this->id,
+            'username'      => $this->loginInfo->username(),
             'contact'       => $this->contact->toArray(),
             'status'        => $this->status,
             'stats'         => $this->stats->toArray(),

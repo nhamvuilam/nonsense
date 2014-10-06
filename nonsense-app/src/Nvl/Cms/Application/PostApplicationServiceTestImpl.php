@@ -7,8 +7,6 @@
 //
 namespace Nvl\Cms\Application;
 
-
-use Nvl\Cms\Domain\Model\Post\Post;
 /**
  * Post Application Service
  */
@@ -140,4 +138,12 @@ class PostApplicationServiceTestImpl implements PostApplicationService {
     public function editPost($id, $editFields) {
     	return true;
     }
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::postInfo()
+     */
+    public function postInfo($id) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

@@ -64,7 +64,9 @@ class App {
             	                       $config['image']['sizes']);
             });
             $di->set('post_application_service', function() {
-                return new PostApplicationServiceImpl(App::postRepository(), App::postFactory());
+                return new PostApplicationServiceImpl(App::postRepository(),
+                                                      App::postFactory(),
+                                                      App::userRepository());
             });
 
             // ===================================================================================
@@ -137,8 +139,17 @@ class App {
     /**
      * @return array
      */
-    public static function config() {
-        return static::di()->get('cms_config');
+    public static function config($namespace = '', $key = '') {
+        $config = static::di()->get('cms_config');
+        if (!empty($namespace)) {
+            $config = $config[$namespace];
+
+            if (!empty($key)) {
+                $config = $config[$key];
+            }
+        }
+
+        return $config;
     }
 
     /**

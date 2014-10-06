@@ -7,12 +7,13 @@ Nvl\Cms\Domain\Model\Post\Post:
       targetDocument: Nvl\Cms\Domain\Model\Post\PostContent
     meta:
       targetDocument: Nvl\Cms\Domain\Model\Post\PostMeta
+  referenceOne:
+    author:
+      targetDocument: Nvl\Cms\Domain\Model\User\User
   fields:
     id: 
       id: true
       strategy: AUTO
-    author:
-      type: string
     createdDate:
       type: timestamp
     modifiedDate:

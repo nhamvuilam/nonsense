@@ -95,7 +95,7 @@ use Nvl\Cms\App;
                 	<a class="badge-signup-button link" href="javascript:void(0);">Sign up</a>
                     <div class="upload"> <a class="badge-signup-button upload" href="https://nhamvl.com/signup">Upload</a> </div>
                 </div>
-                <?php } else { ?>
+                <?php } else { $user = App::userApplicationService()->user(); ?>
                 <div id="jsid-user-function" class="user-function">
                     <div id="jsid-header-notification-menu" class="notification badge-evt" data-evt="Notification-Badge,Clicked-Badge,https://9gag.com/notifications">
                         <a class="bell" href="javascript:void(0);">
@@ -129,17 +129,17 @@ use Nvl\Cms\App;
                         </div>
                     </div>
                 </div>
-                <?php } ?>
                 <div class="badge-user-function-placeholder hide">
                     <div class="upload"> <a class="badge-signup-button upload" href="javascript:void(0)">Upload</a> </div>
                 </div>
                 <div id="jsid-header-user-menu-items" class="popup-menu user hide"> <span class="arrow-wrap"> <span class="arrow"></span> </span>
                     <ul>
-                        <li><a id="jsid-my-profile" href="/u/nguyensivn">My Profile</a></li>
-                        <li><a href="https://nhamvl.com/settings">Settings</a></li>
-                        <li><a class="badge-logout-btn" href="https://nhamvl.com/logout">Logout</a></li>
+                        <li><a id="jsid-my-profile" href="/u/<?php echo $user['username']; ?>">My Profile</a></li>
+                        <li><a href="/settings">Settings</a></li>
+                        <li><a class="badge-logout-btn" href="/logout">Logout</a></li>
                     </ul>
                 </div>
+                <?php } ?>
                 <div class="popup-menu upload hide badge-upload-items"> <span class="arrow-wrap"> <span class="arrow"></span> </span>
                     <ul>
                         <li><a class="badge-upload-selector badge-upload-url" href="javascript:void(0)">Add from URL</a></li>
