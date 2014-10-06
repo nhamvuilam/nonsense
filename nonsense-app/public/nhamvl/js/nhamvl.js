@@ -80,7 +80,7 @@ function valivateFormUpload() {
 	}
 	
 	if ( !jQuery("#jsid-upload-file-input").hasClass("hide")) {
-		if (jQuery("#jsid-upload-file-input").val() == "") {
+		if (jQuery("input[name=image]").val() == "") {
 			alert('Vui lòng chọn hình ảnh cần upload');
 			return false;
 		}
