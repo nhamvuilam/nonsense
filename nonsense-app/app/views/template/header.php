@@ -1,18 +1,9 @@
-<?php
-use Nvl\Cms\App;
-?>
-<head>
-    <title>Nham VL</title>
+<?php use Nvl\Cms\App; ?>
+<head>    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="keywords" content="Nham VL" />
-    <meta name="description" content="Nham VL, vui lam, nham vui lam" />
     <meta name="robots" content="noodp" />
  	<meta name="google-site-verification" content="_reH-wYeRCPPrwQkNAV4Xc9YIBL1Z64xkSsN_vumMNo" />
-    <meta property="og:title" content="Nhảm vui lắm" />
-    <meta property="og:site_name" content="nhamvl.com" />
-    <meta property="og:url" content="<?php echo App::config('site', 'site_url'); ?>" />
-    <meta property="og:description" content="Nham VL, vui lam, nham vui lam" />
-    <meta property="og:type" content="blog" />
+ 	<?php $this->partial("template/seo",array('data_seo' => isset($data_seo) ? $data_seo : '' ));?>
     <link href="<?php echo STATIC_PATH ?>/css/styleAll.css" media="screen,projection" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<?php echo STATIC_PATH ?>/js/lib.js"></script>
 </head>
