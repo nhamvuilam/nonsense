@@ -4,7 +4,7 @@
 </head>
 <body>
 <div id="menu">
-<a href="/nghiemtuc/post/index">Post</a>
+<a href="/nghiemtuc/post">Post</a>
 </div>
 <div id="main">
 <?php echo $this->getContent(); ?>
