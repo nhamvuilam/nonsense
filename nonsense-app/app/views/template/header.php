@@ -59,7 +59,7 @@
     <div class="badge-sticky-subnav-static">
         <header id="top-nav" class="badge-sticky-nav">
             <div class="nav-wrap">
-                <h1><a href="/" style="position:absolute;height:80px;z-index:9000">NhamVL</a></h1>
+                <h1><a href="/" style="position:absolute;height:97px;top:-35px;z-index:9000">NhamVL</a></h1>
                 <div class="headbar-items" style="padding-left:90px;">
                     <ul>
                         <li><a href="javascript:void(0);" class="selected" ><span class="label">Đang Hot</span></a></li>
