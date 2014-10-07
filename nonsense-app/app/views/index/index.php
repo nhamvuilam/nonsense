@@ -1,3 +1,4 @@
+<?php use Nvl\Cms\App; ?>
 <div class="main-wrap">
     <div id="gag-ads-init-mode"></div>
 	<section id="list-view-2" class="badge-list-view-element variant-right">
@@ -20,7 +21,7 @@
 						<p class="post-meta">
 							<a class="badge-evt point" href="javascript:void(0)"><span class="badge-item-love-count">0</span> points</a> &middot;
 							<a class="comment badge-evt" href="<?php echo $post['post_url']?>">
-								<fb:comments-count href="<?php echo $post['post_url']?>"/></fb:comments-count> comments
+								<fb:comments-count href="<?php echo DOMAIN_PATH.$post['post_url']?>"/></fb:comments-count> comments
 							</a>
 						</p>
 						<div class="badge-item-vote-container post-afterbar-a in-list-view  ">
@@ -40,7 +41,7 @@
 							<div class="share right">
 								<ul>
 									<li>
-										<a href="javascript:void(0);" class="badge-facebook-share badge-evt badge-track btn-share facebook" data-share="<?php echo $post['post_url']?>">Facebook</a>
+										<a onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<?php echo App::config('site', 'site_url').$post['post_url']?>', 'facebook_share', 'toolbar=yes, scrollbars=yes, resizable=yes, top=200, left=400, width=640, height=400');" href="javascript:void(0);" class="badge-facebook-share badge-evt badge-track btn-share facebook">Facebook</a>
 									</li>
 									<!-- <li>
 										<a href="javascript:void(0);" class="badge-twitter-share badge-evt badge-track btn-share twitter"
@@ -61,6 +62,7 @@
 	<!-- <div class="loading"> <a class="btn badge-load-more-post" href="/?id=aMbwODP%2CanX1w9q%2CamLzeoV&c=10" data-loading-text="Loading more posts..." data-load-count-max="30">Load more posts</a> </div> -->
 </div>
 <script type="text/javascript">
+	var domainPath = '<?php echo App::config('site', 'site_url');?>';
 	jQuery(document).ready(function() {
 		var track_load = 10; //total loaded record group(s)
 		var loading  = false; //to prevents multipal ajax loads
@@ -88,9 +90,9 @@
 								jQuery("#loadPosts").append(html);
 			            	}
 			            }
-			        });			        
-			        track_load += 10;	
-			        loading = false; 			
+			        });
+			        track_load += 10;
+			        loading = false;
 				}
 			}
 		});
@@ -115,7 +117,7 @@
 				html +=	'<p class="post-meta">';
 					html +=	'<a class="badge-evt point" href="javascript:void(0)"><span class="badge-item-love-count">0</span> points</a> &middot; ';
 					html +=	'<a class="comment badge-evt" href="'+post.post_url+'">';
-						html +=	'<fb:comments-count href="'+post.post_url+'"/></fb:comments-count> comments';
+						html +=	'<fb:comments-count href="'+ domainPath + post.post_url +'"/></fb:comments-count> comments';
 					html +=	'</a>';
 				html +=	'</p>';
 				html +=	'<div class="badge-item-vote-container post-afterbar-a in-list-view ">';
@@ -127,7 +129,7 @@
 						html +=	'</ul>';
 					html +=	'</div>';					
 					html +=	'<div class="share right">';
-						html +=	'<ul><li><a href="javascript:void(0);" class="badge-facebook-share badge-evt badge-track btn-share facebook" data-share="'+post.post_url+'">Facebook</a></li></ul>';							
+						html +=	'<ul><li><a onclick="window.open(\'http://www.facebook.com/sharer/sharer.php?u='+ domainPath + post.post_url +'\', \'facebook_share\', \'toolbar=yes, scrollbars=yes, resizable=yes, top=200, left=400, width=640, height=400\' )" href="javascript:void(0);" class="badge-facebook-share badge-evt badge-track btn-share facebook">Facebook</a></li></ul>';							
 					html +=	'</div>';
 					html +=	'<div class="clearfix"></div>';
 				html +=	'</div>';

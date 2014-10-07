@@ -12,7 +12,7 @@
 		                        <span itemprop="ratingCount" class="badge-item-love-count">0</span> points
 		                    </a> ·
 			                <a href="javascript:void(0);" class="comment badge-evt">
-			                    <span class="badge-item-comment-count"><fb:comments-count href="<?php echo $post['post_url']?>"/></fb:comments-count></span> comments
+			                    <span class="badge-item-comment-count"><fb:comments-count href="<?php echo App::config('site', 'site_url').$post['post_url']?>"/></fb:comments-count></span> comments
 			                </a>
 			            </p>
 					</header>
@@ -37,7 +37,7 @@
 					<div class="post-afterbar-a in-post-bot full-width">
 						<div class="share">
 						    <ul>
-						        <li><a data-share="https://www.facebook.com/pages/G%C3%B3c-H%C3%A0i/281158712077617" href="javascript:void(0);" class="badge-facebook-share badge-facebook-bot-share badge-evt badge-track btn-share facebook">Share on Facebook</a></li>
+						        <li><a onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<?php echo App::config('site', 'site_url').$post['post_url']?>', 'facebook_share', 'toolbar=yes, scrollbars=yes, resizable=yes, top=200, left=400, width=640, height=400');" href="javascript:void(0);" class="badge-facebook-share badge-facebook-bot-share badge-evt badge-track btn-share facebook">Share on Facebook</a></li>
 						        <!-- <li><a data-share="http://9gag.com/gag/a7KMRnb?ref=t" data-title="Let%27s%20do%20this%21" data-evt="Twitter-Share-Bot,PostClicked,http://9gag.com/gag/a7KMRnb" data-track="social,t.s,,,d,a7KMRnb,p" href="javascript:void(0);" class="badge-twitter-share badge-twitter-bot-share badge-evt badge-track btn-share twitter">Share on Twitter</a></li> -->
 						    </ul>
 						</div>
@@ -48,6 +48,6 @@
 		</div>
 	</section>
 	<section class="post-comment">
-		<div class="fb-comments" data-href="<?php echo App::config('site', 'site_url').'/'.$post['post_url']?>" data-numposts="5" data-colorscheme="light"></div>
+		<div class="fb-comments" data-href="<?php echo App::config('site', 'site_url').$post['post_url']?>" data-numposts="5" data-colorscheme="light"></div>
 	</section>
 </div>
