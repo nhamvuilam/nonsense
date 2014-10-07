@@ -47,7 +47,7 @@ class FacebookOAuth extends AbstractOAuth {
 	 */
 	protected function populateUser($token) {
 		// get user info
-		$graph_url = "https://graph.facebook.com/me?access_token=" . $token['access_token'];
+		$graph_url = "https://graph.facebook.com/v2.1/me?access_token=" . $token['access_token'];
 		$response = $this->makeRequest($graph_url, array(), 'get');
 
 		if ($response[0] == 200) {
@@ -56,7 +56,7 @@ class FacebookOAuth extends AbstractOAuth {
 			$this->user['first_name'] = $user->first_name;
 			$this->user['last_name'] = $user->last_name;
 			$this->user['username'] = $user->username;
-			$this->user['gender'] = $user->gender == 'male' ? '0' : '1';
+			$this->user['gender'] = $user->gender;
 			$this->user['email'] = $user->email;
             $this->user['id'] = $user->id;
 		}
