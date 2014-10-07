@@ -11,6 +11,7 @@
 namespace Nvl\Cms\Domain\Model\Post;
 
 use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Stdlib\InvalidArgumentException;
 
 /**
  * A cms post object
@@ -22,6 +23,12 @@ class Post {
     const STATUS_PENDING_REVIEW = "pending_review";
     const STATUS_PUBLISHED = "published";
     const STATUS_DELETED = "deleted";
+
+    private static $ALLOWED_STATUS = array(
+    	self::STATUS_PENDING_REVIEW,
+        self::STATUS_PUBLISHED,
+        self::STATUS_DELETED,
+    );
 
     private $id;
 
@@ -78,7 +85,21 @@ class Post {
      * Publish this post
      */
     public function publish() {
+        if ($this->status == static::STATUS_PUBLISHED) {
+            throw new \Exception('Post has already been published');
+        }
+
         $this->status = static::STATUS_PUBLISHED;
+        $this->refreshModifiedDate();
+    }
+
+    public function setStatus($status) {
+
+        if (!in_array($status, static::$ALLOWED_STATUS)) {
+            throw new InvalidArgumentException('Post status is not valid');
+        }
+
+        $this->status = $status;
         $this->refreshModifiedDate();
     }
 
@@ -105,8 +126,9 @@ class Post {
             'post_url'  => '/nham/'.$this->id,
             'timestamp' => $this->createdDate,
             'metas'     => $this->meta->toArray(),
-            'content' => $this->content->toArray(),
-            'author' => $this->author->toArray(),
+            'content'   => $this->content->toArray(),
+            'author'    => $this->author->toArray(),
+            'status'    => $this->status,
         );
 
         return $postArray;

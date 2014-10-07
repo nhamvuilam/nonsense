@@ -145,5 +145,45 @@ class PostApplicationServiceTestImpl implements PostApplicationService {
         // TODO Auto-generated method stub
 
     }
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::pendingPosts()
+     */
+    public function pendingPosts($limit = 10, $offset = 0) {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::latestPosts()
+     */
+    public function latestPosts($limit = 10, $offset = 0) {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::latestPostsWithTag()
+     */
+    public function latestPostsWithTag($tag, $limit = 10, $offset = 0) {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::latestPostsOfAuthor()
+     */
+    public function latestPostsOfAuthor($authorId, $limit = 10, $offset = 0) {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::publish()
+     */
+    public function publish($id) {
+        // TODO Auto-generated method stub
+
+    }
+
 
 }

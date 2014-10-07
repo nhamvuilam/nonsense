@@ -16,6 +16,7 @@ use Nvl\Cms\Domain\Model\User\UserRepository;
 use Nvl\Cms\App;
 use Nvl\Cms\Domain\Model\Post\Post;
 use Nvl\Stdlib\InvalidArgumentException;
+use Nvl\Stdlib\ValidateException;
 
 /**
  * Post Application Service Implementation
@@ -49,7 +50,7 @@ class PostApplicationServiceImpl implements PostApplicationService {
     // Latest published posts
     public function latestPosts($limit = 10, $offset = 0) {
         return $this->queryPosts(
-                '', '', Post::STATUS_PENDING_REVIEW, array(), $limit, $offset);
+                '', '', Post::STATUS_PUBLISHED, array(), $limit, $offset);
     }
 
     // Latest posts tagged with given tag
@@ -59,7 +60,7 @@ class PostApplicationServiceImpl implements PostApplicationService {
         }
 
         return $this->queryPosts(
-                '', '', Post::STATUS_PENDING_REVIEW, array($tag), $limit, $offset);
+                '', '', Post::STATUS_PUBLISHED, array($tag), $limit, $offset);
     }
 
     // Latest posts posted by given author id
@@ -70,7 +71,7 @@ class PostApplicationServiceImpl implements PostApplicationService {
         }
 
         return $this->queryPosts(
-                $authorId, '', Post::STATUS_PENDING_REVIEW, array(), $limit, $offset);
+                $authorId, '', Post::STATUS_PUBLISHED, array(), $limit, $offset);
     }
 
     public function queryPosts($author = '', $type = '', $status = '',
@@ -109,7 +110,16 @@ class PostApplicationServiceImpl implements PostApplicationService {
     }
 
     public function editPost($id, $editFields) {
-        // TODO Auto-generated method stub
+        $post = $this->postRepository()->find($id);
+        if (empty($post)) {
+            throw new ValidateException('Post not found');
+        }
+
+        if (!empty($editFields['status'])) {
+            $post->setStatus($editFields['status']);
+        }
+
+        $this->postRepository()->save($post);
     }
 
     public function publish($id) {

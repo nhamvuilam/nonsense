@@ -18,7 +18,7 @@ interface PostRepository {
 
     /**
      * @param string $id Post id to find
-     * @return \Nvl\Cms\Domain\Model\Post The post object
+     * @return \Nvl\Cms\Domain\Model\Post\Post The post object
      */
     public function find($id);
 
