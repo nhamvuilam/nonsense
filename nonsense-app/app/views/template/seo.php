@@ -7,6 +7,7 @@
 	<meta property="og:site_name" content="nhamvl.com" />
 	<meta property="og:url" content="<?php echo App::config('site', 'site_url').$data_seo['post_url']; ?>" />
 	<meta property="og:description" content="Nham VL, vui lam, nham vui lam, <?php echo $data_seo['content']['caption']?>" />
+	<meta property="og:image" content="<?php echo $data_seo['content']['images']['medium']['url']?>" />
 	<meta property="og:type" content="blog" />
 <?php } else { ?>
 	<title>Nham VL</title>
