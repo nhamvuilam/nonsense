@@ -1,5 +1,5 @@
 <?php use Nvl\Cms\App; ?>
-<head>    
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="robots" content="noodp" />
  	<meta name="google-site-verification" content="_reH-wYeRCPPrwQkNAV4Xc9YIBL1Z64xkSsN_vumMNo" />
@@ -59,8 +59,8 @@
     <div class="badge-sticky-subnav-static">
         <header id="top-nav" class="badge-sticky-nav">
             <div class="nav-wrap">
-                <h1><a href="/">NhamVL</a></h1>
-                <div class="headbar-items">
+                <h1><a href="/" style="position:absolute;height:80px;z-index:9000">NhamVL</a></h1>
+                <div class="headbar-items" style="padding-left:90px;">
                     <ul>
                         <li><a href="javascript:void(0);" class="selected" ><span class="label">Đang Hot</span></a></li>
                         <li><a href="javascript:void(0);"><span class="label">Hot trong tuần</span></a></li>
