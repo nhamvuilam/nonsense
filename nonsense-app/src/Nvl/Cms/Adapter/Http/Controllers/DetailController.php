@@ -10,7 +10,11 @@ class DetailController extends BaseController {
 	public function indexAction() {
 		$id = $this->dispatcher->getParam("id");
 		$post = App::postApplicationService()->postInfo($id);			
-		$this->view->setVars(array('post' => $post, 'display_slidebar' => 1));
+		$this->view->setVars(array(
+			'post' => $post, 
+			'display_slidebar' => 1, 
+			'data_seo' => $post
+		));
 	}
 
 }
