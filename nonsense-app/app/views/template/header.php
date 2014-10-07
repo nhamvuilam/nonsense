@@ -91,15 +91,15 @@ use Nvl\Cms\App;
                 </div>
                 <?php if (!App::userApplicationService()->isLoggedIn())  { ?>
                 <div id="jsid-visitor-function" class="visitor-function">
-                	<a class="badge-login-button link" href="javascript:void(0);">Log in</a>
-                	<a class="badge-signup-button link" href="javascript:void(0);">Sign up</a>
-                    <div class="upload"> <a class="badge-signup-button upload" href="https://nhamvl.com/signup">Upload</a> </div>
+                	<a class="badge-login-button link" href="javascript:void(0);">Đăng nhập</a>
+                	<a class="badge-signup-button link" href="javascript:void(0);">Đăng ký</a>
+                    <div class="upload"> <a class="badge-signup-button upload" href="<?php echo App::config('site', 'site_url')?>/signup">Upload</a> </div>
                 </div>
                 <?php } else { $user = App::userApplicationService()->user(); ?>
                 <div id="jsid-user-function" class="user-function">
                     <div id="jsid-header-notification-menu" class="notification badge-evt" data-evt="Notification-Badge,Clicked-Badge,https://9gag.com/notifications">
                         <a class="bell" href="javascript:void(0);">
-                            <span id="jsid-notification-unread-count" class="badge hide" href="http://9gag.com/notifications">0</span>
+                            <span id="jsid-notification-unread-count" class="badge hide" href="<?php echo App::config('site', 'site_url')?>/notifications">0</span>
                         </a>
                     </div>
 
@@ -111,7 +111,7 @@ use Nvl\Cms\App;
                         </a>
                     </div>
 
-                            <div class="upload">
+                    <div class="upload">
                         <a id="jsid-upload-menu" class="upload" href="javascript:void(0);">Upload</a>
                     </div>
 
@@ -125,7 +125,7 @@ use Nvl\Cms\App;
                             <ul id="jsid-header-notification-items-container" class="overview" style="top: 0px;"><li class="empty"><div class="empty-message"><p>You don't have any notification yet.</p></div></li></ul>
                         </div>
                         <div class="bumper">
-                            <a id="jsid-header-notification-see-all" class="see-all badge-evt" href="http://9gag.com/notifications" data-evt="Notification-Menu,Clicked-All,http://9gag.com/notifications">See all</a>
+                            <a id="jsid-header-notification-see-all" class="see-all badge-evt" href="<?php echo App::config('site', 'site_url')?>/notifications" data-evt="Notification-Menu,Clicked-All,http://9gag.com/notifications">See all</a>
                         </div>
                     </div>
                 </div>
@@ -142,12 +142,12 @@ use Nvl\Cms\App;
                 <?php } ?>
                 <div class="popup-menu upload hide badge-upload-items"> <span class="arrow-wrap"> <span class="arrow"></span> </span>
                     <ul>
-                        <li><a class="badge-upload-selector badge-upload-url" href="javascript:void(0)">Add from URL</a></li>
-                        <li><a class="badge-upload-selector badge-upload-image" href="javascript:void(0)">Upload image</a></li>
-                        <li><a href="http://memeful.com/generator?ref=9gag" target="_blank">Make a meme</a></li>
+                        <li><a class="badge-upload-selector badge-upload-url" href="javascript:void(0)">Đăng link</a></li>
+                        <li><a class="badge-upload-selector badge-upload-image" href="javascript:void(0)">Đăng ảnh</a></li>
+                        <!-- <li><a href="http://memeful.com/generator?ref=9gag" target="_blank">Make a meme</a></li> -->
                     </ul>
                 </div>
-                <form id="headbar-search" class="badge-header-search" action="http://nhamvl.com/search">
+                <form id="headbar-search" class="badge-header-search" action="<?php echo App::config('site', 'site_url')?>/search">
                     <input type="text" name="query" id="jsid-search-input" class="ui-autocomplete-input search search_input" data-placeholder="Search…" tabindex="1" autocomplete="off">
                     <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
                     <div class="ui-widget"></div>
@@ -164,7 +164,7 @@ use Nvl\Cms\App;
                 <p>NhamVL Vui lam.</p>
             </div>
             <div class="social-love" style="float:right">
-                <div class="fb-like" style="top:0px;" data-href="http://nhamvl.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                <div class="fb-like" style="top:0px;" data-href="<?php echo App::config('site', 'site_url')?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
             </div>
            <!-- <a class="customize badge-personalise-btn" href="#">Personalise <span class="drop-arrow"></span></a>-->
             <div class="clearfix"></div>

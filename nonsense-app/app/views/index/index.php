@@ -21,7 +21,7 @@
 						<p class="post-meta">
 							<a class="badge-evt point" href="javascript:void(0)"><span class="badge-item-love-count">0</span> points</a> &middot;
 							<a class="comment badge-evt" href="<?php echo $post['post_url']?>">
-								<fb:comments-count href="<?php echo DOMAIN_PATH.$post['post_url']?>"/></fb:comments-count> comments
+								<fb:comments-count href="<?php echo App::config('site', 'site_url').$post['post_url']?>"/></fb:comments-count> comments
 							</a>
 						</p>
 						<div class="badge-item-vote-container post-afterbar-a in-list-view  ">
