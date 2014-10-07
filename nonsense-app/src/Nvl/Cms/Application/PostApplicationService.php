@@ -57,7 +57,7 @@ interface PostApplicationService {
     public function newPost($type, $tags, $date, $postContent, $metas = array());
 
     /**
-     * @param array  $authors Limit to these authors
+     * @param string $author  Limit to author id
      * @param string $type    Limit to this post type
      * @param string $status  Limit to this status
      * @param array  $tags    Limit to these tags
@@ -100,13 +100,27 @@ interface PostApplicationService {
      * )
      * </pre>
      */
-    public function queryPosts($authors = array(), $type = '', $status = '', $tags = array(), $limit, $offset = 1);
+    public function queryPosts($author = '', $type = '', $status = '', $tags = array(), $limit, $offset = 1);
+
+    public function pendingPosts($limit = 10, $offset = 0);
+
+    public function latestPosts($limit = 10, $offset = 0);
+
+    public function latestPostsWithTag($tag, $limit = 10, $offset = 0);
+
+    public function latestPostsOfAuthor($authorId, $limit = 10, $offset = 0);
 
     /**
      * @param string $id The post id to find
      * @return Array of post's info or NULL if post id is not found
      */
     public function postInfo($id);
+
+    /**
+     * Publish a post with given id
+     * @param string $id Post id to be published
+     */
+    public function publish($id);
 
     /**
      * Edit a post

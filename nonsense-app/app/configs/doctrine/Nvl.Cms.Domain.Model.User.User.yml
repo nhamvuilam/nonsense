@@ -12,7 +12,7 @@ Nvl\Cms\Domain\Model\User\User:
   fields:
     id: 
       id: true
-      strategy: INCREMENT
+      strategy: AUTO
     confirmed: 
       type: boolean
     status:

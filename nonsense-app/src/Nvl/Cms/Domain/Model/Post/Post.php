@@ -75,9 +75,9 @@ class Post {
     }
 
     /**
-     * Approve this post
+     * Publish this post
      */
-    public function approve() {
+    public function publish() {
         $this->status = static::STATUS_PUBLISHED;
         $this->refreshModifiedDate();
     }

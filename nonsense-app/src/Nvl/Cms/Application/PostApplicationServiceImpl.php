@@ -14,6 +14,8 @@ use Nvl\Cms\Domain\Model\Post\PostFactory;
 use Nvl\Cms\Domain\Model\Post\PostRepository;
 use Nvl\Cms\Domain\Model\User\UserRepository;
 use Nvl\Cms\App;
+use Nvl\Cms\Domain\Model\Post\Post;
+use Nvl\Stdlib\InvalidArgumentException;
 
 /**
  * Post Application Service Implementation
@@ -38,14 +40,44 @@ class PostApplicationServiceImpl implements PostApplicationService {
     // POST APPLICATION SERVICE IMPLEMENTATION
     // =============================================================================================
 
-	/**
-     * @see \Nvl\Cms\Application\PostApplicationService::queryPosts()
-     */
-    public function queryPosts($authors = array(), $type = '', $status = '',
+    // Latest pending posts
+    public function pendingPosts($limit = 10, $offset = 0) {
+        return $this->queryPosts(
+                '', '', Post::STATUS_PENDING_REVIEW, array(), $limit, $offset);
+    }
+
+    // Latest published posts
+    public function latestPosts($limit = 10, $offset = 0) {
+        return $this->queryPosts(
+                '', '', Post::STATUS_PENDING_REVIEW, array(), $limit, $offset);
+    }
+
+    // Latest posts tagged with given tag
+    public function latestPostsWithTag($tag, $limit = 10, $offset = 0) {
+        if (!is_string($tag)) {
+            throw new InvalidArgumentException('Tag is not a valid string');
+        }
+
+        return $this->queryPosts(
+                '', '', Post::STATUS_PENDING_REVIEW, array($tag), $limit, $offset);
+    }
+
+    // Latest posts posted by given author id
+    public function latestPostsOfAuthor($authorId, $limit = 10, $offset = 0) {
+
+        if (!is_string($authorId)) {
+            throw new InvalidArgumentException('Author id is not a valid id');
+        }
+
+        return $this->queryPosts(
+                $authorId, '', Post::STATUS_PENDING_REVIEW, array(), $limit, $offset);
+    }
+
+    public function queryPosts($author = '', $type = '', $status = '',
                                $tags = array(), $limit = 10, $offset = 0) {
         $paginatedResult = $this->postRepository()->findBy(array(
         	'tags'    => $tags,
-            'authors' => $authors,
+            'author'  => $author,
             'type'    => $type,
             'status'  => $status,
             'limit'   => $limit,
@@ -54,7 +86,6 @@ class PostApplicationServiceImpl implements PostApplicationService {
 
         $posts = array();
         foreach ($paginatedResult->data() as $post) {
-            /* @var $post \Nvl\Cms\Domain\Model\Post\Post */
             $posts[] = $post->toArray();
         }
 
@@ -77,16 +108,21 @@ class PostApplicationServiceImpl implements PostApplicationService {
         return $post->toArray();
     }
 
-	/**
-     * @see \Nvl\Cms\Application\PostApplicationService::editPost()
-     */
     public function editPost($id, $editFields) {
         // TODO Auto-generated method stub
     }
 
-	/**
-     * @see \Nvl\Cms\Application\PostApplicationService::newPost()
-     */
+    public function publish($id) {
+        if (empty($id)) {
+            throw new InvalidArgumentException('Post Id cannot be empty');
+        }
+
+        $post = $this->postRepository()->find($id);
+        $post->publish();
+
+        $this->postRepository()->save($post);
+    }
+
     public function newPost($type, $tags, $date, $postContent, $metas = array()) {
         // Dummy author
         $author = 'nmquyet';
@@ -108,9 +144,6 @@ class PostApplicationServiceImpl implements PostApplicationService {
     // HELPER METHODS
     // =============================================================================================
 
-    /**
-     * @return PostRepository
-     */
     private function postRepository() {
         return $this->_postRepository;
     }
@@ -119,9 +152,6 @@ class PostApplicationServiceImpl implements PostApplicationService {
         return $this->_userRepository;
     }
 
-    /**
-     * @return PostFactory
-     */
     private function postFactory() {
         return $this->_postFactory;
     }

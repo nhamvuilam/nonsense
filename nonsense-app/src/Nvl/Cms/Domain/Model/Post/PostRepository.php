@@ -17,7 +17,7 @@ use Nvl\Cms\Domain\Model\PaginatedResult;
 interface PostRepository {
 
     /**
-     * @param int $id Post id to find
+     * @param string $id Post id to find
      * @return \Nvl\Cms\Domain\Model\Post The post object
      */
     public function find($id);

@@ -53,13 +53,14 @@ class MongoPostRepository implements PostRepository {
      * @see \Nvl\Cms\Domain\Model\Post\PostRepository::findBy()
      */
     public function findBy($query) {
-        $queryBuilder = $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\Post\Post');
+        $queryBuilder = $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\Post\Post')
+                                   ->eagerCursor(true);
 
         if (!empty($query['tags'])) {
             $queryBuilder->field('meta.tags')->in($query['tags']);
         }
-        if (!empty($query['authors'])) {
-            $queryBuilder->field('author')->in((array) $query['authors']);
+        if (!empty($query['author']) && is_string($query['author'])) {
+            $queryBuilder->field('author.$id')->equals(new \MongoId($query['author']));
         }
         if (!empty($query['type'])) {
             $queryBuilder->field('content.type')->equals($query['type']);

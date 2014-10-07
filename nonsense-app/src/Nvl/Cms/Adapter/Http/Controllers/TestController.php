@@ -100,8 +100,8 @@ class TestController extends BaseController {
     }
 
     function queryPostAction() {
-        echo '<h1>By tags</h1>';
-        $posts = App::postApplicationService()->queryPosts(array(), '', '', array(), 10, 0);
+        // $posts = App::postApplicationService()->latestPosts(10, 0);
+        $posts = App::postApplicationService()->latestPostsOfAuthor('5433bbbcf7c62f3b010041a7', 10, 0);
         var_dump($posts);
         exit;
     }
