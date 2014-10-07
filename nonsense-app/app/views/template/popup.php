@@ -119,8 +119,8 @@
 					NhamVL is your best source of fun. Share anything you find interesting, get real responses from people all over the world, and discover what makes you laugh.
 				</p>
 				<div class="social-signup">
-					<a class="btn-connect-option facebook badge-facebook-connect" href="javascript:void(0);">Facebook</a>
-					<span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="javascript:void(0);">Google</a></span>
+					<a class="btn-connect-option facebook badge-facebook-connect" href="/connect/facebook">Facebook</a>
+					<span class="badge-gplus-connect"><a class="btn-connect-option google-plus" href="/connect/google">Google</a></span>
 				</div>
 				<p class="alternative">
 					Sign up with your <a href="javascript:void(0);" class="badge-signup-email-link">Email Address</a>
