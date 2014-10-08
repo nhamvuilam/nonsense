@@ -2,46 +2,76 @@
 	<section id="modal-upload" class="modal upload hide">
 		<a class="badge-overlay-close btn-close" href="javascript:void(0)">✖</a>
 		<section id="upload-file">
-			<form id="form-modal-post-image" class="modal" action="/post" enctype="multipart/form-data" method="POST" onsubmit="return valivateFormUpload();">
-				<input type="hidden" name="type" value="image" />
-				<div id="jsid-disable-mask">
-					<h2>Post a fun</h2>
-					<p class="lead">
-						Upload funny pictures, paste pictures URL, accepting GIF/JPG/PNG (Max size: 3MB)
-					</p>
-					<div class="field photo">
-						<input id="jsid-upload-url-input" class="hide" type="url" name="url" placeholder="http://" value="" />
-						<div id="jsid-upload-file-input" class="file-field ">
-							<input class="file text" type="file" name="image" accept="image/gif,image/jpeg,image/jpg,image/png" />
-						</div>
-						<p id="jsid-upload-content-error" class="error-message hide"></p>
-					</div>
-					<div class="field title">
-						<label>Title</label>
-						<p id="jsid-char-count" class="count">
-							120
-						</p>
-						<textarea id="jsid-upload-title" name="title" data-maxlength="120"></textarea>
-						<p id="jsid-upload-title-error" class="error-message hide"></p>
-					</div>
-					<div class="field section-picker">
-						<ul id="jsid-section-list" class="section-list" data-sections-count-max="5"></ul>
-						<p id="jsid-upload-section-error" class="error-message hide"></p>
-					</div>
-					<div class="field checkbox">
-						<label id="jsid-source-checkbox-label">
-							<input type="checkbox" id="jsid-source-checkbox" />
-							Attribute original creator</label>
-						<input id="jsid-source-input" type="text" class="text hide" name="source" value="" placeholder="http://" />
-					</div>
-					<div class="btn-container">
-						<input id="jsid-submit-btn" type="submit" value="Upload" />
-					</div>
-					<div id="spinner-here" class="disabled-mask"></div>
+			<form id="form-modal-post-image" class="modal" action="/post" enctype="multipart/form-data" method="POST" onsubmit="return valivateFormUploadLink();">
+				<input type="hidden" name="type" id="type_post" value="link" />
+				<h2>Post a fun</h2>
+          		<p class="lead" style="margin-bottom:0px;">Upload funny pictures, paste pictures URL, accepting GIF/JPG/PNG (Max size: 3MB)</p>
+				
+				<div id="showtab" class="section-nav" style="margin-bottom: 20px;">
+					<div class="width-limit" style="width: 460px;">
+				        <ul id="tabsPost">
+				            <li><a href="javascript:void(0);" value="link" id="tabPostlink" class="selected">LINK</a></li>
+				            <li><a href="javascript:void(0);" value="video" id="tabPostVideo">VIDEO</a></li>	                        		                        
+				        </ul>
+				        <div class="clearfix"></div>
+				    </div>
 				</div>
+				<div class="field photo">
+					<input id="jsid-upload-url-input" type="url" name="url" placeholder="http://" value="" />													
+				</div>
+				<div class="field title">
+					<label>Title</label>
+					<p id="jsid-char-count" class="count">120</p>
+					<textarea id="jsid-upload-title" name="title" data-maxlength="120"></textarea>							
+				</div>
+				<div class="field section-picker">
+					<ul id="jsid-section-list" class="section-list" data-sections-count-max="5"></ul>							
+				</div>
+				<div class="field checkbox">
+					<label id="jsid-source-checkbox-label">
+						<input type="checkbox" id="jsid-source-checkbox" />
+						Attribute original creator</label>
+					<input id="jsid-source-input" type="text" class="text hide" name="source" value="" placeholder="http://" />
+				</div>
+				<div class="btn-container">
+					<input id="jsid-submit-btn" type="submit" value="Upload" />
+				</div>
+				<div id="spinner-here" class="disabled-mask"></div>
 			</form>
 		</section>
 	</section>
+	
+	<section id="modal-upload-image" class="modal upload-image hide">
+		<a class="badge-overlay-close btn-close" href="javascript:void(0)">✖</a>
+		<section id="upload-file">
+			<form id="form-modal-post-image" class="modal" action="/post" enctype="multipart/form-data" method="POST" onsubmit="return valivateFormUploadImage();">
+				<input type="hidden" name="type" id="type_post" value="image" />
+				<h2>Post a fun</h2>
+          		<p class="lead" style="margin-bottom:0px;">Upload funny pictures, paste pictures URL, accepting GIF/JPG/PNG (Max size: 3MB)</p>
+								
+				<div class="field photo">					
+					<div id="jsid-upload-file-input" class="file-field">
+						<input class="file text" type="file" name="image" accept="image/gif,image/jpeg,image/jpg,image/png" />
+					</div>							
+				</div>
+				<div class="field title">
+					<label>Title</label>
+					<p id="jsid-char-count-image" class="count">120</p>
+					<textarea id="jsid-upload-title" name="title-image" data-maxlength="120"></textarea>							
+				</div>
+				<div class="field checkbox">
+					<label id="jsid-source-checkbox-label">
+						<input type="checkbox" id="jsid-source-checkbox" />
+						Attribute original creator</label>
+					<input id="jsid-source-input" type="text" class="text hide" name="source" value="" placeholder="http://" />
+				</div>
+				<div class="btn-container">
+					<input id="jsid-submit-btn" type="submit" value="Upload" />
+				</div>				
+			</form>
+		</section>
+	</section>
+	
 	<section id="modal-report" class="badge-overlay-report modal report hide">
 		<header>
 			<h3>Report Post</h3>

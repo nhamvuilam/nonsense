@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {					
-	jQuery("#modal-upload, #modal-report, .badge-overlay-signin, .badge-overlay-signup-fb").click(function(event) {	    
+	jQuery("#modal-upload, #modal-upload-image, #modal-report, .badge-overlay-signin, .badge-overlay-signup-fb").click(function(event) {	    
 	    event.stopPropagation();	    
 	});
 	
@@ -15,25 +15,37 @@ jQuery(document).ready(function() {
 		jQuery(".overlay-scroll-container").addClass("hide");
 	});
 	
-	jQuery(".badge-upload-selector").click(function() {				
-		jQuery(".overlay-scroll-container").removeClass("hide");
-		jQuery("#modal-upload").removeClass("hide");
+	jQuery(".badge-upload-selector").click(function() {						
 		jQuery(".badge-upload-items").addClass("hide");
 	});
 	
-	jQuery(".badge-upload-image").click(function() {				
+	// click dang anh
+	jQuery(".badge-upload-image").click(function() {	
+		jQuery(".overlay-scroll-container").removeClass("hide");
+		jQuery("#modal-upload-image").removeClass("hide");			
 		if ( !jQuery("#jsid-upload-url-input").hasClass("hide")) {
 			jQuery("#jsid-upload-url-input").addClass("hide");
 		}
 		jQuery("#jsid-upload-file-input").removeClass("hide");
-									
+		jQuery("#showtab").addClass("hide");
+		jQuery("#modal-upload").addClass("hide");
 	});
-	jQuery(".badge-upload-url").click(function() {		
-				
+	
+	// click dang link
+	jQuery(".badge-upload-url").click(function() {
+		
+		jQuery(".overlay-scroll-container").removeClass("hide");
+		jQuery("#modal-upload").removeClass("hide");
+		
+		//set value of type post is link
+		jQuery("#type_post").val("link");
+		
 		if ( !jQuery("#jsid-upload-file-input").hasClass("hide")) {
 			jQuery("#jsid-upload-file-input").addClass("hide");
 		}
-		jQuery("#jsid-upload-url-input").removeClass("hide");								
+		jQuery("#jsid-upload-url-input").removeClass("hide");	
+		jQuery("#showtab").removeClass("hide");			
+		jQuery("#modal-upload-image").addClass("hide");				
 	});
 	
  	jQuery("textarea[name=title]").keyup(function() {                  
@@ -48,6 +60,20 @@ jQuery(document).ready(function() {
 		   jQuery(this).val(new_text);
 	  	}
  	});
+ 	
+ 	jQuery("textarea[name=title-image]").keyup(function() {                  
+	  	var limit = parseInt(jQuery(this).attr('data-maxlength'));         
+	  	var text = jQuery(this).val();
+	  	var chars = text.length;
+	  	var result = (limit - chars) > 0 ? (limit - chars) : 0;     
+	  	jQuery('#jsid-char-count-image').html(result);                          
+	  	if(chars > limit || (limit - chars) <=0 ) {
+		   alert('Bạn đã nhập quá số ký tự cho phép');                            
+		   var new_text = text.substr(0, limit);                    
+		   jQuery(this).val(new_text);
+	  	}
+ 	});
+ 	
  	jQuery("#jsid-upload-menu").click(function() {
  		if ( jQuery(".badge-upload-items").hasClass("hide")) {
 			jQuery(".badge-upload-items").removeClass("hide");
@@ -76,9 +102,25 @@ jQuery(document).ready(function() {
 		jQuery(".badge-overlay-signin").addClass("hide");
 		jQuery("#modal-upload").addClass("hide");		
  	});
+ 	
+ 	//tab post
+ 	//jQuery("#content").find("[id^='tabPost']").hide(); // Hide all content
+    jQuery("#tabs li a:first").attr("class","selected"); // Activate the first tab
+    //jQuery("#content #tabPostlink").fadeIn(); // Show first tab's content
+    
+    jQuery('#tabsPost a').click(function(e) {
+        e.preventDefault();
+        if (jQuery(this).closest("li a").attr("class") == "selected") //detection for current tab
+         	return;    
+      	//jQuery("#content").find("[id^='tabPost']").hide(); // Hide all content
+      	jQuery("#tabsPost li a").attr("class",""); //Reset class
+      	jQuery(this).attr("class","selected"); // Activate this
+      	//jQuery('#content #' + jQuery(this).attr('id')).fadeIn(); // Show content for the current tab      	
+      	jQuery("#type_post").val(jQuery(this).attr('value')); // set type post by click
+    });
 });
 
-function valivateFormUpload() { 		
+function valivateFormUploadLink() { 		
 	if ( !jQuery("#jsid-upload-url-input").hasClass("hide")) {		
 		if (jQuery("#jsid-upload-url-input").val() == "") {
 			alert('Vui lòng nhập đuờng dẫn');
@@ -96,6 +138,31 @@ function valivateFormUpload() {
 	// validate title
 	var limit = parseInt(jQuery("textarea[name=title]").attr('data-maxlength'));  
 	var text = jQuery("textarea[name=title]").val();
+  	var chars = text.length; 
+	if (chars > limit) {
+		alert('Bạn đã nhập quá số ký tự cho phép');
+		return false;
+	}
+	if (chars <= 0) {
+		alert('Vui lòng nhập title');
+		return false;
+	}
+	      
+    return true;
+}
+
+function valivateFormUploadImage() { 	
+	
+	if ( !jQuery("#jsid-upload-file-input").hasClass("hide")) {
+		if (jQuery("input[name=image]").val() == "") {
+			alert('Vui lòng chọn hình ảnh cần upload');
+			return false;
+		}
+	}
+	
+	// validate title
+	var limit = parseInt(jQuery("textarea[name=title-image]").attr('data-maxlength'));  
+	var text = jQuery("textarea[name=title-image]").val();
   	var chars = text.length; 
 	if (chars > limit) {
 		alert('Bạn đã nhập quá số ký tự cho phép');

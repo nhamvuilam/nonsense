@@ -12,7 +12,7 @@ class PostController extends BaseController {
         // HTTP Method: Post
         if ($this->isPost()) {
 
-			$params = $this->getPostParam();
+			$params = $this->getPostParam();			
 			$arrContent = array();
 
         	//Check if the user has uploaded files (image)
@@ -26,26 +26,25 @@ class PostController extends BaseController {
 					);
                 }
 
-				$arrContent['caption'] = $params['title'];
-				$arrContent['type'] = 'image';
+				$arrContent['caption'] = $params['title-image'];				
 
             } else { // type is Video
-
-            	$arrContent['type'] = 'image';
+            
+				$params['type'] = 'video';            	
             	$arrContent['link'] = $params['url'];
 				$arrContent['caption'] = $params['title'];
             }
 
 			$result = App::postApplicationService()->newPost(
-                    $arrContent['type'],
-			        '',
-			        time(),
+                    $params['type'],
+			        array(),
+			        null,		        
 			        $arrContent,
 			        array(
 			            'source_url' => @$params['source_url']
-                    ));
-
-			$this->redirect("/");
+                    ));					
+			$data = $result->toArray();			
+			$this->redirect("/nham/{$data['id']}");
 
         }
 
