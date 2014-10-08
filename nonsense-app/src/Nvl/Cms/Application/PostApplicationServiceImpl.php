@@ -14,7 +14,6 @@ use Nvl\Cms\Domain\Model\Post\PostFactory;
 use Nvl\Cms\Domain\Model\Post\PostRepository;
 use Nvl\Cms\Domain\Model\User\UserRepository;
 use Nvl\Cms\App;
-use Nvl\Cms\Domain\Model\Post\Post;
 use Nvl\Stdlib\InvalidArgumentException;
 use Nvl\Stdlib\ValidateException;
 
@@ -43,39 +42,30 @@ class PostApplicationServiceImpl implements PostApplicationService {
 
     // Latest pending posts
     public function pendingPosts($limit = 10, $offset = 0) {
-        return $this->queryPosts(
-                '', '', Post::STATUS_PENDING_REVIEW, array(), $limit, $offset);
+        $pagedResult = $this->postRepository()->pendingPosts($limit, $offset);
+        return $this->toArray($pagedResult, $limit, $offset);
     }
 
     // Latest published posts
     public function latestPosts($limit = 10, $offset = 0) {
-        return $this->queryPosts(
-                '', '', Post::STATUS_PUBLISHED, array(), $limit, $offset);
+        $pagedResult = $this->postRepository()->latestPosts($limit, $offset);
+        return $this->toArray($pagedResult, $limit, $offset);
     }
 
     // Latest posts tagged with given tag
-    public function latestPostsWithTag($tag, $limit = 10, $offset = 0) {
-        if (!is_string($tag)) {
-            throw new InvalidArgumentException('Tag is not a valid string');
-        }
-
-        return $this->queryPosts(
-                '', '', Post::STATUS_PUBLISHED, array($tag), $limit, $offset);
+    public function latestPostsWithTags($tags, $limit = 10, $offset = 0) {
+        $pagedResult = $this->postRepository()->latestPostsWithTags($tags, $limit, $offset);
+        return $this->toArray($pagedResult, $limit, $offset);
     }
 
     // Latest posts posted by given author id
     public function latestPostsOfAuthor($authorId, $limit = 10, $offset = 0) {
-
-        if (!is_string($authorId)) {
-            throw new InvalidArgumentException('Author id is not a valid id');
-        }
-
-        return $this->queryPosts(
-                $authorId, '', Post::STATUS_PUBLISHED, array(), $limit, $offset);
+        $pagedResult = $this->postRepository()->latestPostsOfAuthor($authorId, $limit, $offset);
+        return $this->toArray($pagedResult, $limit, $offset);
     }
 
     public function queryPosts($author = '', $type = '', $status = '',
-                               $tags = array(), $limit = 10, $offset = 0) {
+                               $tags = array(), $sort = array(), $limit = 10, $offset = 0) {
         $paginatedResult = $this->postRepository()->findBy(array(
         	'tags'    => $tags,
             'author'  => $author,
@@ -83,20 +73,11 @@ class PostApplicationServiceImpl implements PostApplicationService {
             'status'  => $status,
             'limit'   => $limit,
             'offset'  => $offset,
+            'sort'    => $sort,
         ));
 
-        $posts = array();
-        foreach ($paginatedResult->data() as $post) {
-            $posts[] = $post->toArray();
-        }
+        return $this->toArray($paginatedResult, $limit, $offset);
 
-        return array(
-    	    'total' => $paginatedResult->total(),
-            'current' => (int) $offset,
-            'next' => $paginatedResult->next(),
-            'previous' => $paginatedResult->previous(),
-            'posts' => $posts,
-        );
     }
 
     public function postInfo($id) {
@@ -153,6 +134,21 @@ class PostApplicationServiceImpl implements PostApplicationService {
     // =============================================================================================
     // HELPER METHODS
     // =============================================================================================
+
+    private function toArray($paginatedResult, $limit, $offset) {
+        $posts = array();
+        foreach ($paginatedResult->data() as $post) {
+            $posts[] = $post->toArray();
+        }
+
+        return array(
+    	    'total' => $paginatedResult->total(),
+            'current' => (int) $offset,
+            'next' => $paginatedResult->next(),
+            'previous' => $paginatedResult->previous(),
+            'posts' => $posts,
+        );
+    }
 
     private function postRepository() {
         return $this->_postRepository;

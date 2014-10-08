@@ -44,12 +44,17 @@ interface PostRepository {
      */
     public function findBy($query);
 
-    /**
-     * @param string $tag   Tag to query
-     * @param number $limit Number of post to return
-     * @return array Array of latest post
-     */
-    public function latestOfTag($tag, $limit = 10);
+    // Latest pending posts
+    public function pendingPosts($limit = 10, $offset = 0);
+
+    // Latest published posts
+    public function latestPosts($limit = 10, $offset = 0);
+
+    // Latest posts tagged with given tag
+    public function latestPostsWithTags(array $tags = array(), $limit = 10, $offset = 0);
+
+    // Latest posts posted by given author id
+    public function latestPostsOfAuthor($authorId, $limit = 10, $offset = 0);
 
     /**
      * @return int - The next post id

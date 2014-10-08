@@ -8,7 +8,7 @@
 // Copyright (c) Nvl 2014. All rights reserved.
 //
 //
-namespace Nvl\Cms\Domain\Model;
+namespace Nvl\Stdlib;
 
 /**
  * @author Quyet. Nguyen Minh <minhquyet@gmail.com>

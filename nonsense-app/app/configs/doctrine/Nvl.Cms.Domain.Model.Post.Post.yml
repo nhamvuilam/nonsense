@@ -18,5 +18,7 @@ Nvl\Cms\Domain\Model\Post\Post:
       type: timestamp
     modifiedDate:
       type: timestamp
+    publishedDate:
+      type: timestamp
     status:
       type: string

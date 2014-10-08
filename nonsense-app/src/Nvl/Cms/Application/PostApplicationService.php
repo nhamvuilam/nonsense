@@ -106,7 +106,7 @@ interface PostApplicationService {
 
     public function latestPosts($limit = 10, $offset = 0);
 
-    public function latestPostsWithTag($tag, $limit = 10, $offset = 0);
+    public function latestPostsWithTags($tag, $limit = 10, $offset = 0);
 
     public function latestPostsOfAuthor($authorId, $limit = 10, $offset = 0);
 

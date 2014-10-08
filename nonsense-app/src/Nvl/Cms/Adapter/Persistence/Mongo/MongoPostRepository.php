@@ -13,7 +13,8 @@ namespace Nvl\Cms\Adapter\Persistence\Mongo;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Nvl\Cms\Domain\Model\Post\PostRepository;
 use Nvl\Cms\Domain\Model\Post\Post;
-use Nvl\Cms\Domain\Model\PaginatedResult;
+use Nvl\Stdlib\PaginatedResult;
+use Doctrine\ODM\MongoDB\Query\Builder;
 
 /**
  * Mongo Db Post Repository implementation
@@ -26,74 +27,87 @@ class MongoPostRepository implements PostRepository {
         $this->_dm = $dm;
     }
 
-	/**
-     * @see \Nvl\Cms\Domain\Model\PostRepository::find()
-     */
     public function find($id) {
         return $this->dm()->find('\Nvl\Cms\Domain\Model\Post\Post', $id);
     }
 
-    /**
-     * @see \Nvl\Cms\Domain\Model\Post\PostRepository::add()
-     */
     public function add(Post $post) {
         $this->dm()->persist($post);
         $this->dm()->flush();
     }
 
-    /**
-     * @see \Nvl\Cms\Domain\Model\Post\PostRepository::save()
-     */
     public function save(Post $post) {
         $this->dm()->persist($post);
         $this->dm()->flush();
     }
 
-	/**
-     * @see \Nvl\Cms\Domain\Model\Post\PostRepository::findBy()
-     */
     public function findBy($query) {
-        $queryBuilder = $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\Post\Post')
-                                   ->eagerCursor(true);
 
-        if (!empty($query['tags'])) {
-            $queryBuilder->field('meta.tags')->in($query['tags']);
-        }
-        if (!empty($query['author']) && is_string($query['author'])) {
-            $queryBuilder->field('author.$id')->equals(new \MongoId($query['author']));
-        }
-        if (!empty($query['type'])) {
-            $queryBuilder->field('content.type')->equals($query['type']);
-        }
-        if (!empty($query['status'])) {
-            $queryBuilder->field('status')->equals($query['status']);
-        }
-        if (!empty($query['limit'])) {
-            $queryBuilder->limit($query['limit']);
-        }
-        if (!empty($query['offset'])) {
-            $queryBuilder->skip($query['offset']);
-        }
+        $qb = $this->queryBuilder($query['limit'], $query['offset']);
 
-        $queryBuilder->sort(array('createdDate' => 'desc'));
+        $this->filterByTags($qb, $query['tags']);
+        $this->filterByAuthor($qb, $query['author']);
+        $this->filterByStatus($qb, $query['status']);
+
+        $qb->sort('createdDate', 'desc');
 
         return new PaginatedResult(
                 $query['limit'],
                 $query['offset'],
-                $queryBuilder->getQuery()->count(),
-                $queryBuilder->getQuery()->execute());
+                $qb->getQuery()->count(),
+                $qb->getQuery()->execute());
     }
 
-    /**
-     * @see \Nvl\Cms\Domain\Model\Post\PostRepository::latestOfTag()
-     */
-    public function latestOfTag($tag, $limit = 10) {
-        return $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\Post\Post')
-                          ->select()
-                          ->sort(array('createdDate' => -1))
-                          ->limit($limit)
-                          ->getQuery()
-                          ->execute();
+    // Latest pending posts
+    public function pendingPosts($limit = 10, $offset = 0) {
+        $qb = $this->queryBuilder($limit, $offset);
+        $this->filterByStatus($qb, Post::STATUS_PENDING_REVIEW);
+
+        return new PaginatedResult(
+                $limit,
+                $offset,
+                $qb->getQuery()->count(),
+                $qb->getQuery()->execute());
+
+    }
+
+    // Latest published posts
+    public function latestPosts($limit = 10, $offset = 0) {
+        $qb = $this->queryBuilder($limit, $offset);
+        $this->filterByStatus($qb, Post::STATUS_PUBLISHED);
+
+        return new PaginatedResult(
+                $limit,
+                $offset,
+                $qb->getQuery()->count(),
+                $qb->getQuery()->execute());
+    }
+
+    // Latest posts tagged with given tag
+    public function latestPostsWithTags(array $tags = array(), $limit = 10, $offset = 0) {
+        $qb = $this->queryBuilder($limit, $offset);
+        $this->filterByStatus($qb, Post::STATUS_PUBLISHED);
+        $this->filterByTags($qb, $tags);
+
+        return new PaginatedResult(
+                $limit,
+                $offset,
+                $qb->getQuery()->count(),
+                $qb->getQuery()->execute());
+    }
+
+    // Latest posts posted by given author id
+    public function latestPostsOfAuthor($authorId, $limit = 10, $offset = 0) {
+        $qb = $this->queryBuilder($limit, $offset);
+        $this->filterByStatus($qb, Post::STATUS_PUBLISHED);
+        $this->filterByAuthor($qb, $authorId);
+
+        return new PaginatedResult(
+                $limit,
+                $offset,
+                $qb->getQuery()->count(),
+                $qb->getQuery()->execute());
+
     }
 
     /**
@@ -103,12 +117,41 @@ class MongoPostRepository implements PostRepository {
         return $this->_dm;
     }
 
-	/* (non-PHPdoc)
-     * @see \Nvl\Cms\Adapter\Persistence\Mongo\MongoRepository::collectionName()
-     */
     public function collectionName() {
         return 'posts';
     }
 
+    // ==========================================================================
+    // QUERY HELPER
+    // ==========================================================================
+
+    private function queryBuilder($limit = 10, $offset = 0) {
+        return $this->dm()->createQueryBuilder('\Nvl\Cms\Domain\Model\Post\Post')
+                          ->eagerCursor(true)
+                          ->limit($limit)
+                          ->skip($offset);
+    }
+
+    private function filterByAuthor(Builder $qb, $authorId) {
+        if (!empty($authorId)) {
+            $qb->field('author.$id')->equals(new \MongoId($authorId));
+        }
+        return $this;
+    }
+
+    private function filterByTags(Builder $qb, array $tags = array()) {
+        if (!empty($tags)) {
+            $qb->field('meta.tags')->in($tags);
+        }
+        return $this;
+    }
+
+    private function filterByStatus(Builder $qb, $status) {
+        if (!empty($status)) {
+            $qb->field('status')->equals($status);
+        }
+
+        return $this;
+    }
 
 }

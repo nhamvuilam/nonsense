@@ -53,6 +53,8 @@ class Post {
 
     private $modifiedDate;
 
+    private $publishedDate;
+
     /**
      * @param PostContent $content
      * @param PostMeta    $meta
@@ -97,6 +99,10 @@ class Post {
 
         if (!in_array($status, static::$ALLOWED_STATUS)) {
             throw new InvalidArgumentException('Post status is not valid');
+        }
+
+        if ($status === static::STATUS_PUBLISHED) {
+            $this->publishedDate = time();
         }
 
         $this->status = $status;
