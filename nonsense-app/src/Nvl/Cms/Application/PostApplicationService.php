@@ -10,8 +10,6 @@
 //
 namespace Nvl\Cms\Application;
 
-use Nvl\Cms\Domain\Model\Post\Post;
-
 /**
  * Post application service provides interface for manipulate post objects
  *
@@ -51,7 +49,7 @@ interface PostApplicationService {
      * )
      * </pre>
      * @param array $meta [OPTIONAL] Additional meta data
-     * @return Post Newly created post
+     * @return array Newly created post
      *
      */
     public function newPost($type, $tags, $date, $postContent, $metas = array());
@@ -100,14 +98,15 @@ interface PostApplicationService {
      * )
      * </pre>
      */
-    public function queryPosts($author = '', $type = '', $status = '', $tags = array(), $limit, $offset = 1);
+    public function queryPosts($author = '',
+                               $type = '',
+                               $status = '',
+                               $tags = array(),
+                               $limit, $offset = 1);
 
     public function pendingPosts($limit = 10, $offset = 0);
-
     public function latestPosts($limit = 10, $offset = 0);
-
     public function latestPostsWithTags($tag, $limit = 10, $offset = 0);
-
     public function latestPostsOfAuthor($authorId, $limit = 10, $offset = 0);
 
     /**
@@ -121,6 +120,38 @@ interface PostApplicationService {
      * @param string $id Post id to be published
      */
     public function publish($id);
+
+    /**
+     * Increase post's comment count
+     *
+     * @param string $postId Post id
+     * @return number New comment count
+     */
+    public function incrCommentCount($postId);
+
+    /**
+     * Decrease post's comment count
+     *
+     * @param string $postId Post id
+     * @return number New comment count
+     */
+    public function decrCommentCount($postId);
+
+    /**
+     * Increase post's like count
+     *
+     * @param string $postId Post id
+     * @return number New like count
+     */
+    public function incrLikeCount($postId);
+
+    /**
+     * Decrease post's like count
+     *
+     * @param string $postId Post id
+     * @return number New like count
+     */
+    public function decrLikeCount($postId);
 
     /**
      * Edit a post

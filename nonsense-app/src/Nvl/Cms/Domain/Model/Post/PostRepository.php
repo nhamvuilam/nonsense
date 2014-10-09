@@ -17,10 +17,11 @@ use Nvl\Cms\Domain\Model\PaginatedResult;
 interface PostRepository {
 
     /**
-     * @param string $id Post id to find
+     * @param string  $id   Post id to find
+     * @param boolean $lock Lock found document or not
      * @return \Nvl\Cms\Domain\Model\Post\Post The post object
      */
-    public function find($id);
+    public function find($id, $lock = false);
 
     /**
      * Add new post

@@ -91,13 +91,14 @@ class PostApplicationServiceImpl implements PostApplicationService {
     }
 
     public function editPost($id, $editFields) {
-        $post = $this->postRepository()->find($id);
-        if (empty($post)) {
-            throw new ValidateException('Post not found');
-        }
+        $post = $this->findPostWithLock($id);
 
         if (!empty($editFields['status'])) {
             $post->setStatus($editFields['status']);
+        }
+
+        if (!empty($editFields['tags'])) {
+            $post->meta()->setTags($editFields['tags']);
         }
 
         $this->postRepository()->save($post);
@@ -114,6 +115,35 @@ class PostApplicationServiceImpl implements PostApplicationService {
         $this->postRepository()->save($post);
     }
 
+    public function incrCommentCount($postId) {
+        $post = $this->findPostWithLock($postId);
+        $count = $post->meta()->incrCommentCount();
+        $this->postRepository()->save($post);
+        return $count;
+    }
+
+    public function incrLikeCount($postId) {
+        $post = $this->findPostWithLock($postId);
+        $count = $post->meta()->incrLikeCount();
+        $this->postRepository()->save($post);
+        return $count;
+
+    }
+
+    public function decrCommentCount($postId) {
+        $post = $this->findPostWithLock($postId);
+        $count = $post->meta()->decrCommentCount();
+        $this->postRepository()->save($post);
+        return $count;
+    }
+
+    public function decrLikeCount($postId) {
+        $post = $this->findPostWithLock($postId);
+        $count = $post->meta()->decrLikeCount();
+        $this->postRepository()->save($post);
+        return $count;
+    }
+
     public function newPost($type, $tags, $date, $postContent, $metas = array()) {
         // Dummy author
         $author = 'nmquyet';
@@ -128,7 +158,7 @@ class PostApplicationServiceImpl implements PostApplicationService {
 
         // Save created post
         $this->postRepository()->add($post);
-        return $post;
+        return $post->toArray();
     }
 
     // =============================================================================================
@@ -150,6 +180,15 @@ class PostApplicationServiceImpl implements PostApplicationService {
         );
     }
 
+    private function findPostWithLock($id) {
+        $post = $this->postRepository()->find($id, true);
+        if (empty($post)) {
+            throw new ValidateException('Post not found');
+        }
+        return $post;
+
+    }
+
     private function postRepository() {
         return $this->_postRepository;
     }
@@ -161,5 +200,6 @@ class PostApplicationServiceImpl implements PostApplicationService {
     private function postFactory() {
         return $this->_postFactory;
     }
+
 
 }

@@ -10,6 +10,7 @@
 //
 namespace Nvl\Cms\Domain\Model\Post;
 
+use Nvl\Stdlib\InvalidArgumentException;
 /**
  * Post meta data
  *
@@ -28,22 +29,40 @@ class PostMeta {
 
     public function incrCommentCount() {
         $this->commentCount++;
+        return $this->commentCount;
     }
 
     public function decrCommentCount() {
         $this->commentCount--;
+        return $this->commentCount;
     }
 
     public function incrLikeCount() {
         $this->likeCount++;
+        return $this->likeCount;
     }
 
     public function decrLikeCount() {
         $this->likeCount--;
+        return $this->likeCount;
     }
 
     public function addTag($tags) {
         $this->tags = array_unique(array_merge($this->tags, (array) $tags));
+    }
+
+    public function setTags($tags) {
+        if (is_string($tags)) {
+            $tags = explode(',', $tags);
+        } else if (!is_array($tags)) {
+            throw new InvalidArgumentException('Tags must be a string or an array');
+        }
+
+        foreach ($tags as $i => $tag) {
+            $tags[$i] = trim($tag);
+        }
+
+        $this->tags = $tags;
     }
 
     public function setData($data = array()) {
