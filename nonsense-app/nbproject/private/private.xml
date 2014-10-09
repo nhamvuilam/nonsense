@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="Development">
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/public/index.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/Cms/App.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/Cms/Application/PostApplicationService.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/Cms/Adapter/Http/Controllers/IndexController.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/Di/Di.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/vendor/autoload.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/vendor/composer/autoload_real.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/README.md</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/composer.json</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/vendor/composer/autoload_namespaces.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/vendor/composer/autoload_classmap.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/vendor/composer/autoload_psr4.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/vendor/composer/ClassLoader.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/app/configs/local/cms.ini</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/OAuth/OAuth.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/Cms/Adapter/Http/Controllers/ConnectController.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/Cms/Application/UserApplicationService.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/OAuth/OAuthFactory.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/OAuth/FacebookOAuth.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/OAuth/AbstractOAuth.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/Cms/Adapter/Http/Controllers/PostController.php</file>
+            <file>file:/home/localadm/Dropbox/projects/kehoachvl/source/develop/nonsense-app/src/Nvl/Cms/Adapter/Http/Controllers/TestController.php</file>
+        </group>
+    </open-files>
+</project-private>
