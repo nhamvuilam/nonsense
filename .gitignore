@@ -1,3 +1,4 @@
 nonsense-app/vendor
 nonsense-app/app/caches
 nonsense-app/public/photos
+nonsense-app/composer.lock
