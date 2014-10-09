@@ -81,7 +81,7 @@
                     </ul>
                 </div>
                 <?php if (!App::userApplicationService()->isLoggedIn())  { ?>
-                <div id="jsid-visitor-function" class="visitor-function">
+                <div id="jsid-visitor-function" class="visitor-function" style="width: 235px;">
                 	<a class="badge-login-button link" href="javascript:void(0);">Đăng nhập</a>
                 	<a class="badge-signup-button link" href="javascript:void(0);">Đăng ký</a>
                     <div class="upload"> <a class="badge-signup-button upload" href="<?php echo App::config('site', 'site_url')?>/signup">Upload</a> </div>
