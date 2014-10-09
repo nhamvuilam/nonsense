@@ -11,7 +11,7 @@
 namespace Nvl\Cms\Adapter\Image;
 
 use Nvl\Cms\Domain\Model\Post\ImageProcessor;
-use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Stdlib\ValidateException;
 use Nvl\Cms\App;
 
 /**

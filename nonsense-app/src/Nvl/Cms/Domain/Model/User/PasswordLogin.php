@@ -10,8 +10,9 @@
 //
 namespace Nvl\Cms\Domain\Model\User;
 
-use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Stdlib\ValidateException;
 use Nvl\Cms\App;
+
 /**
  * Username, password login info
  */

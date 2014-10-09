@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
 		jQuery("#modal-upload").removeClass("hide");
 		
 		//set value of type post is link
-		jQuery("#type_post").val("link");
+		jQuery("#type_post").val("image");
 		
 		if ( !jQuery("#jsid-upload-file-input").hasClass("hide")) {
 			jQuery("#jsid-upload-file-input").addClass("hide");

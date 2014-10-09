@@ -66,6 +66,7 @@ class PostApplicationServiceImpl implements PostApplicationService {
 
     public function queryPosts($author = '', $type = '', $status = '',
                                $tags = array(), $sort = array(), $limit = 10, $offset = 0) {
+
         $paginatedResult = $this->postRepository()->findBy(array(
         	'tags'    => $tags,
             'author'  => $author,
@@ -102,6 +103,8 @@ class PostApplicationServiceImpl implements PostApplicationService {
         }
 
         $this->postRepository()->save($post);
+
+        ApplicationLifeCycle::success();
     }
 
     public function publish($id) {
@@ -110,37 +113,59 @@ class PostApplicationServiceImpl implements PostApplicationService {
         }
 
         $post = $this->postRepository()->find($id);
+
         $post->publish();
 
         $this->postRepository()->save($post);
+
+        ApplicationLifeCycle::success();
     }
 
     public function incrCommentCount($postId) {
+
         $post = $this->findPostWithLock($postId);
+
         $count = $post->meta()->incrCommentCount();
+
         $this->postRepository()->save($post);
+
+        ApplicationLifeCycle::success();
         return $count;
     }
 
     public function incrLikeCount($postId) {
+
         $post = $this->findPostWithLock($postId);
+
         $count = $post->meta()->incrLikeCount();
+
         $this->postRepository()->save($post);
+
+        ApplicationLifeCycle::success();
         return $count;
 
     }
 
     public function decrCommentCount($postId) {
+
         $post = $this->findPostWithLock($postId);
+
         $count = $post->meta()->decrCommentCount();
+
         $this->postRepository()->save($post);
+
+        ApplicationLifeCycle::success();
         return $count;
     }
 
     public function decrLikeCount($postId) {
         $post = $this->findPostWithLock($postId);
+
         $count = $post->meta()->decrLikeCount();
+
         $this->postRepository()->save($post);
+
+        ApplicationLifeCycle::success();
         return $count;
     }
 
@@ -158,6 +183,9 @@ class PostApplicationServiceImpl implements PostApplicationService {
 
         // Save created post
         $this->postRepository()->add($post);
+
+        ApplicationLifeCycle::success();
+
         return $post->toArray();
     }
 

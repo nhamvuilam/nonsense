@@ -55,6 +55,8 @@ class Post {
 
     private $publishedDate;
 
+    private $version;
+
     /**
      * @param PostContent $content
      * @param PostMeta    $meta

@@ -10,7 +10,7 @@
 //
 namespace Nvl\Cms\Domain\Model\Post;
 
-use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Stdlib\ValidateException;
 
 /**
  * Post factory which is responsible for creating a new post

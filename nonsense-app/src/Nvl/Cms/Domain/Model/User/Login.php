@@ -10,7 +10,7 @@
 //
 namespace Nvl\Cms\Domain\Model\User;
 
-use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Stdlib\ValidateException;
 use Nvl\Cms\App;
 /**
  * @author Quyet. Nguyen Minh <minhquyet@gmail.com>

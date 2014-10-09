@@ -13,7 +13,7 @@ namespace Nvl\Cms\Adapter\Persistence\Mongo;
 use Nvl\Cms\Domain\Model\User\UserRepository;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Nvl\Cms\Domain\Model\User\User;
-use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Stdlib\ValidateException;
 use Nvl\Cms\App;
 
 /**
@@ -59,26 +59,23 @@ class MongoUserRepository implements UserRepository {
         return $user;
     }
 
-	/**
-     * @see \Nvl\Cms\Domain\Model\User\UserRepository::add()
+    /**
+     * {@inheritDoc}
      */
     public function add(User $user) {
         try {
             $this->dm()->persist($user);
             $this->dm()->getSchemaManager()->ensureIndexes();
-            $this->dm()->flush(null, array('safe' => true));
         } catch (\MongoDuplicateKeyException $e) {
             throw new ValidateException(App::message('new_user.rule.username_existed'));
         }
     }
 
-	/**
-     * @see \Nvl\Cms\Domain\Model\User\UserRepository::save()
+    /**
+     * {@inheritDoc}
      */
     public function save(User $user) {
         $this->dm()->persist($user);
-        $this->dm()->flush();
-
     }
 
     /**

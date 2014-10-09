@@ -15,9 +15,9 @@ use Nvl\Cms\Domain\Model\User\ContactInfo;
 use Nvl\Cms\Domain\Model\User\User;
 use Nvl\Cms\Domain\Model\User\UserRepository;
 use Nvl\Cms\Domain\Model\User\PasswordLogin;
-use Nvl\Cms\Domain\Model\ValidateException;
 use Nvl\Cms\Domain\Model\User\AuthenticationException;
 use Nvl\Cms\App;
+use Nvl\Stdlib\ValidateException;
 
 /**
  * @author Quyet. Nguyen Minh <minhquyet@gmail.com>
@@ -103,6 +103,8 @@ class UserApplicationService {
 
         $this->userRepository()->add($user);
 
+        ApplicationLifeCycle::success();
+
         return $user;
     }
 
@@ -125,6 +127,8 @@ class UserApplicationService {
         $user = new User($loginInfo, $contact);
 
         $this->userRepository()->add($user);
+
+        ApplicationLifeCycle::success();
 
         return $user;
     }

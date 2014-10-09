@@ -27,11 +27,11 @@ class TestController extends BaseController {
         session_start();
 
         echo '<a href="javascript:void(0);" onclick="">Facebook</a>';
-        if ($type = $this->getGetParam('s', null)) {
+        if (!$s) {
 
             $config = App::config();
             $authFactory = new OAuthFactory($config['oauth']);
-            $auth = $authFactory->getOAuth($type);
+            $auth = $authFactory->getOAuth($s);
 
             if ($auth == null) {
                 throw new \Exception('Sorry we have not supported this feature yet');
@@ -48,7 +48,7 @@ class TestController extends BaseController {
                 throw new \Exception('User do not have any email account');
             }
 
-            var_dump(App::userApplicationService()->connectSocialAccount($type, $returnedUser));
+            var_dump(App::userApplicationService()->connectSocialAccount($s, $returnedUser));
 
         }
         exit;
@@ -144,9 +144,9 @@ class TestController extends BaseController {
 
         exit;
     }
-    
+
     function longAction() {
-        die('Im Long'); 
-        
+        die('Im Long');
+
     }
 }

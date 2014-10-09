@@ -184,6 +184,46 @@ class PostApplicationServiceTestImpl implements PostApplicationService {
         // TODO Auto-generated method stub
 
     }
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::latestPostsWithTags()
+     */
+    public function latestPostsWithTags($tag, $limit = 10, $offset = 0) {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::incrCommentCount()
+     */
+    public function incrCommentCount($postId) {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::decrCommentCount()
+     */
+    public function decrCommentCount($postId) {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::incrLikeCount()
+     */
+    public function incrLikeCount($postId) {
+        // TODO Auto-generated method stub
+
+    }
+
+	/**
+     * @see \Nvl\Cms\Application\PostApplicationService::decrLikeCount()
+     */
+    public function decrLikeCount($postId) {
+        // TODO Auto-generated method stub
+
+    }
+
 
 
 }

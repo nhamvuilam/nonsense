@@ -10,7 +10,8 @@
 //
 namespace Nvl\Cms\Domain\Model\Post;
 
-use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Stdlib\ValidateException;
+
 /**
  * Video post
  *
@@ -28,22 +29,22 @@ class VideoPost extends PostContent {
         $this->parseVideo();
     }
 
-	/**
-     * @see \Nvl\Cms\Domain\Model\Post\PostContent::excerptHtml()
+    /**
+     * {@inheritDoc}
      */
     public function excerptHtml() {
         // TODO Auto-generated method stub
     }
 
-	/**
-     * @see \Nvl\Cms\Domain\Model\Post\PostContent::html()
+    /**
+     * {@inheritDoc}
      */
     public function html($attribs) {
         return $this->embeddedCode;
     }
 
     /**
-     * @see \Nvl\Cms\Domain\Model\Post\PostContent::toArray()
+     * {@inheritDoc}
      */
     public function toArray() {
         return array(
@@ -55,7 +56,7 @@ class VideoPost extends PostContent {
     }
 
     /**
-     * @see \Nvl\Cms\Domain\Model\Post\PostContent::type()
+     * {@inheritDoc}
      */
     public function type() {
         return 'video';
@@ -78,7 +79,7 @@ class VideoPost extends PostContent {
 
         if ($isMatch > 0) {
             $embeddedUrl .= $matches[0];
-            $imageUrl = 'http://i.ytimg.com/vi/'.$matches[0].'/sddefault.jpg';
+            $imageUrl = 'http://img.youtube.com/vi/'.$matches[0].'/0.jpg';
         } else {
             throw new ValidateException('Đường dẫn video không được hỗ trợ');
         }

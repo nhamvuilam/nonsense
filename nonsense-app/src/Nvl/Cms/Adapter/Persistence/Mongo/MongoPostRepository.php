@@ -31,19 +31,17 @@ class MongoPostRepository implements PostRepository {
     public function find($id, $lock = false) {
         $lockMode = LockMode::NONE;
         if ($lock === true) {
-            // $lockMode = LockMode::PESSIMISTIC_WRITE;
+            $lockMode = LockMode::PESSIMISTIC_WRITE;
         }
         return $this->dm()->find('\Nvl\Cms\Domain\Model\Post\Post', $id, $lockMode);
     }
 
     public function add(Post $post) {
         $this->dm()->persist($post);
-        $this->dm()->flush();
     }
 
     public function save(Post $post) {
         $this->dm()->persist($post);
-        $this->dm()->flush();
     }
 
     public function findBy($query) {

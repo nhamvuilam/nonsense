@@ -22,3 +22,6 @@ Nvl\Cms\Domain\Model\Post\Post:
       type: timestamp
     status:
       type: string
+    version:
+      type: int 
+      lock: true
