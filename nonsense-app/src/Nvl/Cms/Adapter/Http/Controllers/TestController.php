@@ -135,6 +135,7 @@ class TestController extends BaseController {
     }
     
     function longAction() {
-        die('Im Long');
+        die('Im Long'); 
+        
     }
 }
