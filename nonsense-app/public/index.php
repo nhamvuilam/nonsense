@@ -31,6 +31,7 @@ try {
 
 		$router->addGet('/nghiemtuc/post', 'admin::post::index');
 		$router->addPost('/nghiemtuc/post/{id}', 'admin::post::update');
+		$router->addGet('/nghiemtuc/post/{id}', 'admin::post::view');
 
 		// This route only will be matched if the HTTP method is GET
 		$router->addGet("/nham/{id}", "Detail::index");

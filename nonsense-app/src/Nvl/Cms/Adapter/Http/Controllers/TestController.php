@@ -12,6 +12,17 @@ class TestController extends BaseController {
         exit;
     }
 
+    function postCountAction() {
+        $result = App::postApplicationService()->latestPosts();
+        if ($result['total'] >= 1) {
+            echo '<h1>+comment';
+            var_dump(App::postApplicationService()->incrCommentCount($result['posts'][0]['id']));
+            echo '<h1>+like';
+            var_dump(App::postApplicationService()->incrLikeCount($result['posts'][0]['id']));
+        }
+        exit;
+    }
+
     function oauthAction($s) {
         session_start();
 

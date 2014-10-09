@@ -10,7 +10,7 @@
 //
 namespace Nvl\Cms\Domain\Model\Post;
 
-use Nvl\Cms\Domain\Model\ValidateException;
+use Nvl\Stdlib\ValidateException;
 use Nvl\Stdlib\InvalidArgumentException;
 
 /**
@@ -24,7 +24,7 @@ class Post {
     const STATUS_PUBLISHED = "published";
     const STATUS_DELETED = "deleted";
 
-    private static $ALLOWED_STATUS = array(
+    public static $ALLOWED_STATUS = array(
     	self::STATUS_PENDING_REVIEW,
         self::STATUS_PUBLISHED,
         self::STATUS_DELETED,
@@ -115,6 +115,13 @@ class Post {
     public function promote() {
         // TODO
         $this->refreshModifiedDate();
+    }
+
+    /**
+     * @return \Nvl\Cms\Domain\Model\Post\PostMeta
+     */
+    public function meta() {
+        return $this->meta;
     }
 
     public function html($attribs = array()) {

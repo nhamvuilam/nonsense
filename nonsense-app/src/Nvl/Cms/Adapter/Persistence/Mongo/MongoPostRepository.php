@@ -15,6 +15,7 @@ use Nvl\Cms\Domain\Model\Post\PostRepository;
 use Nvl\Cms\Domain\Model\Post\Post;
 use Nvl\Stdlib\PaginatedResult;
 use Doctrine\ODM\MongoDB\Query\Builder;
+use Doctrine\ODM\MongoDB\LockMode;
 
 /**
  * Mongo Db Post Repository implementation
@@ -27,8 +28,12 @@ class MongoPostRepository implements PostRepository {
         $this->_dm = $dm;
     }
 
-    public function find($id) {
-        return $this->dm()->find('\Nvl\Cms\Domain\Model\Post\Post', $id);
+    public function find($id, $lock = false) {
+        $lockMode = LockMode::NONE;
+        if ($lock === true) {
+            // $lockMode = LockMode::PESSIMISTIC_WRITE;
+        }
+        return $this->dm()->find('\Nvl\Cms\Domain\Model\Post\Post', $id, $lockMode);
     }
 
     public function add(Post $post) {
@@ -75,6 +80,8 @@ class MongoPostRepository implements PostRepository {
     public function latestPosts($limit = 10, $offset = 0) {
         $qb = $this->queryBuilder($limit, $offset);
         $this->filterByStatus($qb, Post::STATUS_PUBLISHED);
+
+        $qb->sort('publishedDate', 'desc');
 
         return new PaginatedResult(
                 $limit,

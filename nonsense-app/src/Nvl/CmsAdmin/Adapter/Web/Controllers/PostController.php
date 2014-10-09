@@ -26,16 +26,20 @@ class PostController extends BaseController {
 
     function indexAction($offset = 0) {
         $posts = $this->postService()->pendingPosts(10, $offset);
-        var_dump($posts);
         $this->view->setVars(array(
             'paginatedPost' => $posts,
         ));
     }
 
+    function viewAction($id) {
+        $this->view->setVar('post', $this->postService()->postInfo($id));
+    }
+
     function updateAction($id) {
 
         $this->postService()->editPost($id, array(
-           'status' => $this->getPostParam('status'),
+            'status' => $this->getPostParam('status'),
+            'tags' => $this->getPostParam('tags'),
         ));
 
         $this->redirect(static::HOME_URL);
