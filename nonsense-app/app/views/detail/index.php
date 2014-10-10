@@ -17,12 +17,7 @@
 			            </p>
 					</header>
 					<div class="badge-toolbar-pre fixed-wrap-post-bar">
-						<div class="badge-entry-toolbar-sticky post-afterbar-a in-post-top">
-							<ul class="badge-item-vote-container horizontal-vote">
-							    <li><a href="javascript:void(0);" class="badge-item-vote-up up"><span>UP</span></a></li>
-							    <li><a href="javascript:void(0);" class="badge-item-vote-down down"><span>DOWN</span></a></li>
-							</ul>
-						</div>
+						<div class="fb-like" data-href="<?php echo App::config('site', 'site_url').$post['post_url']?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 						<div class="clearfix"></div>
 					</div>
 					<div class="badge-post-container badge-entry-content post-container">

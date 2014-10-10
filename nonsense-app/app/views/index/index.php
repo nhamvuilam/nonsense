@@ -26,13 +26,11 @@
 						</p>
 						<div class="badge-item-vote-container post-afterbar-a in-list-view  ">
 							<div class="vote">
+								
 								<ul class="btn-vote left">
 									<li>
-										<a class="badge-item-vote-up up " href="javascript:void(0);">Upvote</a>
-									</li>
-									<li>
-										<a class="badge-item-vote-down down " href="javascript:void(0);">Downvote</a>
-									</li>
+										<div class="fb-like" data-href="<?php echo App::config('site', 'site_url').$post['post_url']?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+									</li>									
 									<li>
 										<a class="comment badge-evt badge-item-comment" target="_blank" href="<?php echo $post['post_url']?>">Comment</a>
 									</li>

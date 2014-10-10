@@ -54,6 +54,17 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>
+	window.fbAsyncInit = function() {                 
+        FB.Event.subscribe('edge.create', function(href, widget) {
+            //alert(href);
+        });
+        FB.Event.subscribe('comment.create', function(href, widget) {
+            //alert('comment'+href);
+        });
+                         
+    }
+</script>
 
 <body class="background-white">
     <div class="badge-sticky-subnav-static">
