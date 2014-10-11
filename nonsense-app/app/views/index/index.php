@@ -19,10 +19,8 @@
 							</a>
 						</div>
 						<p class="post-meta">
-							<a class="badge-evt point" href="javascript:void(0)"><span class="badge-item-love-count">0</span> points</a> &middot;
-							<a class="comment badge-evt" href="<?php echo $post['post_url']?>">
-								<fb:comments-count href="<?php echo App::config('site', 'site_url').$post['post_url']?>"/></fb:comments-count> comments
-							</a>
+							<a class="badge-evt point" href="javascript:void(0)"><span class="badge-item-love-count" id="countLike<?php echo $post['id'];?>"><?php echo $post['metas']['like_count'];?></span> likes</a> &middot;
+							<a target="_blank" href="<?php echo $post['post_url']?>" class="comment badge-evt"><?php echo $post['metas']['comment_count'];?> comments</a>							
 						</p>
 						<div class="badge-item-vote-container post-afterbar-a in-list-view  ">
 							<div class="vote">
@@ -40,14 +38,7 @@
 								<ul>
 									<li>
 										<a onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<?php echo App::config('site', 'site_url').$post['post_url']?>', 'facebook_share', 'toolbar=yes, scrollbars=yes, resizable=yes, top=200, left=400, width=640, height=400');" href="javascript:void(0);" class="badge-facebook-share badge-evt badge-track btn-share facebook">Facebook</a>
-									</li>
-									<!-- <li>
-										<a href="javascript:void(0);" class="badge-twitter-share badge-evt badge-track btn-share twitter"
-										data-track="social,t.s,,,d,aAVP4Go,l"
-										data-evt="Twitter-Share,ListClicked,http://9gag.com/gag/aAVP4Go"
-										data-title="How%20to%20properly%20text%20in%20class"
-										data-share="http://9gag.com/gag/aAVP4Go?ref=t">Twitter</a>
-									</li> -->
+									</li>									
 								</ul>
 							</div>
 							<div class="clearfix"></div>
@@ -56,8 +47,7 @@
 				<?php } ?>
 			<?php } ?>
 		</div>		
-	</section>
-	<!-- <div class="loading"> <a class="btn badge-load-more-post" href="/?id=aMbwODP%2CanX1w9q%2CamLzeoV&c=10" data-loading-text="Loading more posts..." data-load-count-max="30">Load more posts</a> </div> -->
+	</section>	
 </div>
 <script type="text/javascript">
 	var domainPath = '<?php echo App::config('site', 'site_url');?>';
@@ -70,6 +60,8 @@
 			track_load = total_groups;
 		
 		jQuery(window).scroll(function() { //detect page scroll
+						
+			// check scroll for load more post
 			if(jQuery(window).scrollTop() + jQuery(window).height() == jQuery(document).height())  //user scrolled to bottom of the page?
 			{				
 				if(track_load <= total_groups && loading == false) //there's more data to load
@@ -112,18 +104,15 @@
 						}              
 					html +=	'</a>';
 				html +=	'</div>';
-				html +=	'<p class="post-meta">';
-					html +=	'<a class="badge-evt point" href="javascript:void(0)"><span class="badge-item-love-count">0</span> points</a> &middot; ';
-					html +=	'<a class="comment badge-evt" href="'+post.post_url+'">';
-						html +=	'<fb:comments-count href="'+ domainPath + post.post_url +'"/></fb:comments-count> comments';
-					html +=	'</a>';
+				html +=	'<p class="post-meta">';					
+					html +=	'<a class="badge-evt point" href="javascript:void(0)"><span class="badge-item-love-count" id="countLike'+post.id+'" >'+post.metas['like_count']+'</span> likes</a> &middot; ';					
+					html +=	'<a class="comment badge-evt" href="'+post.post_url+'"> '+post.metas['comment_count']+' comments </a>';						
 				html +=	'</p>';
 				html +=	'<div class="badge-item-vote-container post-afterbar-a in-list-view ">';
 					html +=	'<div class="vote">';
-						html +=	'<ul class="btn-vote left">';
-							html +=	'<li><a class="badge-item-vote-up up " href="javascript:void(0);">Upvote</a></li>';
-							html +=	'<li><a class="badge-item-vote-down down " href="javascript:void(0);">Downvote</a></li>';
-							html +=	'<li><a class="omment badge-evt badge-item-comment" target="_blank" href="'+post.post_url+'">Comment</a></li>';									
+						html +=	'<ul class="btn-vote left">';							
+							html +=	'<li><div class="fb-like" data-href="'+domainPath + post.post_url+'" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div> </li>';							
+							html +=	'<li><a class="comment badge-evt badge-item-comment" target="_blank" href="'+post.post_url+'">Comment</a></li>';									
 						html +=	'</ul>';
 					html +=	'</div>';					
 					html +=	'<div class="share right">';

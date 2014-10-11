@@ -175,3 +175,19 @@ function valivateFormUploadImage() {
 	      
     return true;
 }
+
+function splitData(url, pattern, limit, offset) {
+	var res = url.split(pattern, limit);
+	return res[offset];
+}
+function socialActionAjax(url, postId) {
+	var num = 0;
+	$.ajax({
+        type: 'GET', url: url, async: false,
+        data: {'id': postId},
+        success: function(response) {        	
+        	num = response;        	
+        }
+    });
+    return num;
+}

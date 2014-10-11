@@ -55,20 +55,34 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
-	window.fbAsyncInit = function() {                 
+	// process action social Facebook
+	window.fbAsyncInit = function() {
         FB.Event.subscribe('edge.create', function(href, widget) {
-            //alert(href);
+        	var postId = splitData(href, "nham/", 2, 1);
+            var count = socialActionAjax("/load/incrLike", postId);
+            jQuery("#countLike"+postId).html(count);            
         });
-        FB.Event.subscribe('comment.create', function(href, widget) {
-            //alert('comment'+href);
+        FB.Event.subscribe('edge.remove', function(href, widget) {
+            var postId = splitData(href, "nham/", 2, 1);
+            var count = socialActionAjax("/load/decrLike", postId);
+            jQuery("#countLike"+postId).html(count);
+        });        
+        FB.Event.subscribe('comment.create', function(response, widget) {        	
+            var postId = splitData(response.href, "nham/", 2, 1);
+            var count = socialActionAjax("/load/incrComment", postId);
+            jQuery("#countComment"+postId).html(count);
         });
-                         
+        FB.Event.subscribe('comment.remove', function(response, widget) {        	
+            var postId = splitData(response.href, "nham/", 2, 1);
+            var count = socialActionAjax("/load/decrComment", postId);
+            jQuery("#countComment"+postId).html(count);
+        });
     }
 </script>
 
 <body class="background-white">
     <div class="badge-sticky-subnav-static">
-        <header id="top-nav" class="badge-sticky-nav">
+        <header id="top-nav" class="badge-sticky-nav" style="top: 0px; position: fixed; z-index: 3;">
             <div class="nav-wrap">
                 <h1><a href="/" style="position:absolute;height:97px;top:-19px;z-index:9000">NhamVL</a></h1>
                 <div class="headbar-items" style="padding-left:90px;">
